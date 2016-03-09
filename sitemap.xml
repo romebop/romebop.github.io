@@ -2,9 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.romebop.io/projects/index.html</loc>
+    
+    <lastmod>2016-03-09T08:43:11.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.romebop.io/about/index.html</loc>
+    
+    <lastmod>2016-03-09T08:42:55.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://www.romebop.io/2016/03/08/myfirstentry/</loc>
     
-    <lastmod>2016-03-09T05:54:09.000Z</lastmod>
+    <lastmod>2016-03-09T07:48:11.000Z</lastmod>
     
   </url>
   
