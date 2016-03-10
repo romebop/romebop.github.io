@@ -1,15 +1,15 @@
 menu:
+    About: /about/
     Blog: /
     Archive: /archives/
+    Projects: /projects/
     GitHub: https://github.com/romebop
 
-favicon: /favicon.png
+favicon: /gitlogo.png
 logo: /favicon.png
 
 # Comment
 # e.g disqus: seansun
-disqus:
-duoshuo: 
 
 # Analytics
 # google-analytics:
