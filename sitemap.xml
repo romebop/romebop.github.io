@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.romebop.io/2016/03/hello-world/</loc>
+    
+    <lastmod>2016-03-11T03:06:46.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://www.romebop.io/about/index.html</loc>
     
     <lastmod>2016-03-10T07:57:39.000Z</lastmod>
@@ -9,14 +16,14 @@
   </url>
   
   <url>
-    <loc>http://www.romebop.io/2016/03/09/testpost/</loc>
+    <loc>http://www.romebop.io/2016/03/testpost/</loc>
     
     <lastmod>2016-03-10T07:27:25.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://www.romebop.io/2016/03/08/myfirstentry/</loc>
+    <loc>http://www.romebop.io/2016/03/myfirstentry/</loc>
     
     <lastmod>2016-03-10T06:46:58.000Z</lastmod>
     
@@ -26,13 +33,6 @@
     <loc>http://www.romebop.io/projects/index.html</loc>
     
     <lastmod>2016-03-09T09:34:03.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.romebop.io/2016/03/08/hello-world/</loc>
-    
-    <lastmod>2016-03-09T02:14:27.000Z</lastmod>
     
   </url>
   
