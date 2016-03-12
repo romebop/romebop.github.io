@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.romebop.io/"/>
-  <updated>2016-03-11T08:46:05.000Z</updated>
+  <updated>2016-03-11T08:48:06.000Z</updated>
   <id>http://www.romebop.io/</id>
   
   <author>
@@ -14,65 +14,6 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>wipperSnapper</title>
-    <link href="http://www.romebop.io/2016/03/wipperSnapper/"/>
-    <id>http://www.romebop.io/2016/03/wipperSnapper/</id>
-    <published>2016-03-11T08:46:05.000Z</published>
-    <updated>2016-03-11T08:46:05.000Z</updated>
-    
-    <content type="html"></content>
-    
-    <summary type="html">
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>testpost</title>
-    <link href="http://www.romebop.io/2016/03/testpost/"/>
-    <id>http://www.romebop.io/2016/03/testpost/</id>
-    <published>2016-03-10T07:26:59.000Z</published>
-    <updated>2016-03-11T10:26:04.000Z</updated>
-    
-    <content type="html">&lt;p&gt;is this really happening&lt;/p&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;is this really happening&lt;/p&gt;
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>myfirstentry</title>
-    <link href="http://www.romebop.io/2016/03/myfirstentry/"/>
-    <id>http://www.romebop.io/2016/03/myfirstentry/</id>
-    <published>2016-03-09T04:01:06.000Z</published>
-    <updated>2016-03-11T08:29:17.000Z</updated>
-    
-    <content type="html">&lt;p&gt;hue hue&lt;/p&gt;
-&lt;p&gt;i am alive&lt;/p&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;p&gt;:3&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;hue hue&lt;/p&gt;
-&lt;p&gt;i am alive&lt;/p&gt;
-    
-    </summary>
-    
-    
-  </entry>
   
   <entry>
     <title>Hello World</title>
