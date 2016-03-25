@@ -308,6 +308,11 @@ header .nav-list-item a {
     margin-left: 10px;
     width: 250px;
 }
+#catEmoji {
+    height: 25px;
+    vertical-align: bottom;
+    margin-bottom: 4px;
+}
 .about a {
     color: #42b983;
 }
