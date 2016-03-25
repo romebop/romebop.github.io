@@ -294,6 +294,27 @@ header .nav-list-item a {
     width: 100px;
     color: #7f8c8d
 }
+.about-container {
+    text-align: center;
+    padding-top: 20px;
+}
+.picture {
+    height: 400px;
+    vertical-align: top;
+}
+.about {
+    display: inline-block;
+    text-align: left;
+    margin-left: 10px;
+    width: 250px;
+}
+.about a {
+    color: #42b983;
+}
+.projects {
+    max-width: 500px;
+    margin: 5em auto
+}
 .post {
     padding-top: 1em
 }
