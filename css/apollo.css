@@ -235,17 +235,16 @@ table tbody td {
     padding: 5px
 }
 header {
-    height: 100px
+    min-height: 60px
 }
 header .logo-link {
     float: left
 }
 header .nav {
     float: right;
-    left: 80px
 }
 header .logo-link img {
-    height: 100px
+    height: 70px
 }
 header .nav-list-item {
     display: inline-block;
@@ -296,7 +295,6 @@ header .nav-list-item a {
 }
 .about-container {
     text-align: center;
-    padding-top: 70px;
 }
 .picture {
     height: 400px;
@@ -635,7 +633,7 @@ section.container {
         margin: 0 auto
     }
     header {
-        padding: 20px 110px
+        padding: 20px 150px
     }
 }
 @media screen and (max-width: 700px) {
