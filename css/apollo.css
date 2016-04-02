@@ -318,6 +318,9 @@ header .nav-list-item a {
     max-width: 500px;
     margin: 5em auto
 }
+.projects a {
+    color: #42b983;
+}
 .post {
     padding-top: 1em
 }

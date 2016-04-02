@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.romebop.io/"/>
-  <updated>2016-03-31T10:31:14.000Z</updated>
+  <updated>2016-04-01T21:27:04.000Z</updated>
   <id>http://www.romebop.io/</id>
   
   <author>
@@ -20,12 +20,12 @@
     <link href="http://www.romebop.io/2016/03/World/"/>
     <id>http://www.romebop.io/2016/03/World/</id>
     <published>2016-03-31T07:46:06.000Z</published>
-    <updated>2016-03-31T10:31:14.000Z</updated>
+    <updated>2016-04-01T21:27:04.000Z</updated>
     
     <content type="html">&lt;p&gt;I had a lot of fun setting up a personal site for the first time and learning about how static site generators work. I decided to go with &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt; which runs on top of &lt;a href=&quot;https://nodejs.org/en/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Node.js&lt;/a&gt;. It seems to be among the more popular ones with lots of community driven content and plugins to play with. Hosting was conveniently available through &lt;a href=&quot;https://pages.github.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;GitHub Pages&lt;/a&gt;, and things came together quite simply, which was nice.&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;h4 id=&quot;Moving-Forward&quot;&gt;&lt;a href=&quot;#Moving-Forward&quot; class=&quot;headerlink&quot; title=&quot;Moving Forward&quot;&gt;&lt;/a&gt;Moving Forward&lt;/h4&gt;&lt;p&gt;I don’t have much blogging experience aside from keeping a &lt;a href=&quot;https://romebop.tumblr.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Tumblr&lt;/a&gt;, which mainly just ended up being a collection of random media I’ve come across and found interesting. I hope this blog can be a collection of more processed ideas about my interests, whether it’s about music, technology, culture, or something else.&lt;/p&gt;
-&lt;p&gt;A big motivation for me in wanting to create this space has been the idea of documenting my progress as I continue to grow as a person and programmer. Being able to reflect on my thoughts and express them coherently seems useful, and I like the idea of being able to look back to see how far I’ve come, and then look forward to a place I’d like to reach. Maybe the content could come useful to some people in the future as well.&lt;/p&gt;
+&lt;h4 id=&quot;Moving-Forward&quot;&gt;&lt;a href=&quot;#Moving-Forward&quot; class=&quot;headerlink&quot; title=&quot;Moving Forward&quot;&gt;&lt;/a&gt;Moving Forward&lt;/h4&gt;&lt;p&gt;I don’t have much blogging experience aside from keeping a &lt;a href=&quot;https://romebop.tumblr.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Tumblr&lt;/a&gt;, which more or less ended up being a collection of random media I’ve come across and found interesting. I hope this blog can be a collection of more processed ideas about my interests, whether it’s about music, technology, culture, or something else.&lt;/p&gt;
+&lt;p&gt;A big motivation for me in wanting to create this space has been the idea of documenting my progress as I continue to grow as a person and programmer. Being able to reflect on my thoughts and express them coherently seems useful, and I like the idea of being able to look back to see how far I’ve come, and then look forward to a place I’d like to reach. Hopefully the content may come useful to others in the future as well.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;I think this will be fun.&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Let’s get it.&lt;/em&gt;&lt;/p&gt;
 </content>
