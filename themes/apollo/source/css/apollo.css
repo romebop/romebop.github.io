@@ -235,17 +235,16 @@ table tbody td {
     padding: 5px
 }
 header {
-    height: 60px
+    min-height: 60px
 }
 header .logo-link {
     float: left
 }
 header .nav {
     float: right;
-    left: 80px
 }
 header .logo-link img {
-    height: 60px
+    height: 70px
 }
 header .nav-list-item {
     display: inline-block;
@@ -293,6 +292,34 @@ header .nav-list-item a {
     display: inline-block;
     width: 100px;
     color: #7f8c8d
+}
+.about-container {
+    text-align: center;
+}
+.picture {
+    height: 400px;
+    vertical-align: top;
+}
+.about {
+    display: inline-block;
+    text-align: left;
+    margin-left: 10px;
+    width: 250px;
+}
+#catEmoji {
+    height: 25px;
+    vertical-align: bottom;
+    margin-bottom: 4px;
+}
+.about a {
+    color: #42b983;
+}
+.projects {
+    max-width: 500px;
+    margin: 5em auto
+}
+.projects a {
+    color: #42b983;
 }
 .post {
     padding-top: 1em
@@ -609,7 +636,7 @@ section.container {
         margin: 0 auto
     }
     header {
-        padding: 20px 55px
+        padding: 20px 150px
     }
 }
 @media screen and (max-width: 700px) {

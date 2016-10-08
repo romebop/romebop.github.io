@@ -43,3 +43,16 @@ mixin post(item)
             +postInfo(item)
             .post-content
                 != item.content
+
+
+//- About Page
+mixin about(page)
+    .about-container
+        img.picture(src='/img/piclogo.png')
+        .about
+            != page.content
+
+//- Projects Page
+mixin projects(page)
+    .projects
+        != page.content

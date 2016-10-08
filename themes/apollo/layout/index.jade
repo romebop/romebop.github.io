@@ -1,5 +1,8 @@
 extends partial/layout
 
+block site_title
+    != "Blog · " + config.title
+
 block container
     include mixins/post
     +posts()
@@ -7,6 +10,3 @@ block container
 block pagination
     include mixins/paginator
     +home()
-
-block copyright
-    include partial/copyright

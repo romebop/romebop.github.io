@@ -8,15 +8,12 @@ block description
     meta(name="description", content=desc)
 
 block container
-    p Romulus Remus
-    p Romulus Remus
-    p Romulus Remus
-    p Romulus Remus
-    p Romulus Remus
-    p Romulus Remus
-    p Romulus Remus
-    p Romulus Remus
-    p Romulus Remus
+    include mixins/post
+    case page.title
+        when 'About'
+            +about(page)
+        when 'Projects'
+            +projects(page)
 
 block copyright
     include partial/copyright

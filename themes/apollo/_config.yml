@@ -3,10 +3,10 @@ menu:
     Blog: /
     Archive: /archives/
     Projects: /projects/
-    GitHub: https://github.com/romebop
+    #GitHub: https://github.com/romebop
 
-favicon: /gitlogo.png
-logo: /sideLogo.png
+favicon: /img/gitlogo.png
+logo: /img/one.png
 
 # Comment
 # e.g disqus: seansun
