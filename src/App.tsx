@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactGA from 'react-ga'; 
-import logo from './logo.svg';
+import drifter from './assets/drifter.gif';
 import './App.css';
 
 function App() {
@@ -11,9 +11,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <p>
-          test
-        </p>
+        <img src={drifter} alt="drifter" />
       </header>
     </div>
   );
