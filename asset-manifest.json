@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/static/css/main.d3c5d06f.css",
-    "main.js": "/static/js/main.a51ec159.js",
+    "main.js": "/static/js/main.7a95f25b.js",
     "static/js/787.958d0699.chunk.js": "/static/js/787.958d0699.chunk.js",
     "static/media/drifter.gif": "/static/media/drifter.c02883f004b3ace92b57.gif",
     "index.html": "/index.html",
     "main.d3c5d06f.css.map": "/static/css/main.d3c5d06f.css.map",
-    "main.a51ec159.js.map": "/static/js/main.a51ec159.js.map",
+    "main.7a95f25b.js.map": "/static/js/main.7a95f25b.js.map",
     "787.958d0699.chunk.js.map": "/static/js/787.958d0699.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.d3c5d06f.css",
-    "static/js/main.a51ec159.js"
+    "static/js/main.7a95f25b.js"
   ]
 }
