@@ -16,7 +16,7 @@ function App() {
       <header className="App-header">
         <Router>
           <div>
-            <nav>
+            {/* <nav>
               <ul>
                 <li>
                   <Link to="/">About</Link>
@@ -25,10 +25,10 @@ function App() {
                   <Link to="/projects">Projects</Link>
                 </li>
                 <li>
-                  <Link to="/visualizations">Users</Link>
+                  <Link to="/visualizations">Visualizations</Link>
                 </li>
               </ul>
-            </nav>
+            </nav> */}
             <Routes>
               <Route path="/" element={<About />} />
               <Route path="/projects" element={<Projects />} />
