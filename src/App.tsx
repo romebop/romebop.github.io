@@ -1,17 +1,22 @@
-import React from 'react';
 import {
   BrowserRouter as Router,
   Routes,
   Route,
-  Link
-} from "react-router-dom";
+  // Link
+} from 'react-router-dom';
 
 import drifter from './assets/drifter.gif';
 import './App.css';
+import useKeyPress from './hooks/useKeypress';
 
 function App() {
-  return (
 
+  const onArrowPress = (event: KeyboardEvent) => {
+    console.log(`key pressed: ${event.key}`);
+  };
+  useKeyPress(['Up', 'Down', 'Left', 'Right'].map(d => `Arrow${d}`), onArrowPress);
+  
+  return (
     <div className="App">
       <header className="App-header">
         <Router>
@@ -52,6 +57,5 @@ function Projects() {
 function Visualizations() {
   return <h2>Visualizations</h2>;
 }
-
 
 export default App;
