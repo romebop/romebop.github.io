@@ -1,7 +1,13 @@
+import drifter from './assets/drifter.gif';
+
+function About() {
+  return <img src={drifter} alt="drifter" />;
+}
+
 type Place = {
   name: string,
   description: string,
-  // component
+  component?: JSX.Element;
 };
 
 const map: Place[][] = [
@@ -17,6 +23,7 @@ const map: Place[][] = [
     {
       name: 'About',
       description: 'hello i am saerom park',
+      component: <About />,
     },
   ],
   [

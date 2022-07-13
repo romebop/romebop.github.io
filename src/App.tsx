@@ -6,7 +6,6 @@ import { useState } from 'react';
 //   // Link
 // } from 'react-router-dom';
 
-// import drifter from './assets/drifter.gif';
 import './App.css';
 import useKeyPress from './hooks/useKeypress';
 import map from './map';
@@ -28,11 +27,12 @@ function App() {
     if (d === 'Right' && map[pos.y][pos.x + 1]) setPos({ x: pos.x + 1, y: pos.y });
   };
   const onArrowPress = (event: KeyboardEvent): void => {
-    console.log('trying to move', event.key.slice(5));
     movePos(event.key.slice(5) as Direction);
   };
   useKeyPress(['Up', 'Down', 'Left', 'Right'].map(d => `Arrow${d}`), onArrowPress);
   
+  const place = map[pos.y][pos.x];
+
   return (
     <div className="App">
       <header className="App-header">
@@ -68,7 +68,7 @@ function App() {
                   key={y}
                 >
                   {
-                    row.map((place, x) =>
+                    row.map((_, x) =>
                       <div
                         style={{ width: 30, height: 30, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}
                         key={x}
@@ -85,8 +85,10 @@ function App() {
               )}
             </div>
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid #0095ff', width: 500, height: 500 }}>
-            <span style={{ fontSize: 16 }}>{map[pos.y][pos.x].name}</span>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', border: '1px solid #0095ff', width: 500, height: 500 }}>
+            <div style={{ fontSize: 24, fontWeight: 600 }}>{place.name}</div>
+            <div style={{ fontSize: 14, marginTop: 14, marginBottom: 14 }}>{place.description}</div>
+            {place.component && place.component}
           </div>
 
         </div>
@@ -97,17 +99,5 @@ function App() {
     </div>
   );
 }
-
-// function About() {
-//   return <img src={drifter} alt="drifter" />;
-// }
-
-// function Projects() {
-//   return <h2>Projects</h2>;
-// }
-
-// function Visualizations() {
-//   return <h2>Visualizations</h2>;
-// }
 
 export default App;
