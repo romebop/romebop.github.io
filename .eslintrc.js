@@ -12,18 +12,18 @@ module.exports = {
   'parser': '@typescript-eslint/parser',
   'parserOptions': {
     'ecmaFeatures': {
-        'jsx': true
+        'jsx': true,
     },
     'ecmaVersion': 'latest',
-    'sourceType': 'module'
+    'sourceType': 'module',
   },
   'plugins': [
     'react',
-    '@typescript-eslint'
+    '@typescript-eslint',
   ],
   'rules': {
     'react/react-in-jsx-scope': 'off' ,
     'quotes': ['error', 'single', { 'allowTemplateLiterals': true }],
-    'comma-dangle': ['error', 'always-multiline'],
-  }
+    // 'comma-dangle': ['error', 'always-multiline'],
+  },
 }

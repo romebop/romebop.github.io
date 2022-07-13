@@ -16,7 +16,7 @@ const useKeyPress = (
         callbackRef.current(event);
       }
     },
-    [keys]
+    [keys],
   );
   
   useEffect(() => {
