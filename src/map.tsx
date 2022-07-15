@@ -71,7 +71,7 @@ const map: Place[][] = [
   [
     {
       name: 'Advent of Code',
-      description: 'my solutions to the annual coding advent calendar',
+      description: 'romebop\'s solutions to the annual coding advent calendar',
     },
   ],
 ];

@@ -9,16 +9,15 @@ import { useState } from 'react';
 import './App.css';
 import useKeyPress from './hooks/useKeypress';
 import map from './map';
+import PlacePort from './components/PlacePort';
 
 type Point = { x: number, y: number };
 type Direction = 'Up' | 'Down' | 'Left' | 'Right';
 
 function App() {
 
-  console.log('App rendered');
-
   const [pos, setPos] = useState<Point>({ x: 0, y: 0 });
-  console.log(`currently on ${map[pos.y][pos.x].name}`);
+  const [show, setShow] = useState<boolean>(true);
 
   const movePos = (d: Direction): void => {
     if (d === 'Up' && map[pos.y - 1] && map[pos.y - 1][pos.x]) setPos({ x: pos.x, y: pos.y - 1 });
@@ -32,6 +31,11 @@ function App() {
   useKeyPress(['Up', 'Down', 'Left', 'Right'].map(d => `Arrow${d}`), onArrowPress);
   
   const place = map[pos.y][pos.x];
+
+  setTimeout(() => {
+    console.log('set to false!');
+    setShow(false);
+  }, 2000)
 
   return (
     <div className="App">
@@ -85,15 +89,11 @@ function App() {
               )}
             </div>
           </div>
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', border: '1px solid #0095ff', width: 500, height: 500 }}>
+          <PlacePort key={place.name} show={show}>
             <div style={{ fontSize: 24, fontWeight: 600 }}>{place.name}</div>
             <div style={{ fontSize: 14, marginTop: 14, marginBottom: 14 }}>{place.description}</div>
             {place.component && place.component}
-          </div>
-
-        </div>
-        <div style={{ marginTop: 50 }}>
-          {`(${pos.x}, ${pos.y})`}
+          </PlacePort>
         </div>
       </header>
     </div>
