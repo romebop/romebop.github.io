@@ -1,3 +1,4 @@
+import { AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 // import {
 //   BrowserRouter as Router,
@@ -17,7 +18,6 @@ type Direction = 'Up' | 'Down' | 'Left' | 'Right';
 function App() {
 
   const [pos, setPos] = useState<Point>({ x: 0, y: 0 });
-  const [show, setShow] = useState<boolean>(true);
 
   const movePos = (d: Direction): void => {
     if (d === 'Up' && map[pos.y - 1] && map[pos.y - 1][pos.x]) setPos({ x: pos.x, y: pos.y - 1 });
@@ -31,11 +31,6 @@ function App() {
   useKeyPress(['Up', 'Down', 'Left', 'Right'].map(d => `Arrow${d}`), onArrowPress);
   
   const place = map[pos.y][pos.x];
-
-  setTimeout(() => {
-    console.log('set to false!');
-    setShow(false);
-  }, 2000)
 
   return (
     <div className="App">
@@ -89,11 +84,13 @@ function App() {
               )}
             </div>
           </div>
-          <PlacePort key={place.name} show={show}>
-            <div style={{ fontSize: 24, fontWeight: 600 }}>{place.name}</div>
-            <div style={{ fontSize: 14, marginTop: 14, marginBottom: 14 }}>{place.description}</div>
-            {place.component && place.component}
-          </PlacePort>
+          <AnimatePresence exitBeforeEnter>
+            <PlacePort key={place.name} pos={pos}>
+              <div style={{ fontSize: 24, fontWeight: 600 }}>{place.name}</div>
+              <div style={{ fontSize: 14, marginTop: 14, marginBottom: 14 }}>{place.description}</div>
+              {place.component && place.component}
+            </PlacePort>
+          </AnimatePresence>
         </div>
       </header>
     </div>

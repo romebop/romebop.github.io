@@ -1,29 +1,8 @@
-import { useEffect, useState, ReactNode } from 'react';
-import styled, { keyframes } from 'styled-components';
+import { motion } from 'framer-motion';
+import { ReactNode, useEffect } from 'react';
+import styled from 'styled-components';
 
-const placeInEffect = keyframes`
-  from {
-    transform: translateX(-100%);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0%);
-    opacity: 1;
-  }
-`;
-
-const placeOutEffect = keyframes`
-  from {
-    transform: translateX(0%);
-    opacity: 1;
-  }
-  to {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-`;
-
-const Thing = styled.div<{ show: boolean }>`
+const Wrapper = styled(motion.div)`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -31,33 +10,39 @@ const Thing = styled.div<{ show: boolean }>`
   border: 1px solid #0095ff;
   width: 500px;
   height: 500px;
-  animation: ${props => props.show ? placeInEffect : placeOutEffect} 500ms ease-out;
-  animation-fill-mode: forwards;
 `;
 
-const PlacePort = ({ show, children }: { show: boolean, children: ReactNode}) => {
+type Point = { x: number, y: number };
 
-  const [shouldRender, setRender] = useState(show);
+const PlacePort = ({ pos, children }: { pos: Point, children: ReactNode}) => {  
+  console.log('PlacePort Rendered');
 
   useEffect(() => {
-    if (show) setRender(true);
-  }, [show]);
-
-  const onAnimationEnd = () => {
-    if (!show) setRender(false);
-  };
+    return () => { console.log('PlacePort unmounted') };
+  }, [])
   
   return (
-    shouldRender
-      ? (
-          <Thing
-            show={show}
-            onAnimationEnd={onAnimationEnd}
-          >
-            {children}
-          </Thing>
-        )
-      : <></>
+    <Wrapper
+      initial={{
+        opacity: 0,
+        x: 100,
+      }}
+      animate={{
+        opacity: 1,
+        x: 0,
+      }}
+      exit={{
+        opacity: 0,
+        x: -100,
+      }}
+      transition={{
+        duration: 1,
+        ease: 'easeOut',
+      }}
+    >
+      {children}
+      <div>({pos.x}, {pos.y})</div>
+    </Wrapper>
   );
 };
 
