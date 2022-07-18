@@ -1,5 +1,5 @@
-import { AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
+import styled from 'styled-components';
 // import {
 //   BrowserRouter as Router,
 //   Routes,
@@ -8,27 +8,55 @@ import { useState } from 'react';
 // } from 'react-router-dom';
 
 import './App.css';
+import Place from './components/Place';
 import useKeyPress from './hooks/useKeypress';
 import map from './map';
-import PlacePort from './components/PlacePort';
+import { Point, Direction } from './types';
 
-type Point = { x: number, y: number };
-type Direction = 'Up' | 'Down' | 'Left' | 'Right';
+const PlaceContainer = styled.div`
+  width: 500px;
+  height: 500px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
 function App() {
 
   const [pos, setPos] = useState<Point>({ x: 0, y: 0 });
+  const [dir, setDir] = useState<Direction>('Down');
 
-  const movePos = (d: Direction): void => {
-    if (d === 'Up' && map[pos.y - 1] && map[pos.y - 1][pos.x]) setPos({ x: pos.x, y: pos.y - 1 });
-    if (d === 'Down' && map[pos.y + 1] && map[pos.y + 1][pos.x]) setPos({ x: pos.x, y: pos.y + 1 });
-    if (d === 'Left' && map[pos.y][pos.x - 1]) setPos({ x: pos.x - 1, y: pos.y });
-    if (d === 'Right' && map[pos.y][pos.x + 1]) setPos({ x: pos.x + 1, y: pos.y });
+  const movePos = (dir: Direction): void => {
+    if (dir === 'Up' && map[pos.y - 1] && map[pos.y - 1][pos.x]) {
+      setPos({ x: pos.x, y: pos.y - 1 });
+      setDir(dir);
+    }
+    if (dir === 'Down' && map[pos.y + 1] && map[pos.y + 1][pos.x]) {
+      setPos({ x: pos.x, y: pos.y + 1 });
+      setDir(dir);
+    }
+    if (dir === 'Left' && map[pos.y][pos.x - 1]) {
+      setPos({ x: pos.x - 1, y: pos.y });
+      setDir(dir);
+    }
+    if (dir === 'Right' && map[pos.y][pos.x + 1]) {
+      setPos({ x: pos.x + 1, y: pos.y });
+      setDir(dir);
+    }
   };
   const onArrowPress = (event: KeyboardEvent): void => {
     movePos(event.key.slice(5) as Direction);
   };
-  useKeyPress(['Up', 'Down', 'Left', 'Right'].map(d => `Arrow${d}`), onArrowPress);
+  useKeyPress(
+    ['Up', 'Down', 'Left', 'Right'].map(d => `Arrow${d}`), 
+    onArrowPress,
+  );
+
+  const teleportPos = (x: number, y: number): void => {
+    setPos({ x, y });
+    setDir('Down');
+  };
   
   const place = map[pos.y][pos.x];
 
@@ -75,7 +103,8 @@ function App() {
                         <input
                           type='checkbox'
                           checked={x === pos.x && y === pos.y}
-                          readOnly
+                          onChange={() => teleportPos(x, y)}
+                          // readOnly
                         />
                       </div>
                     )
@@ -84,13 +113,9 @@ function App() {
               )}
             </div>
           </div>
-          <AnimatePresence exitBeforeEnter>
-            <PlacePort key={place.name} pos={pos}>
-              <div style={{ fontSize: 24, fontWeight: 600 }}>{place.name}</div>
-              <div style={{ fontSize: 14, marginTop: 14, marginBottom: 14 }}>{place.description}</div>
-              {place.component && place.component}
-            </PlacePort>
-          </AnimatePresence>
+          <PlaceContainer>
+            <Place />
+          </PlaceContainer>
         </div>
       </header>
     </div>
