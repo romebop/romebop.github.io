@@ -1,10 +1,25 @@
+import { FC } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { ReactNode, useEffect } from 'react';
 import styled from 'styled-components';
 
-const outOpacity = 0;
+import {
+  Direction,
+  Place as IPlace
+} from 'src/types';
 
-const variants = {
+const Wrapper = styled(motion.div)`
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #0095ff;
+  width: 500px;
+  height: 500px;
+`;
+
+const outOpacity = 0;
+const placeVariants = {
   enter: (dir: Direction) => {
     let x: number, y: number;
     if (dir === 'Up') {
@@ -56,34 +71,17 @@ const variants = {
   },
 };
 
-const Wrapper = styled(motion.div)`
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid #0095ff;
-  width: 500px;
-  height: 500px;
-`;
+export interface PlaceProps {
+  place: IPlace;
+  dir: Direction;
+}
 
-type Point = { x: number, y: number };
-
-const Place = ({ pos, children }: { pos: Point, children: ReactNode}) => {  
-  console.log('Place Rendered');
-
-  useEffect(() => {
-    return () => { console.log('Place unmounted') };
-  }, [])
-  
+const Place: FC<PlaceProps> = ({ place, dir }) => {  
   return (
-    <AnimatePresence
-      custom={dir}
-    // exitBeforeEnter
-    >
+    <AnimatePresence custom={dir}>
       <Wrapper
         key={place.name}
-        variants={variants}
+        variants={placeVariants}
         custom={dir}
         initial="enter"
         animate="center"

@@ -1,14 +1,9 @@
 import drifter from './assets/drifter.gif';
+import { Place } from './types';
 
 function About() {
   return <img src={drifter} alt="drifter" />;
 }
-
-type Place = {
-  name: string,
-  description: string,
-  component?: JSX.Element;
-};
 
 const map: Place[][] = [
   [
@@ -22,7 +17,7 @@ const map: Place[][] = [
     },
     {
       name: 'About',
-      description: 'hello i am saerom park',
+      description: 'saerom park',
       component: <About />,
     },
   ],
@@ -53,7 +48,7 @@ const map: Place[][] = [
     },
     {
       name: 'FEC Visualization',
-      description: 'see US Campaign Finance by state',
+      description: 'US Campaign Finance by state',
     },
   ],
   [
@@ -71,7 +66,7 @@ const map: Place[][] = [
   [
     {
       name: 'Advent of Code',
-      description: 'romebop\'s solutions to the annual coding advent calendar',
+      description: 'my solutions to the coding advent calendar',
     },
   ],
 ];

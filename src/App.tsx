@@ -7,24 +7,43 @@ import styled from 'styled-components';
 //   // Link
 // } from 'react-router-dom';
 
-import './App.css';
-import Place from './components/Place';
+import Map, { MapProps } from './components/Map';
+import Place, { PlaceProps } from './components/Place';
 import useKeyPress from './hooks/useKeypress';
 import map from './map';
 import { Point, Direction } from './types';
 
-const PlaceContainer = styled.div`
-  width: 500px;
-  height: 500px;
-  position: relative;
+const Container = styled.div`
+  background-color: #4c4182;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+`;
+
+const MapWrapper = styled.div`
+  width: 200px;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+
+const PlaceWrapper = styled.div`
+  width: 500px;
+  height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
 `;
 
 function App() {
 
   const [pos, setPos] = useState<Point>({ x: 0, y: 0 });
+  const place = map[pos.y][pos.x];
   const [dir, setDir] = useState<Direction>('Down');
 
   const movePos = (dir: Direction): void => {
@@ -53,73 +72,49 @@ function App() {
     onArrowPress,
   );
 
-  const teleportPos = (x: number, y: number): void => {
-    setPos({ x, y });
+  const teleportPos = (pos: Point): void => {
+    setPos(pos);
     setDir('Down');
   };
-  
-  const place = map[pos.y][pos.x];
+
+  const mapProps: MapProps = { map, pos, teleportPos };
+  const placeProps: PlaceProps = { place, dir };
 
   return (
-    <div className="App">
-      <header className="App-header">
-        
-        {/* <Router>
-          <div>
-            <nav>
-              <ul>
-                <li>
-                  <Link to="/">About</Link>
-                </li>
-                <li>
-                  <Link to="/projects">Projects</Link>
-                </li>
-                <li>
-                  <Link to="/visualizations">Visualizations</Link>
-                </li>
-              </ul>
-            </nav>
-            <Routes>
-              <Route path="/" element={<About />} />
-              <Route path="/projects" element={<Projects />} />
-              <Route path="/visualizations" element={<Visualizations />} />
-            </Routes>
-          </div>
-        </Router> */}
-        <div style={{ display: 'flex' }}>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 500, width: 200 }}>
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start'}}>
-              {map.map((row, y) =>
-                <div
-                  style={{ display: 'flex' }}
-                  key={y}
-                >
-                  {
-                    row.map((_, x) =>
-                      <div
-                        style={{ width: 30, height: 30, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}
-                        key={x}
-                      >
-                        <input
-                          type='checkbox'
-                          checked={x === pos.x && y === pos.y}
-                          onChange={() => teleportPos(x, y)}
-                          // readOnly
-                        />
-                      </div>
-                    )
-                  }
-                </div>
-              )}
-            </div>
-          </div>
-          <PlaceContainer>
-            <Place />
-          </PlaceContainer>
-        </div>
-      </header>
-    </div>
+    <Container>
+      <MapWrapper>
+        <Map {...mapProps} />
+      </MapWrapper>
+      <PlaceWrapper>
+        <Place {...placeProps} />
+      </PlaceWrapper>
+    </Container>
   );
 }
 
 export default App;
+
+/*
+<Router>
+  <div>
+    <nav>
+      <ul>
+        <li>
+          <Link to='/'>About</Link>
+        </li>
+        <li>
+          <Link to='/projects'>Projects</Link>
+        </li>
+        <li>
+          <Link to='/visualizations'>Visualizations</Link>
+        </li>
+      </ul>
+    </nav>
+    <Routes>
+      <Route path='/' element={<About />} />
+      <Route path='/projects' element={<Projects />} />
+      <Route path='/visualizations' element={<Visualizations />} />
+    </Routes>
+  </div>
+</Router>
+*/

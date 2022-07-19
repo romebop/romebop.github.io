@@ -2,8 +2,9 @@ import { useCallback, useEffect, useLayoutEffect, useRef } from 'react';
 
 const useKeyPress = (
   keys: string[],
-  callback: (e: KeyboardEvent
-) => void, node = null) => {
+  callback: (e: KeyboardEvent) => void,
+  node = null,
+) => {
 
   const callbackRef = useRef(callback);
   useLayoutEffect(() => {
