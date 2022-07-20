@@ -1,4 +1,5 @@
 import ReactDOM from 'react-dom/client';
+import { HashRouter as Router } from 'react-router-dom';
 import { createGlobalStyle } from 'styled-components';
 
 import App from './App';
@@ -29,7 +30,9 @@ root.render(
   // </React.StrictMode>
   <>
     <GlobalStyle />
-    <App />
+    <Router>
+      <App />
+    </Router>
   </>
 );
 

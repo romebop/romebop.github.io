@@ -1,4 +1,4 @@
-export type Direction = 'Up' | 'Down' | 'Left' | 'Right';
+export type Direction = 'Up' | 'Down' | 'Left' | 'Right' | 'Teleport';
 
 export interface Point {
   x: number;
@@ -8,5 +8,7 @@ export interface Point {
 export interface Place {
   name: string;
   description: string;
-  component?: JSX.Element;
+  link?: string;
+  img?: JSX.Element;
+  path: string;
 }

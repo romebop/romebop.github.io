@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 // import {
-//   BrowserRouter as Router,
+//   HashRouter as Router,
 //   Routes,
 //   Route,
 //   // Link
 // } from 'react-router-dom';
 
-import Map, { MapProps } from './components/Map';
-import Place, { PlaceProps } from './components/Place';
+import MapArea, { MapAreaProps } from './components/MapArea';
+import PlaceArea, { PlaceAreaProps } from './components/PlaceArea';
 import useKeyPress from './hooks/useKeypress';
 import map from './map';
 import { Point, Direction } from './types';
@@ -23,7 +23,7 @@ const Container = styled.div`
   color: white;
 `;
 
-const MapWrapper = styled.div`
+const MapAreaWrapper = styled.div`
   width: 200px;
   height: 500px;
   display: flex;
@@ -31,7 +31,7 @@ const MapWrapper = styled.div`
   justify-content: center;
 `
 
-const PlaceWrapper = styled.div`
+const PlaceAreaWrapper = styled.div`
   width: 500px;
   height: 500px;
   display: flex;
@@ -44,7 +44,7 @@ function App() {
 
   const [pos, setPos] = useState<Point>({ x: 0, y: 0 });
   const place = map[pos.y][pos.x];
-  const [dir, setDir] = useState<Direction>('Down');
+  const [dir, setDir] = useState<Direction>('Teleport');
 
   const movePos = (dir: Direction): void => {
     if (dir === 'Up' && map[pos.y - 1] && map[pos.y - 1][pos.x]) {
@@ -74,20 +74,20 @@ function App() {
 
   const teleportPos = (pos: Point): void => {
     setPos(pos);
-    setDir('Down');
+    setDir('Teleport');
   };
 
-  const mapProps: MapProps = { map, pos, teleportPos };
-  const placeProps: PlaceProps = { place, dir };
+  const mapAreaProps: MapAreaProps = { map, pos, teleportPos };
+  const placeAreaProps: PlaceAreaProps = { place, dir };
 
   return (
     <Container>
-      <MapWrapper>
-        <Map {...mapProps} />
-      </MapWrapper>
-      <PlaceWrapper>
-        <Place {...placeProps} />
-      </PlaceWrapper>
+      <MapAreaWrapper>
+        <MapArea {...mapAreaProps} />
+      </MapAreaWrapper>
+      <PlaceAreaWrapper>
+        <PlaceArea {...placeAreaProps} />
+      </PlaceAreaWrapper>
     </Container>
   );
 }

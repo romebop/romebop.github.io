@@ -22,13 +22,13 @@ const InputWrapper = styled.div`
   align-items: center;
 `;
 
-export interface MapProps {
+export interface MapAreaProps {
   map: Place[][];
   pos: Point;
   teleportPos: (pos: Point) => void;
 }
 
-const Map: FC<MapProps> = ({ map, pos, teleportPos }) => {  
+const MapArea: FC<MapAreaProps> = ({ map, pos, teleportPos }) => {  
   return (
     <RowsContainer>
       {map.map((row, y) =>
@@ -48,4 +48,4 @@ const Map: FC<MapProps> = ({ map, pos, teleportPos }) => {
   );
 };
 
-export default Map;
+export default MapArea;
