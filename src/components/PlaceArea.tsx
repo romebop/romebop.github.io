@@ -103,9 +103,6 @@ export interface PlaceAreaProps {
 }
 
 const PlaceArea: FC<PlaceAreaProps> = ({ place, dir }) => {  
-
-  console.log('place area rendered');
-  
   return (
     <AnimatePresence custom={dir}>
       <Wrapper

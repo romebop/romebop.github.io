@@ -1,18 +1,13 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-// import {
-//   HashRouter as Router,
-//   Routes,
-//   Route,
-//   // Link
-// } from 'react-router-dom';
+import { Navigate, Routes, Route, useLocation, useNavigate  } from 'react-router-dom';
 
 import MapArea, { MapAreaProps } from './components/MapArea';
-import PlaceArea, { PlaceAreaProps } from './components/PlaceArea';
+import PlaceArea from './components/PlaceArea';
 import useKeyPress from './hooks/useKeypress';
 import map from './map';
-import { Point, Direction } from './types';
-import { isSamePoint } from './util';
+import { Direction, Place, Point } from './types';
+import { getMapPos, isSamePoint } from './util';
 
 const Container = styled.div`
   background-color: #4c4182;
@@ -43,25 +38,32 @@ const PlaceAreaWrapper = styled.div`
 
 function App() {
 
-  const [pos, setPos] = useState<Point>({ x: 0, y: 0 });
-  const place = map[pos.y][pos.x];
+  console.log('app rendered');
+
+  const { pathname } = useLocation();
+  const pos = getMapPos(map, pathname)!;
   const [dir, setDir] = useState<Direction>('Teleport');
+  const navigate = useNavigate();
 
   const movePos = (dir: Direction): void => {
     if (dir === 'Up' && map[pos.y - 1] && map[pos.y - 1][pos.x]) {
-      setPos({ x: pos.x, y: pos.y - 1 });
+      console.log('@@@ navigating now');
+      navigate(map[pos.y - 1][pos.x].path);
       setDir(dir);
     }
     if (dir === 'Down' && map[pos.y + 1] && map[pos.y + 1][pos.x]) {
-      setPos({ x: pos.x, y: pos.y + 1 });
+      console.log('@@@ navigating now');
+      navigate(map[pos.y + 1][pos.x].path);
       setDir(dir);
     }
     if (dir === 'Left' && map[pos.y][pos.x - 1]) {
-      setPos({ x: pos.x - 1, y: pos.y });
+      console.log('@@@ navigating now');
+      navigate(map[pos.y][pos.x - 1].path);
       setDir(dir);
     }
     if (dir === 'Right' && map[pos.y][pos.x + 1]) {
-      setPos({ x: pos.x + 1, y: pos.y });
+      console.log('@@@ navigating now');
+      navigate(map[pos.y][pos.x + 1].path)
       setDir(dir);
     }
   };
@@ -75,49 +77,37 @@ function App() {
 
   const teleportPos = (newPos: Point): void => {
     if (!isSamePoint(newPos, pos)) {
-      setPos(newPos);
+      console.log('@@@ navigating now');
+      navigate(map[newPos.y][newPos.x].path);
       setDir('Teleport');
     }
   };
 
   const mapAreaProps: MapAreaProps = { map, pos, teleportPos };
-  const placeAreaProps: PlaceAreaProps = { place, dir };
+  const places: Place[] = map.flat();
 
   return (
     <Container>
       <MapAreaWrapper>
-        <MapArea {...mapAreaProps} />
+        {pos && <MapArea {...mapAreaProps} />}
       </MapAreaWrapper>
       <PlaceAreaWrapper>
-        <PlaceArea {...placeAreaProps} />
+        <Routes>
+          {places.map((place: Place) =>
+            <Route
+              key={place.name}
+              path={place.path}
+              element={<PlaceArea place={place} dir={dir} />}
+            />
+          )}
+          <Route
+            path='*'
+            element={<Navigate to={map[0][0].path} replace />}
+          />
+        </Routes>
       </PlaceAreaWrapper>
     </Container>
   );
 }
 
 export default App;
-
-/*
-<Router>
-  <div>
-    <nav>
-      <ul>
-        <li>
-          <Link to='/'>About</Link>
-        </li>
-        <li>
-          <Link to='/projects'>Projects</Link>
-        </li>
-        <li>
-          <Link to='/visualizations'>Visualizations</Link>
-        </li>
-      </ul>
-    </nav>
-    <Routes>
-      <Route path='/' element={<About />} />
-      <Route path='/projects' element={<Projects />} />
-      <Route path='/visualizations' element={<Visualizations />} />
-    </Routes>
-  </div>
-</Router>
-*/
