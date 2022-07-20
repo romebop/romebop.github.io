@@ -29,7 +29,7 @@ const DescriptionSection = styled.div`
 `;
 
 const outOpacity = 0;
-const outScale = 1.4;
+const outScale = 1.2;
 const placeVariants = {
   enter: (dir: Direction) => {
     if (dir === 'Teleport') {
@@ -103,6 +103,9 @@ export interface PlaceAreaProps {
 }
 
 const PlaceArea: FC<PlaceAreaProps> = ({ place, dir }) => {  
+
+  console.log('place area rendered');
+  
   return (
     <AnimatePresence custom={dir}>
       <Wrapper

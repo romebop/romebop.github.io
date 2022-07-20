@@ -12,6 +12,7 @@ import PlaceArea, { PlaceAreaProps } from './components/PlaceArea';
 import useKeyPress from './hooks/useKeypress';
 import map from './map';
 import { Point, Direction } from './types';
+import { isSamePoint } from './util';
 
 const Container = styled.div`
   background-color: #4c4182;
@@ -72,9 +73,11 @@ function App() {
     onArrowPress,
   );
 
-  const teleportPos = (pos: Point): void => {
-    setPos(pos);
-    setDir('Teleport');
+  const teleportPos = (newPos: Point): void => {
+    if (!isSamePoint(newPos, pos)) {
+      setPos(newPos);
+      setDir('Teleport');
+    }
   };
 
   const mapAreaProps: MapAreaProps = { map, pos, teleportPos };
