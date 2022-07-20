@@ -1,9 +1,10 @@
 import { FC } from 'react';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { Point, Place } from 'src/types';
-import { serializePoint } from 'src/util';
+import { colors } from 'src/map';
+
+// &.{yourActiveClassName} { #css goes here}
 
 const RowsContainer = styled.div`
   display: flex;
@@ -15,14 +16,20 @@ const Row = styled.div`
   display: flex;
 `;
 
-const InputWrapper = styled.div`
+const PlaceMarkerWrapper = styled.div`
   width: 30px;
-  /* width: 250px; */
   height: 30px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  display: grid;
+  place-content: center;
+`;
+
+const PlaceMarker = styled.div<{ x: number, active: boolean }>`
+  cursor: pointer;
+  width: 15px;
+  height: 15px;
+  border: ${({ active }) => active ? '2px' : '0' } solid ${({ active }) => active ? '#fff' : '#444' };
+  border-radius: 50%;
+  background-color: ${({ active, x }) => active ? colors[x] : '#fff'};
 `;
 
 export interface MapAreaProps {
@@ -32,24 +39,18 @@ export interface MapAreaProps {
 }
 
 const MapArea: FC<MapAreaProps> = ({ map, pos, teleportPos }) => {  
-  console.log('@@@ map area rendered:');
-  console.log(pos);
   return (
     <RowsContainer>
       {map.map((row, y) =>
         <Row key={y}>
           {row.map((place, x) =>
-            <InputWrapper key={x}>
-              <Link to={place.path}>
-                {/* <label htmlFor={place.name}>{serializePoint({ x, y })} === {serializePoint(pos)}</label> */}
-                <input
-                  name={place.name}
-                  type='checkbox'
-                  checked={(x === pos.x) && (y === pos.y)}
-                  onChange={() => teleportPos({ x, y })}
-                />
-              </Link>
-            </InputWrapper>
+            <PlaceMarkerWrapper key={place.name}>
+              <PlaceMarker
+                x={x}
+                active={(x === pos.x) && (y === pos.y)}
+                onClick={() => teleportPos({ x, y })}
+              />
+            </PlaceMarkerWrapper>
           )}
         </Row>
       )}

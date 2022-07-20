@@ -1,6 +1,12 @@
 import drifter from './assets/drifter.gif';
 import { Place } from './types';
 
+export const colors = [
+  '#0095ff',
+  '#f23535',
+  'yellow',
+];
+
 const map: Place[][] = [
   [
     {

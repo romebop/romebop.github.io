@@ -1,6 +1,12 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import { Navigate, Routes, Route, useLocation, useNavigate  } from 'react-router-dom';
+import {
+  Navigate,
+  Routes,
+  Route,
+  useLocation,
+  useNavigate,
+} from 'react-router-dom';
 
 import MapArea, { MapAreaProps } from './components/MapArea';
 import PlaceArea from './components/PlaceArea';
@@ -38,8 +44,6 @@ const PlaceAreaWrapper = styled.div`
 
 function App() {
 
-  console.log('app rendered');
-
   const { pathname } = useLocation();
   const pos = getMapPos(map, pathname)!;
   const [dir, setDir] = useState<Direction>('Teleport');
@@ -47,22 +51,18 @@ function App() {
 
   const movePos = (dir: Direction): void => {
     if (dir === 'Up' && map[pos.y - 1] && map[pos.y - 1][pos.x]) {
-      console.log('@@@ navigating now');
       navigate(map[pos.y - 1][pos.x].path);
       setDir(dir);
     }
     if (dir === 'Down' && map[pos.y + 1] && map[pos.y + 1][pos.x]) {
-      console.log('@@@ navigating now');
       navigate(map[pos.y + 1][pos.x].path);
       setDir(dir);
     }
     if (dir === 'Left' && map[pos.y][pos.x - 1]) {
-      console.log('@@@ navigating now');
       navigate(map[pos.y][pos.x - 1].path);
       setDir(dir);
     }
     if (dir === 'Right' && map[pos.y][pos.x + 1]) {
-      console.log('@@@ navigating now');
       navigate(map[pos.y][pos.x + 1].path)
       setDir(dir);
     }
@@ -77,7 +77,6 @@ function App() {
 
   const teleportPos = (newPos: Point): void => {
     if (!isSamePoint(newPos, pos)) {
-      console.log('@@@ navigating now');
       navigate(map[newPos.y][newPos.x].path);
       setDir('Teleport');
     }
