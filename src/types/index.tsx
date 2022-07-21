@@ -9,6 +9,6 @@ export interface Place {
   name: string;
   description: string;
   link?: string;
-  img?: JSX.Element;
+  imgName?: string;
   path: string;
 }

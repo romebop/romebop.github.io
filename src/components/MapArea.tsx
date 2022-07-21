@@ -6,10 +6,11 @@ import { colors } from 'src/map';
 
 // &.{yourActiveClassName} { #css goes here}
 
-const RowsContainer = styled.div`
+const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  z-index: 1;
 `;
 
 const Row = styled.div`
@@ -40,7 +41,7 @@ export interface MapAreaProps {
 
 const MapArea: FC<MapAreaProps> = ({ map, pos, teleportPos }) => {  
   return (
-    <RowsContainer>
+    <Container>
       {map.map((row, y) =>
         <Row key={y}>
           {row.map((place, x) =>
@@ -54,7 +55,7 @@ const MapArea: FC<MapAreaProps> = ({ map, pos, teleportPos }) => {
           )}
         </Row>
       )}
-    </RowsContainer>
+    </Container>
   );
 };
 

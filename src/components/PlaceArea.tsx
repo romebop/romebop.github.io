@@ -7,13 +7,14 @@ import {
   Place,
 } from 'src/types';
 
+const margin = '20px';
+
 const Wrapper = styled(motion.div)`
   position: absolute;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  border: 1px solid #0095ff;
   width: 500px;
   height: 500px;
 `;
@@ -25,8 +26,20 @@ const NameSection = styled.div`
 
 const DescriptionSection = styled.div`
   font-size: 14px;
-  margin: 14px 0%;
+  margin-top: ${margin};
 `;
+
+const LinkSection = styled.a`
+  font-size: 14px;
+  color: white;
+  margin-top: ${margin};
+`;
+
+const ImageSection = styled.img`
+  width: 500px;
+  height: 500px;
+  margin-top: ${margin};
+`
 
 const outOpacity = 0;
 const outScale = 1.2;
@@ -36,6 +49,7 @@ const placeVariants = {
       return {
         scale: outScale,
         opacity: outOpacity,
+        zIndex: 0,
       };
     } else {
       let x: number, y: number;
@@ -56,21 +70,23 @@ const placeVariants = {
         x,
         y,
         opacity: outOpacity,
+        zIndex: 0,
       };
     }
   },
   center: {
-    // zIndex: 1,
     scale: 1,
     x: 0,
     y: 0,
-    opacity: 1
+    opacity: 1,
+    zIndex: 1,
   },
   exit: (dir: Direction) => {
     if (dir === 'Teleport') {
       return {
         scale: outScale,
         opacity: outOpacity,
+        zIndex: 0,
       };
     } else {
       let x: number, y: number;
@@ -88,10 +104,10 @@ const placeVariants = {
         y = 0;
       }
       return {
-        // zIndex: 0,
         x,
         y,
         opacity: outOpacity,
+        zIndex: 0,
       };
     }
   },
@@ -113,13 +129,17 @@ const PlaceArea: FC<PlaceAreaProps> = ({ place, dir }) => {
         animate="center"
         exit="exit"
         transition={{
-          duration: 0.25,
+          duration: 0.4,
           ease: 'easeOut',
         }}
       >
         <NameSection>{place.name}</NameSection>
         <DescriptionSection>{place.description}</DescriptionSection>
-        {place.img && place.img}
+        <LinkSection
+          href={place.link}
+          target='_blank'
+        >{place.link}</LinkSection>
+        {place.imgName && <ImageSection src={require(`src/assets/${place.imgName}`)} />}
       </Wrapper>
     </AnimatePresence>
   );
