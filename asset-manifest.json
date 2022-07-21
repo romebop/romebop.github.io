@@ -1,16 +1,34 @@
 {
   "files": {
-    "main.css": "/static/css/main.d3c5d06f.css",
-    "main.js": "/static/js/main.0f916a47.js",
+    "main.js": "/static/js/main.9576eb67.js",
     "static/js/787.958d0699.chunk.js": "/static/js/787.958d0699.chunk.js",
+    "static/media/choso.png": "/static/media/choso.fd22c69b9840ba2d613a.png",
+    "static/media/kinji-hakari.png": "/static/media/kinji-hakari.60f75869358cb4cbf336.png",
+    "static/media/hajime-kashimo.png": "/static/media/hajime-kashimo.98ac28950d96abcbaea5.png",
+    "static/media/charles-bernard.png": "/static/media/charles-bernard.dba24eb0d602060c60cc.png",
+    "static/media/maki-zenin.png": "/static/media/maki-zenin.70db6ee25f4f9b386e4a.png",
+    "static/media/reggie-star.png": "/static/media/reggie-star.031a9942386878f6ff1e.png",
+    "static/media/yuta-okkotsu.png": "/static/media/yuta-okkotsu.60a349ad68deb9ea9768.png",
+    "static/media/hanami.png": "/static/media/hanami.a026a5008e0316c69b91.png",
+    "static/media/megumi-fushiguro.png": "/static/media/megumi-fushiguro.d7d6bd710861fd70749e.png",
+    "static/media/sukuna.png": "/static/media/sukuna.c91e4809e845f6da3e02.png",
+    "static/media/dagon.png": "/static/media/dagon.0a0ea76fd7f86bbd9681.png",
+    "static/media/jogo.png": "/static/media/jogo.3722b98ade84c7b0806e.png",
+    "static/media/hana-kurusu.png": "/static/media/hana-kurusu.332a9046cc802e6c7821.png",
+    "static/media/eight-handled-sword-divergent-sila-divine-general-mahoraga.png": "/static/media/eight-handled-sword-divergent-sila-divine-general-mahoraga.c4773c8298e63f7b9e8f.png",
+    "static/media/panda.png": "/static/media/panda.881df37969c19bf10801.png",
+    "static/media/ryu-ishigori.png": "/static/media/ryu-ishigori.adc015dddce686a23d5c.png",
+    "static/media/suguru-geto.png": "/static/media/suguru-geto.bb820b564f8d8a4e3700.png",
+    "static/media/hiromi-higuruma.png": "/static/media/hiromi-higuruma.384201c23e86b43a0761.png",
+    "static/media/satoru-gojo.png": "/static/media/satoru-gojo.daeda71d61c028757036.png",
+    "static/media/toji-fushiguro.png": "/static/media/toji-fushiguro.64fde11ee55a4ce5d96a.png",
+    "static/media/yuji-itadori.png": "/static/media/yuji-itadori.097f2bfca01add422126.png",
     "static/media/drifter.gif": "/static/media/drifter.c02883f004b3ace92b57.gif",
     "index.html": "/index.html",
-    "main.d3c5d06f.css.map": "/static/css/main.d3c5d06f.css.map",
-    "main.0f916a47.js.map": "/static/js/main.0f916a47.js.map",
+    "main.9576eb67.js.map": "/static/js/main.9576eb67.js.map",
     "787.958d0699.chunk.js.map": "/static/js/787.958d0699.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.d3c5d06f.css",
-    "static/js/main.0f916a47.js"
+    "static/js/main.9576eb67.js"
   ]
 }
