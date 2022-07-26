@@ -11,26 +11,37 @@ const Container = styled.div`
   flex-direction: column;
   align-items: flex-start;
   z-index: 1;
+  margin-right: 200px;
 `;
 
-const Row = styled.div`
+const Row = styled.div<{ idx: number }>`
   display: flex;
-`;
-
-const PlaceMarkerWrapper = styled.div`
-  width: 30px;
-  height: 30px;
-  display: grid;
-  place-content: center;
+  margin-left: ${({ idx }) => idx * 16}px;
 `;
 
 const PlaceMarker = styled.div<{ x: number, active: boolean }>`
   cursor: pointer;
-  width: 15px;
-  height: 15px;
-  border: ${({ active }) => active ? '2px' : '0' } solid ${({ active }) => active ? '#fff' : '#444' };
-  border-radius: 50%;
+  margin: 2px 2px;
+  width:  80px;
+  height: 40px;
+  border: 4px solid ${({ active }) => active ? '#fff' : '#444' };
+  border-radius: 8px;
   background-color: ${({ active, x }) => active ? colors[x] : '#fff'};
+  transform: skewX(20deg);
+  box-sizing: border-box;
+  position: relative;
+
+  /* &:before {
+    content: '';
+    z-index: -1;
+    background-color: #fff;
+    border-radius: 50%;
+    width: 26px;
+    height: 26px;
+    right: -5.5px;
+    top: -5.5px;
+    position: absolute;
+  } */
 `;
 
 export interface MapAreaProps {
@@ -43,15 +54,17 @@ const MapArea: FC<MapAreaProps> = ({ map, pos, teleportPos }) => {
   return (
     <Container>
       {map.map((row, y) =>
-        <Row key={y}>
+        <Row
+          key={y}
+          idx={y}
+        >
           {row.map((place, x) =>
-            <PlaceMarkerWrapper key={place.name}>
-              <PlaceMarker
-                x={x}
-                active={(x === pos.x) && (y === pos.y)}
-                onClick={() => teleportPos({ x, y })}
-              />
-            </PlaceMarkerWrapper>
+            <PlaceMarker
+              key={place.name}
+              x={x}
+              active={(x === pos.x) && (y === pos.y)}
+              onClick={() => teleportPos({ x, y })}
+            />
           )}
         </Row>
       )}

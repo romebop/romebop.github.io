@@ -21,7 +21,7 @@ const Wrapper = styled(motion.div)`
 
 const NameSection = styled.div`
   font-size: 24px;
-  font-weight: 600;
+  font-weight: 800;
 `;
 
 const DescriptionSection = styled.div`
@@ -129,7 +129,7 @@ const PlaceArea: FC<PlaceAreaProps> = ({ place, dir }) => {
         animate="center"
         exit="exit"
         transition={{
-          duration: 0.4,
+          duration: 0.2,
           ease: 'easeOut',
         }}
       >
