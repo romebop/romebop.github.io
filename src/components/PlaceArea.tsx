@@ -125,9 +125,9 @@ const PlaceArea: FC<PlaceAreaProps> = ({ place, dir }) => {
         key={place.name}
         variants={placeVariants}
         custom={dir}
-        initial="enter"
-        animate="center"
-        exit="exit"
+        initial='enter'
+        animate='center'
+        exit='exit'
         transition={{
           duration: 0.2,
           ease: 'easeOut',

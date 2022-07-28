@@ -16,7 +16,7 @@ import { Direction, Place, Point } from './types';
 import { getMapPos, isSamePoint } from './util';
 
 const Container = styled.div`
-  background-color: #999;
+  background: linear-gradient(-45deg, #13385b, #12355b, #12335c, #11305c, #102d5d, #102a5d, #0f275d, #0f245e, #0e215e); 
   min-height: 100vh;
   display: flex;
   justify-content: center;

@@ -1,9 +1,10 @@
 import { Place } from './types';
 
-export const colors = [
-  '#0095ff',
-  '#f23535',
-  'yellow',
+export const categoryColors = [
+  '#a3255c',
+  '#baa986',
+  '#01e4d3',
+  '#3722c2',
 ];
 
 const map: Place[][] = [
@@ -16,18 +17,18 @@ const map: Place[][] = [
       path: '/kinji-hakari',
     },
     {
-      name: 'Yuji Itadori',
-      description: 'He ate one of Sukuna\'s fingers',
-      link: 'https://jujutsu-kaisen.fandom.com/wiki/Yuji_Itadori',
-      imgName: 'yuji-itadori.png',
-      path: '/yuji-itadori',
-    },
-    {
       name: 'Satoru Gojo',
       description: 'A special grade jujutsu sorcerer and widely recognized as the strongest in the world',
       link: 'https://jujutsu-kaisen.fandom.com/wiki/Satoru_Gojo',
       imgName: 'satoru-gojo.png',
       path: '/satoru-gojo',
+    },
+    {
+      name: 'Yuji Itadori',
+      description: 'He ate one of Sukuna\'s fingers',
+      link: 'https://jujutsu-kaisen.fandom.com/wiki/Yuji_Itadori',
+      imgName: 'yuji-itadori.gif',
+      path: '/yuji-itadori',
     },
     {
       name: 'Megumi Fushiguro',

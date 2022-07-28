@@ -20,3 +20,9 @@ export function getMapPos(map: Place[][], path: string): Point | void {
     }
   }
 }
+
+export function getAcronym(name: string): string {
+  return name.split(/[\s-]+/)
+    .map(s => s[0].toUpperCase())
+    .join('');
+}
