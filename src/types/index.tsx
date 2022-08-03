@@ -12,3 +12,9 @@ export interface Place {
   imgName?: string;
   path: string;
 }
+
+export interface HSL {
+  hue: number;
+  saturation: number;
+  lightness: number;
+}

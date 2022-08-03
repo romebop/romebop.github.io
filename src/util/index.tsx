@@ -1,4 +1,4 @@
-import { Place, Point } from 'src/types';
+import { HSL, Place, Point } from 'src/types';
 
 export function isSamePoint(p1: Point, p2: Point): boolean {
   return (p1.x === p2.x) && (p1.y === p2.y); 
@@ -25,4 +25,24 @@ export function getAcronym(name: string): string {
   return name.split(/[\s-]+/)
     .map(s => s[0].toUpperCase())
     .join('');
+}
+
+export function getHslString({ hue, saturation, lightness }: HSL): string {
+  return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+}
+
+export function getHslType(s: string): HSL {
+  const hslRegex = /^hsl\((?<hue>\d+), (?<saturation>\d+)%, (?<lightness>\d+)%\)$/;
+  const groups = s.match(hslRegex)!.groups;
+  return {
+    hue: +groups!.hue,
+    saturation: +groups!.saturation,
+    lightness: +groups!.lightness,
+  };
+}
+
+export function setHslLightness(hslStr: string, lightness: number): string {
+  const hsl = getHslType(hslStr);
+  hsl.lightness = lightness;
+  return getHslString(hsl);
 }

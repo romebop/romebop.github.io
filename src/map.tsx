@@ -1,10 +1,10 @@
 import { Place } from './types';
 
 export const categoryColors = [
-  '#a3255c',
-  '#baa986',
-  '#01e4d3',
-  '#3722c2',
+  'hsl(0, 100%, 65%)',
+  'hsl(205, 100%, 50%)',
+  'hsl(141, 75%, 56%)',
+  'hsl(175, 100%, 75%)',
 ];
 
 const map: Place[][] = [
@@ -161,18 +161,27 @@ const map: Place[][] = [
       path: '/eight-handled-sword-divergent-sila-divine-general-mahoraga',
     },
   ],
+  [
+    {
+      name: 'Saerom Park',
+      description: 'He is a romebop',
+      link: 'https://romebop.io',
+      imgName: 'drifter.gif',
+      path: '/about',
+    },
+  ],
 ];
 
-function preprocess(map: Place[][]): Place[][] {
-  const preprocessedMap: Place[][] = Array(map[0].length).fill(null).map(() => []);
-  for (let x = 0; x < map[0].length; x++) {
-    for (let y = 0; y < map.length; y++) {
-      if (map[y][x]) {
-        preprocessedMap[x].push(map[y][x]);
-      }
-    }
-  }
-  return preprocessedMap;
-}
+// function preprocess(map: Place[][]): Place[][] {
+//   const preprocessedMap: Place[][] = Array(map[0].length).fill(null).map(() => []);
+//   for (let x = 0; x < map[0].length; x++) {
+//     for (let y = 0; y < map.length; y++) {
+//       if (map[y][x]) {
+//         preprocessedMap[x].push(map[y][x]);
+//       }
+//     }
+//   }
+//   return preprocessedMap;
+// }
 
-export default preprocess(map);
+export default map;

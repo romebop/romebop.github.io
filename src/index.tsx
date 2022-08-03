@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom/client';
 import { HashRouter as Router } from 'react-router-dom';
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from 'styled-components/macro';
 
 import App from './App';
 import reportWebVitals from './reportWebVitals';
@@ -8,7 +8,7 @@ import reportWebVitals from './reportWebVitals';
 const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    font-family: 'Segoe UI', 'Roboto', 'Oxygen',
       'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
       sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -25,9 +25,6 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
-  // <React.StrictMode>
-  //   <App />
-  // </React.StrictMode>
   <>
     <GlobalStyle />
     <Router>

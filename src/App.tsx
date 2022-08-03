@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 import {
   Navigate,
   Routes,
@@ -8,6 +8,7 @@ import {
   useNavigate,
 } from 'react-router-dom';
 
+import Footer from './components/Footer';
 import MapArea, { MapAreaProps } from './components/MapArea';
 import PlaceArea from './components/PlaceArea';
 import useKeyPress from './hooks/useKeypress';
@@ -15,27 +16,33 @@ import map from './map';
 import { Direction, Place, Point } from './types';
 import { getMapPos, isSamePoint } from './util';
 
-const Container = styled.div`
+const Background = styled.div`
   background: linear-gradient(-45deg, #13385b, #12355b, #12335c, #11305c, #102d5d, #102a5d, #0f275d, #0f245e, #0e215e); 
   min-height: 100vh;
+`;
+
+const Container = styled.div`
   display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: auto;
+  width: 500px;
+  min-height: 100vh;
+`;
+
+const AreasContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: auto 0;
 `;
 
 const MapAreaWrapper = styled.div`
-  width: 200px;
-  height: 500px;
   display: flex;
   align-items: center;
   justify-content: center;
 `
 
 const PlaceAreaWrapper = styled.div`
-  width: 500px;
-  height: 500px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -86,26 +93,31 @@ function App() {
   const places: Place[] = map.flat();
 
   return (
-    <Container>
-      <MapAreaWrapper>
-        {pos && <MapArea {...mapAreaProps} />}
-      </MapAreaWrapper>
-      <PlaceAreaWrapper>
-        <Routes>
-          {places.map((place: Place) =>
-            <Route
-              key={place.name}
-              path={place.path}
-              element={<PlaceArea place={place} dir={dir} />}
-            />
-          )}
-          <Route
-            path='*'
-            element={<Navigate to={map[0][0].path} replace />}
-          />
-        </Routes>
-      </PlaceAreaWrapper>
-    </Container>
+    <Background>
+      <Container>
+        <AreasContainer>
+          <MapAreaWrapper>
+            {pos && <MapArea {...mapAreaProps} />}
+          </MapAreaWrapper>
+          {/* <PlaceAreaWrapper>
+            <Routes>
+              {places.map((place: Place) =>
+                <Route
+                  key={place.name}
+                  path={place.path}
+                  element={<PlaceArea place={place} dir={dir} />}
+                />
+              )}
+              <Route
+                path='*'
+                element={<Navigate to={map[0][0].path} replace />}
+              />w
+            </Routes>
+          </PlaceAreaWrapper> */}
+        </AreasContainer>
+        <Footer />
+      </Container>
+    </Background>
   );
 }
 

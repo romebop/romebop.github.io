@@ -1,13 +1,11 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { FC } from 'react';
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 
 import {
   Direction,
   Place,
 } from 'src/types';
-
-const margin = '20px';
 
 const Wrapper = styled(motion.div)`
   position: absolute;
@@ -15,9 +13,11 @@ const Wrapper = styled(motion.div)`
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  width: 500px;
+  /* width: 500px; */
   height: 500px;
 `;
+
+const sectionMargin = '20px';
 
 const NameSection = styled.div`
   font-size: 24px;
@@ -26,19 +26,19 @@ const NameSection = styled.div`
 
 const DescriptionSection = styled.div`
   font-size: 14px;
-  margin-top: ${margin};
+  margin-top: ${sectionMargin};
 `;
 
 const LinkSection = styled.a`
   font-size: 14px;
   color: white;
-  margin-top: ${margin};
+  margin-top: ${sectionMargin};
 `;
 
 const ImageSection = styled.img`
   width: 500px;
   height: 500px;
-  margin-top: ${margin};
+  margin-top: ${sectionMargin};
 `
 
 const outOpacity = 0;
@@ -130,7 +130,7 @@ const PlaceArea: FC<PlaceAreaProps> = ({ place, dir }) => {
         exit='exit'
         transition={{
           duration: 0.2,
-          ease: 'easeOut',
+          // ease: 'easeOut',
         }}
       >
         <NameSection>{place.name}</NameSection>
