@@ -3,7 +3,7 @@ import { FC } from 'react';
 import styled from 'styled-components/macro';
 
 import { Point } from 'src/types';
-import { setHslLightness } from 'src/util';
+import { getHslType, setHslLightness } from 'src/util';
 
 const len = 25;
 const Container = styled.div`
@@ -12,14 +12,15 @@ const Container = styled.div`
   position: relative;
 `;
 
+const lightnessOffset = 30;
 const Target = styled(motion.div)<{ color: string }>`
   cursor: pointer;
   width: ${len}px;
   height: ${len}px;
   border-width: 2px;
   border-style: solid;
-  border-color: ${({ color }) => color};
-  background-color: ${({ color }) => setHslLightness(color, 0)};
+  border-color: ${({ color }) => setHslLightness(color, getHslType(color).lightness + lightnessOffset)};
+  background-color: ${({ color }) => setHslLightness(color, getHslType(color).lightness + lightnessOffset)};
   box-sizing: border-box;
   position: relative;
   position: absolute;
@@ -53,8 +54,8 @@ const PlaceMarker: FC<PlaceMarkerProps> = ({ pos, color, isActive, teleportPos }
         onClick={() => teleportPos(pos)}
         animate={{
           scale: isActive ? scaleSize : 1,
-          // borderColor: isActive ? 'hsl(0, 0%, 100%)' : color,
-          backgroundColor: isActive ? color : setHslLightness(color, 0),
+          borderColor: isActive ? 'hsl(0, 0%, 100%)' : setHslLightness(color, getHslType(color).lightness + lightnessOffset),
+          backgroundColor: isActive ? color : setHslLightness(color, getHslType(color).lightness + lightnessOffset),
         }}
         transition={{
           duration: transitionDuration,

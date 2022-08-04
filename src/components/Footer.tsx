@@ -2,10 +2,8 @@ import { FC } from 'react';
 import styled from 'styled-components/macro';
 
 const Text = styled.div`
-  margin-top: auto;
-  color: white;
-  font-size: 14px;
-  margin-bottom: 20px;
+  color: hsl(0, 0%, 100%);
+  font-size: 12px;
 `;
 
 const Footer: FC = () => (

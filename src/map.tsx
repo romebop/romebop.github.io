@@ -1,10 +1,10 @@
 import { Place } from './types';
 
 export const categoryColors = [
-  'hsl(0, 100%, 65%)',
+  'hsl(0, 100%, 50%)',
   'hsl(205, 100%, 50%)',
-  'hsl(141, 75%, 56%)',
-  'hsl(175, 100%, 75%)',
+  'hsl(141, 75%, 50%)',
+  'hsl(175, 100%, 50%)',
 ];
 
 const map: Place[][] = [

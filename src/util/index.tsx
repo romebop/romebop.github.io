@@ -1,4 +1,4 @@
-import { HSL, Place, Point } from 'src/types';
+import { Direction, HSL, Place, Point } from 'src/types';
 
 export function isSamePoint(p1: Point, p2: Point): boolean {
   return (p1.x === p2.x) && (p1.y === p2.y); 
@@ -46,3 +46,14 @@ export function setHslLightness(hslStr: string, lightness: number): string {
   hsl.lightness = lightness;
   return getHslString(hsl);
 }
+
+export const keyDirectionMap: Record<string, Direction> = {
+  ArrowUp: 'Up',
+  ArrowDown: 'Down',
+  ArrowLeft: 'Left',
+  ArrowRight: 'Right',
+  w: 'Up',
+  s: 'Down',
+  a: 'Left',
+  d: 'Right',
+};

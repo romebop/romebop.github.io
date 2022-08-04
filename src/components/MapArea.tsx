@@ -12,7 +12,7 @@ const Container = styled.div`
   z-index: 2;
 `;
 
-const placeMarkerMargin = 40;
+const placeMarkerMargin = 30;
 const Row = styled.div`
   display: flex;
   &:not(:first-child) {
