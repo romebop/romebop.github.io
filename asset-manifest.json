@@ -1,7 +1,8 @@
 {
   "files": {
-    "main.js": "/static/js/main.9576eb67.js",
+    "main.js": "/static/js/main.eb43ebb0.js",
     "static/js/787.958d0699.chunk.js": "/static/js/787.958d0699.chunk.js",
+    "static/media/yuji-itadori.gif": "/static/media/yuji-itadori.abd4af1b757f5e79f46b.gif",
     "static/media/choso.png": "/static/media/choso.fd22c69b9840ba2d613a.png",
     "static/media/kinji-hakari.png": "/static/media/kinji-hakari.60f75869358cb4cbf336.png",
     "static/media/hajime-kashimo.png": "/static/media/hajime-kashimo.98ac28950d96abcbaea5.png",
@@ -12,6 +13,7 @@
     "static/media/hanami.png": "/static/media/hanami.a026a5008e0316c69b91.png",
     "static/media/megumi-fushiguro.png": "/static/media/megumi-fushiguro.d7d6bd710861fd70749e.png",
     "static/media/sukuna.png": "/static/media/sukuna.c91e4809e845f6da3e02.png",
+    "static/media/toji-fushiguro.png": "/static/media/toji-fushiguro.847dc35473261e8f2608.png",
     "static/media/dagon.png": "/static/media/dagon.0a0ea76fd7f86bbd9681.png",
     "static/media/jogo.png": "/static/media/jogo.3722b98ade84c7b0806e.png",
     "static/media/hana-kurusu.png": "/static/media/hana-kurusu.332a9046cc802e6c7821.png",
@@ -21,14 +23,13 @@
     "static/media/suguru-geto.png": "/static/media/suguru-geto.bb820b564f8d8a4e3700.png",
     "static/media/hiromi-higuruma.png": "/static/media/hiromi-higuruma.384201c23e86b43a0761.png",
     "static/media/satoru-gojo.png": "/static/media/satoru-gojo.daeda71d61c028757036.png",
-    "static/media/toji-fushiguro.png": "/static/media/toji-fushiguro.64fde11ee55a4ce5d96a.png",
     "static/media/yuji-itadori.png": "/static/media/yuji-itadori.097f2bfca01add422126.png",
     "static/media/drifter.gif": "/static/media/drifter.c02883f004b3ace92b57.gif",
     "index.html": "/index.html",
-    "main.9576eb67.js.map": "/static/js/main.9576eb67.js.map",
+    "main.eb43ebb0.js.map": "/static/js/main.eb43ebb0.js.map",
     "787.958d0699.chunk.js.map": "/static/js/787.958d0699.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.9576eb67.js"
+    "static/js/main.eb43ebb0.js"
   ]
 }
