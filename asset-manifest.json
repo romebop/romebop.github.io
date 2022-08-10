@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.js": "/static/js/main.eb43ebb0.js",
+    "main.js": "/static/js/main.69abf949.js",
     "static/js/787.958d0699.chunk.js": "/static/js/787.958d0699.chunk.js",
     "static/media/yuji-itadori.gif": "/static/media/yuji-itadori.abd4af1b757f5e79f46b.gif",
     "static/media/choso.png": "/static/media/choso.fd22c69b9840ba2d613a.png",
@@ -26,10 +26,10 @@
     "static/media/yuji-itadori.png": "/static/media/yuji-itadori.097f2bfca01add422126.png",
     "static/media/drifter.gif": "/static/media/drifter.c02883f004b3ace92b57.gif",
     "index.html": "/index.html",
-    "main.eb43ebb0.js.map": "/static/js/main.eb43ebb0.js.map",
+    "main.69abf949.js.map": "/static/js/main.69abf949.js.map",
     "787.958d0699.chunk.js.map": "/static/js/787.958d0699.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.eb43ebb0.js"
+    "static/js/main.69abf949.js"
   ]
 }
