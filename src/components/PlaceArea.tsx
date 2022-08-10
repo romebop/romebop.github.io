@@ -65,6 +65,7 @@ const Shadow = styled(motion.div)<{ color: string }>`
   width: ${imageLen}px;
   height: ${imageLen}px;
   background-color: ${({ color }) => color};
+  opacity: 0.8;
   position: absolute;
   z-index: 1;
 `;
