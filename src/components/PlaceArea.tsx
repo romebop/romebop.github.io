@@ -42,20 +42,31 @@ const DescriptionSection = styled.a`
   }
 `;
 
-const ImageSection = styled.img`
-  width: 400px;
-  height: 400px;
+
+const imageLen = 400;
+const ImageSection = styled.div`
+  width: ${imageLen}px;
+  height: ${imageLen}px;
   margin-top: ${sectionMargin}px;
+  position: relative;
+  `;
+
+const Image = styled.img`
+  width: ${imageLen}px;
+  height: ${imageLen}px;
+  box-sizing: border-box;
+  border: 4px solid hsl(0, 0%, 100%);
+  background-color: hsl(0, 0%, 100%);
+  position: absolute;
+  z-index: 2;
 `;
 
-const pillarWidth = 3;
-const Pillar = styled.div<{ color: string }>`
-  position: absolute;
-  width: ${pillarWidth}px;
-  height: 100%;
+const Shadow = styled(motion.div)<{ color: string }>`
+  width: ${imageLen}px;
+  height: ${imageLen}px;
   background-color: ${({ color }) => color};
-  /* background-color: white; */
-  transform: translateX(-${sectionMargin + pillarWidth}px);
+  position: absolute;
+  z-index: 1;
 `;
 
 const outOpacity = 0;
@@ -135,6 +146,7 @@ export interface PlaceAreaProps {
   dir: Direction;
 }
 
+const transitionDuration = 0.2;
 const PlaceArea: FC<PlaceAreaProps> = ({ place, dir }) => {
 
   const pos = getMapPos(map, place.path)!;
@@ -151,7 +163,7 @@ const PlaceArea: FC<PlaceAreaProps> = ({ place, dir }) => {
         animate='center'
         exit='exit'
         transition={{
-          duration: 0.2,
+          duration: transitionDuration,
         }}
       >
         <NameSection>{place.name}</NameSection>
@@ -160,8 +172,20 @@ const PlaceArea: FC<PlaceAreaProps> = ({ place, dir }) => {
           title={place.link}
           target='_blank'
         >{place.description}</DescriptionSection>
-        {place.imgName && <ImageSection src={require(`src/assets/${place.imgName}`)} />}
-        <Pillar {...{ color}} />
+        {place.imgName && <ImageSection>
+          <Image src={require(`src/assets/${place.imgName}`)} />
+          <Shadow
+            {...{ color}}
+            animate={{
+              x: 12,
+              y: 12,
+            }}
+            transition={{
+              duration: transitionDuration,
+              delay: transitionDuration,
+            }}
+          />
+        </ImageSection>}
       </Container>
     </AnimatePresence>
   );

@@ -43,7 +43,6 @@ const MapAreaWrapper = styled.div`
   place-items: center;
   width: 100%;
   margin-top: ${minMargin}px;
-  margin-bottom: ${minMargin}px;
 `;
 
 const PlaceAreaWrapper = styled.div`
@@ -51,7 +50,7 @@ const PlaceAreaWrapper = styled.div`
   place-items: center;
   position: relative;
   width: 100%;
-  height: 600px;
+  height: 580px;
   margin-top: ${minMargin}px;
   `;
 

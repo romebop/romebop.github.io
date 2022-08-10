@@ -5,14 +5,14 @@ import styled from 'styled-components/macro';
 import { Point } from 'src/types';
 import { getHslType, setHslLightness } from 'src/util';
 
-const len = 25;
+const len = 20;
 const Container = styled.div`
   width: ${len}px;
   height: ${len}px;
   position: relative;
 `;
 
-const lightnessOffset = 30;
+const lightnessOffset = 40;
 const Target = styled(motion.div)<{ color: string }>`
   cursor: pointer;
   width: ${len}px;
