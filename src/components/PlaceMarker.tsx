@@ -12,7 +12,7 @@ const Container = styled.div`
   position: relative;
 `;
 
-const lightnessOffset = 40;
+const lightnessOffset = 35;
 const Target = styled(motion.div)<{ color: string }>`
   cursor: pointer;
   width: ${len}px;

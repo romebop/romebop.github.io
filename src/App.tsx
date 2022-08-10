@@ -16,9 +16,27 @@ import map from './map';
 import { Direction, Place, Point } from './types';
 import { getMapPos, keyDirectionMap, isSamePoint } from './util';
 
+const lineOpacity = 0.05;
 const Background = styled.div`
   background: linear-gradient(-45deg, #13385b, #12355b, #12335c, #11305c, #102d5d, #102a5d, #0f275d, #0f245e, #0e215e); 
   min-height: 100vh;
+  position: relative;
+  &:after {
+    content: '';
+    height: 100%;
+    width: 100%;
+    display: block;
+    background: linear-gradient(
+      to bottom,
+      transparent,
+      transparent 50%,
+      hsla(0, 0%, 0%, ${lineOpacity}) 50%,
+      hsla(0, 0%, 0%, ${lineOpacity})
+    );
+    background-size: 100% 8px;
+    position: absolute;
+    top: 0;
+  }
 `;
 
 const Container = styled.div`
