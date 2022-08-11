@@ -163,6 +163,7 @@ const PlaceArea: FC<PlaceAreaProps> = ({ place, dir }) => {
   const onImageLoad = () => {
     requestAnimationFrame(() => { // image render started
       requestAnimationFrame(() => { // image rendered
+        console.log('loading:', loading);
         console.log('setLoading false');
         setLoading(false);
       });
