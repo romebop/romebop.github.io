@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from 'framer-motion';
-import { FC, useState } from 'react';
+import { FC, useState, useEffect } from 'react';
 import styled from 'styled-components/macro';
 
 import Loading from 'src/components/Loading';
@@ -160,11 +160,16 @@ const PlaceArea: FC<PlaceAreaProps> = ({ place, dir }) => {
   const pos = getMapPos(map, place.path)!;
   const color = categoryColors[pos.y];
 
+  useEffect(() => {
+    setLoading(true);
+    return () => {
+      setLoading(false);
+    };
+  });
+
   const onImageLoad = () => {
     requestAnimationFrame(() => { // image render started
       requestAnimationFrame(() => { // image rendered
-        console.log('loading:', loading);
-        console.log('setLoading false');
         setLoading(false);
       });
     });
