@@ -1,13 +1,14 @@
 import { AnimatePresence, motion } from 'framer-motion';
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import styled from 'styled-components/macro';
 
+import Loading from 'src/components/Loading';
 import map, { categoryColors } from 'src/map';
 import {
   Direction,
   Place,
 } from 'src/types';
-import { getMapPos } from 'src/util';
+import { getHslType, getMapPos, setHslLightness } from 'src/util';
 
 const Container = styled(motion.div)`
   position: absolute;
@@ -42,23 +43,28 @@ const DescriptionSection = styled.a`
   }
 `;
 
-
 const imageLen = 400;
-const ImageSection = styled.div`
+const lightnessOffset = 45;
+const ImageSection = styled.div<{ color: string }>`
   width: ${imageLen}px;
   height: ${imageLen}px;
   margin-top: ${sectionMargin}px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: relative;
-  `;
+  background-color: ${({ color }) => setHslLightness(color, getHslType(color).lightness + lightnessOffset)};
+`;
 
-const Image = styled.img`
+const Image = styled.img<{ color: string, show: boolean }>`
   width: ${imageLen}px;
   height: ${imageLen}px;
   box-sizing: border-box;
   border: 4px solid hsl(0, 0%, 100%);
-  background-color: hsl(0, 0%, 100%);
+  background-color: ${({ color }) => setHslLightness(color, getHslType(color).lightness + lightnessOffset)};
+  visibility: ${({ show }) => show ? 'visible' : 'hidden'};
   position: absolute;
-  z-index: 2;
+  z-index: 1;
 `;
 
 const Shadow = styled(motion.div)<{ color: string }>`
@@ -67,7 +73,7 @@ const Shadow = styled(motion.div)<{ color: string }>`
   background-color: ${({ color }) => color};
   opacity: 0.8;
   position: absolute;
-  z-index: 1;
+  z-index: -1;
 `;
 
 const outOpacity = 0;
@@ -150,8 +156,14 @@ export interface PlaceAreaProps {
 const transitionDuration = 0.2;
 const PlaceArea: FC<PlaceAreaProps> = ({ place, dir }) => {
 
+  const [loading, setLoading] = useState(true);
   const pos = getMapPos(map, place.path)!;
   const color = categoryColors[pos.y];
+
+  const onImageLoad = () => {
+    console.log('@@@ onload called');
+    setLoading(false);
+  };
 
   return (
     <AnimatePresence custom={dir}>
@@ -173,8 +185,14 @@ const PlaceArea: FC<PlaceAreaProps> = ({ place, dir }) => {
           title={place.link}
           target='_blank'
         >{place.description}</DescriptionSection>
-        {place.imgName && <ImageSection>
-          <Image src={require(`src/assets/${place.imgName}`)} />
+        {place.imgName && <ImageSection { ...{ color }}>
+          {loading && <Loading {...{ color }} />}
+          <Image
+            {...{ color }}
+            show={!loading} 
+            src={require(`src/assets/${place.imgName}`)}
+            onLoad={onImageLoad}
+          />
           <Shadow
             {...{ color}}
             animate={{

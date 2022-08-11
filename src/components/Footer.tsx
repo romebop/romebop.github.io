@@ -2,8 +2,9 @@ import { FC } from 'react';
 import styled from 'styled-components/macro';
 
 const Text = styled.div`
-  color: hsla(0, 0%, 100%, 0.9);
-  font-size: 12px;
+  color: hsl(0,0%,100%);
+  opacity: 0.9;
+  font-size: 14px;
   font-weight: 500;
 `;
 
