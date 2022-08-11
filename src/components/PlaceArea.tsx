@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from 'framer-motion';
-import { FC, useState, useEffect } from 'react';
+import { FC, useState } from 'react';
 import styled from 'styled-components/macro';
 
 import Loading from 'src/components/Loading';
@@ -153,13 +153,13 @@ export interface PlaceAreaProps {
   dir: Direction;
 }
 
-const transitionDuration = 0.2;
 const PlaceArea: FC<PlaceAreaProps> = ({ place, dir }) => {
 
   const pos = getMapPos(map, place.path)!;
   const color = categoryColors[pos.y];
   
   const [loading, setLoading] = useState(true);
+  const transitionDuration = 0.2;
   
   const onImageLoad = () => {
     requestAnimationFrame(() => { // image render started
