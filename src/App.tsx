@@ -133,7 +133,7 @@ function App() {
                 <Route
                   key={place.name}
                   path={place.path}
-                  element={<PlaceArea {...{ place, dir }} />}
+                  element={<PlaceArea key={place.name} {...{ place, dir }} />}
                 />
               )}
               <Route

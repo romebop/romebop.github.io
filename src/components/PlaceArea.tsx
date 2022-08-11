@@ -37,7 +37,7 @@ const DescriptionSection = styled.a`
   margin-top: ${sectionMargin}px;
   text-decoration: none;
   color: hsl(0, 0%, 100%);
-  line-height: 1.4;
+  line-height: 1.6;
   &:hover {
     text-decoration: underline;
   }
@@ -156,17 +156,11 @@ export interface PlaceAreaProps {
 const transitionDuration = 0.2;
 const PlaceArea: FC<PlaceAreaProps> = ({ place, dir }) => {
 
-  const [loading, setLoading] = useState(true);
   const pos = getMapPos(map, place.path)!;
   const color = categoryColors[pos.y];
-
-  useEffect(() => {
-    setLoading(true);
-    return () => {
-      setLoading(false);
-    };
-  });
-
+  
+  const [loading, setLoading] = useState(true);
+  
   const onImageLoad = () => {
     requestAnimationFrame(() => { // image render started
       requestAnimationFrame(() => { // image rendered
