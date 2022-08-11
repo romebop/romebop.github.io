@@ -161,8 +161,11 @@ const PlaceArea: FC<PlaceAreaProps> = ({ place, dir }) => {
   const color = categoryColors[pos.y];
 
   const onImageLoad = () => {
-    console.log('@@@ onload called');
-    setLoading(false);
+    requestAnimationFrame(() => { // image render started
+      requestAnimationFrame(() => { // image rendered
+        setLoading(false);
+      });
+    });
   };
 
   return (
