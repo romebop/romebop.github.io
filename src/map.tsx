@@ -1,7 +1,7 @@
 import { Place } from './types';
 
 export const categoryColors = [
-  'hsl(0, 100%, 50%)',
+  'hsl(30, 100%, 50%)',
   'hsl(205, 100%, 50%)',
   'hsl(141, 75%, 50%)',
   'hsl(175, 100%, 50%)',

@@ -54,17 +54,26 @@ const ImageSection = styled.div<{ color: string }>`
   align-items: center;
   position: relative;
   background-color: ${({ color }) => setHslLightness(color, getHslType(color).lightness + lightnessOffset)};
-`;
+  `;
 
-const Image = styled.img<{ color: string, show: boolean }>`
+const ImageWrapper = styled.div`
   width: ${imageLen}px;
   height: ${imageLen}px;
   box-sizing: border-box;
   border: 4px solid hsl(0, 0%, 100%);
-  background-color: ${({ color }) => setHslLightness(color, getHslType(color).lightness + lightnessOffset)};
-  visibility: ${({ show }) => show ? 'visible' : 'hidden'};
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: absolute;
   z-index: 1;
+`;
+
+const Image = styled.img<{ color: string, show: boolean, isDrifter: boolean }>`
+  width: ${({ isDrifter }) => isDrifter ? '120px' : `${imageLen}px`};
+  height: ${({ isDrifter }) => isDrifter ? '160px' : `${imageLen}px`};;
+  background-color: ${({ color }) => setHslLightness(color, getHslType(color).lightness + lightnessOffset)};
+  visibility: ${({ show }) => show ? 'visible' : 'hidden'};
 `;
 
 const Shadow = styled(motion.div)<{ color: string }>`
@@ -191,12 +200,15 @@ const PlaceArea: FC<PlaceAreaProps> = ({ place, dir }) => {
         >{place.description}</DescriptionSection>
         {place.imgName && <ImageSection { ...{ color }}>
           {loading && <Loading {...{ color }} />}
-          <Image
-            {...{ color }}
-            show={!loading} 
-            src={require(`src/assets/${place.imgName}`)}
-            onLoad={onImageLoad}
-          />
+          <ImageWrapper>
+            <Image
+              {...{ color }}
+              show={!loading}
+              isDrifter={place.imgName === 'drifter.gif'}
+              src={require(`src/assets/${place.imgName}`)}
+              onLoad={onImageLoad}
+            />
+          </ImageWrapper>
           <Shadow
             {...{ color}}
             animate={{

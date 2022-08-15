@@ -47,7 +47,7 @@ const pixelVariants = {
 const pixelTransition = {
   duration: staggerDuration * 4,
   repeat: Infinity,
-  repeatDelay: staggerDuration * 4,
+  repeatDelay: staggerDuration * 2,
   times: [0, 0.5, 1],
 };
 
