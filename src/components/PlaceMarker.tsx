@@ -3,7 +3,7 @@ import { FC } from 'react';
 import styled from 'styled-components/macro';
 
 import { Point } from 'src/types';
-import { getHslType, setHslLightness } from 'src/util';
+import { getHslObj, setHslLightness } from 'src/util';
 
 const len = 20;
 const Container = styled.div`
@@ -19,8 +19,8 @@ const Target = styled(motion.div)<{ color: string }>`
   height: ${len}px;
   border-width: 2px;
   border-style: solid;
-  border-color: ${({ color }) => setHslLightness(color, getHslType(color).lightness + lightnessOffset)};
-  background-color: ${({ color }) => setHslLightness(color, getHslType(color).lightness + lightnessOffset)};
+  border-color: ${({ color }) => setHslLightness(color, getHslObj(color).lightness + lightnessOffset)};
+  background-color: ${({ color }) => setHslLightness(color, getHslObj(color).lightness + lightnessOffset)};
   box-sizing: border-box;
   position: relative;
   position: absolute;
@@ -36,7 +36,7 @@ const Shadow = styled(motion.div)`
   z-index: 2;
 `;
 
-export interface PlaceMarkerProps {
+interface PlaceMarkerProps {
   pos: Point;
   color: string;
   isActive: boolean;
@@ -46,7 +46,7 @@ export interface PlaceMarkerProps {
 const scaleSize = 1.4;
 const originOffset = 0.25;
 const transitionDuration = 0.2;
-export const PlaceMarker: FC<PlaceMarkerProps> = ({ pos, color, isActive, teleportPos }) => {
+const PlaceMarker: FC<PlaceMarkerProps> = ({ pos, color, isActive, teleportPos }) => {
   return (
     <Container>
       <Target
@@ -54,8 +54,8 @@ export const PlaceMarker: FC<PlaceMarkerProps> = ({ pos, color, isActive, telepo
         onClick={() => teleportPos(pos)}
         animate={{
           scale: isActive ? scaleSize : 1,
-          borderColor: isActive ? 'hsl(0, 0%, 100%)' : setHslLightness(color, getHslType(color).lightness + lightnessOffset),
-          backgroundColor: isActive ? color : setHslLightness(color, getHslType(color).lightness + lightnessOffset),
+          borderColor: isActive ? 'hsl(0, 0%, 100%)' : setHslLightness(color, getHslObj(color).lightness + lightnessOffset),
+          backgroundColor: isActive ? color : setHslLightness(color, getHslObj(color).lightness + lightnessOffset),
         }}
         transition={{
           duration: transitionDuration,
@@ -82,4 +82,9 @@ export const PlaceMarker: FC<PlaceMarkerProps> = ({ pos, color, isActive, telepo
       />
     </Container>
   );
+};
+
+export {
+  PlaceMarker,
+  type PlaceMarkerProps,
 };

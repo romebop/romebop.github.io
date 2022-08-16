@@ -1,11 +1,11 @@
-export type Direction = 'Up' | 'Down' | 'Left' | 'Right' | 'Teleport';
+type Direction = 'Up' | 'Down' | 'Left' | 'Right' | 'Teleport';
 
-export interface Point {
+interface Point {
   x: number;
   y: number;
 }
 
-export interface Place {
+interface Place {
   name: string;
   description: string;
   link?: string;
@@ -13,8 +13,15 @@ export interface Place {
   path: string;
 }
 
-export interface HSL {
+interface HSL {
   hue: number;
   saturation: number;
   lightness: number;
+}
+
+export {
+  type Direction,
+  type Point,
+  type Place,
+  type HSL,
 }

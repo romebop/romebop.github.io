@@ -51,11 +51,11 @@ const pixelTransition = {
   times: [0, 0.5, 1],
 };
 
-export interface LoadingProps {
+interface LoadingProps {
   color: string;
 }
 
-export const Loading: FC<LoadingProps> = ({ color }) => {
+const Loading: FC<LoadingProps> = ({ color }) => {
   const pixelCount = 3;
   return (
     <Container
@@ -73,4 +73,9 @@ export const Loading: FC<LoadingProps> = ({ color }) => {
       )}
     </Container>
   );
+};
+
+export {
+  Loading,
+  type LoadingProps,
 };

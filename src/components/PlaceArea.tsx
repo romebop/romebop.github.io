@@ -8,7 +8,7 @@ import {
   Direction,
   Place,
 } from 'src/types';
-import { getHslType, getMapPos, setHslLightness } from 'src/util';
+import { getHslObj, getMapPos, setHslLightness } from 'src/util';
 
 const Container = styled(motion.div)`
   position: absolute;
@@ -53,7 +53,7 @@ const ImageSection = styled.div<{ color: string }>`
   justify-content: center;
   align-items: center;
   position: relative;
-  background-color: ${({ color }) => setHslLightness(color, getHslType(color).lightness + lightnessOffset)};
+  background-color: ${({ color }) => setHslLightness(color, getHslObj(color).lightness + lightnessOffset)};
   `;
 
 const ImageWrapper = styled.div`
@@ -72,7 +72,7 @@ const ImageWrapper = styled.div`
 const Image = styled.img<{ color: string, show: boolean, isDrifter: boolean }>`
   width: ${({ isDrifter }) => isDrifter ? '120px' : `${imageLen}px`};
   height: ${({ isDrifter }) => isDrifter ? '160px' : `${imageLen}px`};;
-  background-color: ${({ color }) => setHslLightness(color, getHslType(color).lightness + lightnessOffset)};
+  background-color: ${({ color }) => setHslLightness(color, getHslObj(color).lightness + lightnessOffset)};
   visibility: ${({ show }) => show ? 'visible' : 'hidden'};
 `;
 
@@ -157,12 +157,12 @@ const placeVariants = {
   },
 };
 
-export interface PlaceAreaProps {
+interface PlaceAreaProps {
   place: Place;
   dir: Direction;
 }
 
-export const PlaceArea: FC<PlaceAreaProps> = ({ place, dir }) => {
+const PlaceArea: FC<PlaceAreaProps> = ({ place, dir }) => {
 
   const pos = getMapPos(map, place.path)!;
   const color = categoryColors[pos.y];
@@ -224,4 +224,9 @@ export const PlaceArea: FC<PlaceAreaProps> = ({ place, dir }) => {
       </Container>
     </AnimatePresence>
   );
+};
+
+export {
+  PlaceArea,
+  type PlaceAreaProps,
 };

@@ -25,13 +25,13 @@ const PlaceMarkerWrapper = styled.div`
   }
 `;
 
-export interface MapAreaProps {
+interface MapAreaProps {
   map: Place[][];
   pos: Point;
   teleportPos: (pos: Point) => void;
 }
 
-export const MapArea: FC<MapAreaProps> = ({ map, pos, teleportPos }) => {  
+const MapArea: FC<MapAreaProps> = ({ map, pos, teleportPos }) => {  
 
   const isActive = ({ x, y }: Point): boolean => {
     return (x === pos.x) && (y === pos.y);
@@ -55,4 +55,9 @@ export const MapArea: FC<MapAreaProps> = ({ map, pos, teleportPos }) => {
       )}
     </Container>
   );
+};
+
+export {
+  MapArea,
+  type MapAreaProps,
 };
