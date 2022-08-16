@@ -27,4 +27,4 @@ const useKeyPress = (
   }, [handleKeyPress, node]);
 };
 
-export default useKeyPress;
+export { useKeyPress };

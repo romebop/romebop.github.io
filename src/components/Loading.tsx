@@ -55,7 +55,7 @@ export interface LoadingProps {
   color: string;
 }
 
-const Loading: FC<LoadingProps> = ({ color }) => {
+export const Loading: FC<LoadingProps> = ({ color }) => {
   const pixelCount = 3;
   return (
     <Container
@@ -74,5 +74,3 @@ const Loading: FC<LoadingProps> = ({ color }) => {
     </Container>
   );
 };
-
-export default Loading;

@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import styled from 'styled-components/macro';
 
-import PlaceMarker from 'src/components/PlaceMarker'
+import { PlaceMarker } from 'src/components'
 import { categoryColors } from 'src/map';
 import { Point, Place } from 'src/types';
 
@@ -31,7 +31,7 @@ export interface MapAreaProps {
   teleportPos: (pos: Point) => void;
 }
 
-const MapArea: FC<MapAreaProps> = ({ map, pos, teleportPos }) => {  
+export const MapArea: FC<MapAreaProps> = ({ map, pos, teleportPos }) => {  
 
   const isActive = ({ x, y }: Point): boolean => {
     return (x === pos.x) && (y === pos.y);
@@ -56,5 +56,3 @@ const MapArea: FC<MapAreaProps> = ({ map, pos, teleportPos }) => {
     </Container>
   );
 };
-
-export default MapArea;

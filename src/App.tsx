@@ -8,10 +8,13 @@ import {
   useNavigate,
 } from 'react-router-dom';
 
-import Footer from './components/Footer';
-import MapArea, { MapAreaProps } from './components/MapArea';
-import PlaceArea from './components/PlaceArea';
-import useKeyPress from './hooks/useKeypress';
+import {
+  Footer,
+  MapArea,
+  MapAreaProps,
+  PlaceArea,
+} from './components';
+import { useKeyPress } from './hooks';
 import map from './map';
 import { Direction, Place, Point } from './types';
 import { getMapPos, keyDirectionMap, isSamePoint } from './util';

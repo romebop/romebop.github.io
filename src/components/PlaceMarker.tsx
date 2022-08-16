@@ -46,7 +46,7 @@ export interface PlaceMarkerProps {
 const scaleSize = 1.4;
 const originOffset = 0.25;
 const transitionDuration = 0.2;
-const PlaceMarker: FC<PlaceMarkerProps> = ({ pos, color, isActive, teleportPos }) => {
+export const PlaceMarker: FC<PlaceMarkerProps> = ({ pos, color, isActive, teleportPos }) => {
   return (
     <Container>
       <Target
@@ -83,5 +83,3 @@ const PlaceMarker: FC<PlaceMarkerProps> = ({ pos, color, isActive, teleportPos }
     </Container>
   );
 };
-
-export default PlaceMarker;

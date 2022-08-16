@@ -2,7 +2,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { FC, useState } from 'react';
 import styled from 'styled-components/macro';
 
-import Loading from 'src/components/Loading';
+import { Loading } from 'src/components';
 import map, { categoryColors } from 'src/map';
 import {
   Direction,
@@ -162,7 +162,7 @@ export interface PlaceAreaProps {
   dir: Direction;
 }
 
-const PlaceArea: FC<PlaceAreaProps> = ({ place, dir }) => {
+export const PlaceArea: FC<PlaceAreaProps> = ({ place, dir }) => {
 
   const pos = getMapPos(map, place.path)!;
   const color = categoryColors[pos.y];
@@ -225,5 +225,3 @@ const PlaceArea: FC<PlaceAreaProps> = ({ place, dir }) => {
     </AnimatePresence>
   );
 };
-
-export default PlaceArea;

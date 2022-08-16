@@ -8,8 +8,6 @@ const Text = styled.div`
   font-weight: 500;
 `;
 
-const Footer: FC = () => (
+export const Footer: FC = () => (
   <Text>© 2022 romebop.io</Text>
 );
-
-export default Footer;
