@@ -25,6 +25,7 @@ module.exports = {
     'react/react-in-jsx-scope': 'off' ,
     'quotes': ['error', 'single', { 'allowTemplateLiterals': true }],
     '@typescript-eslint/no-non-null-assertion': 'off',
+    // '@typescript-eslint/no-explicit-any': 'off',
     // 'comma-dangle': ['error', 'always-multiline'],
   },
 }

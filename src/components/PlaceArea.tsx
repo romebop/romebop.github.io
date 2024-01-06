@@ -54,13 +54,13 @@ const ImageSection = styled.div<{ color: string }>`
   align-items: center;
   position: relative;
   background-color: ${({ color }) => setHslLightness(color, getHslObj(color).lightness + lightnessOffset)};
-  `;
+`;
 
-const ImageWrapper = styled.div`
+const ImageWrapper = styled.div<{ color: string }>`
   width: ${imageLen}px;
   height: ${imageLen}px;
   box-sizing: border-box;
-  border: 4px solid hsl(0, 0%, 100%);
+  border: 4px solid ${({ color }) => color};
   overflow: hidden;
   display: flex;
   justify-content: center;
@@ -80,7 +80,6 @@ const Shadow = styled(motion.div)<{ color: string }>`
   width: ${imageLen}px;
   height: ${imageLen}px;
   background-color: ${({ color }) => color};
-  opacity: 0.8;
   position: absolute;
   z-index: -1;
 `;
@@ -200,7 +199,7 @@ const PlaceArea: FC<PlaceAreaProps> = ({ place, dir }) => {
         >{place.description}</DescriptionSection>
         {place.imgName && <ImageSection { ...{ color }}>
           {loading && <Loading {...{ color }} />}
-          <ImageWrapper>
+          <ImageWrapper {...{ color }}>
             <Image
               {...{ color }}
               show={!loading}

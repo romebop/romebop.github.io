@@ -9,7 +9,7 @@ const Text = styled.div`
 `;
 
 const Footer: FC = () => (
-  <Text>© 2022 romebop.io</Text>
+  <Text>© 2024 romebop.io</Text>
 );
 
 export { Footer };

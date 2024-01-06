@@ -1,3 +1,4 @@
+export * from './CoolThing';
 export * from './Footer';
 export * from './Loading';
 export * from './MapArea';

@@ -9,6 +9,7 @@ import {
 } from 'react-router-dom';
 
 import {
+  CoolThing,
   Footer,
   MapArea,
   MapAreaProps,
@@ -21,7 +22,8 @@ import { getMapPos, keyDirectionMap, isSamePoint } from './util';
 
 const lineOpacity = 0.05;
 const Background = styled.div`
-  background: linear-gradient(-45deg, #13385b, #12355b, #12335c, #11305c, #102d5d, #102a5d, #0f275d, #0f245e, #0e215e); 
+  /* background: linear-gradient(-45deg, #13385b, #12355b, #12335c, #11305c, #102d5d, #102a5d, #0f275d, #0f245e, #0e215e);  */
+  background-color: #000;
   min-height: 100vh;
   position: relative;
   &:after {
@@ -45,7 +47,8 @@ const Background = styled.div`
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  /* align-items: flex-start; */
+  align-items: center;
   margin: auto;
   width: 500px;
   min-height: 100vh;
@@ -126,7 +129,8 @@ function App() {
   return (
     <Background>
       <Container>
-        <AreasContainer>
+        <CoolThing></CoolThing>
+        {/* <AreasContainer>
           <MapAreaWrapper>
             {pos && <MapArea {...mapAreaProps} />}
           </MapAreaWrapper>
@@ -148,7 +152,7 @@ function App() {
         </AreasContainer>
         <FooterWrapper>
           <Footer />
-        </FooterWrapper>
+        </FooterWrapper> */}
       </Container>
     </Background>
   );
