@@ -1,10 +1,3 @@
-type Direction = 'Up' | 'Down' | 'Left' | 'Right' | 'Teleport';
-
-interface Point {
-  x: number;
-  y: number;
-}
-
 interface Place {
   name: string;
   description: string;
@@ -20,8 +13,6 @@ interface HSL {
 }
 
 export {
-  type Direction,
-  type Point,
   type Place,
   type HSL,
 }
