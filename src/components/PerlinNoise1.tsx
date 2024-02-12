@@ -37,7 +37,7 @@ const CoolThing: FC = () => {
         p.strokeCap(p.SQUARE);
         p.stroke('white');
         p.noFill();
-        p.frameRate(100);
+        p.frameRate(120);
       };
 
       const drawGrid = () => {

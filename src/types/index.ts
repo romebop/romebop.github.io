@@ -1,9 +1,18 @@
-interface Place {
+type Direction = 'Up' | 'Down' | 'Left' | 'Right';
+
+interface Category {
+  path: string;
+  name: string;
+  items: Item[];
+}
+
+interface Item {
+  path: string;
   name: string;
   description: string;
   link?: string;
+  compName?: string;
   imgName?: string;
-  path: string;
 }
 
 interface HSL {
@@ -13,6 +22,8 @@ interface HSL {
 }
 
 export {
-  type Place,
+  type Category,
+  type Direction,
+  type Item,
   type HSL,
 }

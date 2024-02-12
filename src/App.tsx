@@ -1,88 +1,84 @@
-// import { useState } from 'react';
+import {
+    Navigate,
+    Routes,
+    Route,
+    useLocation,
+    useNavigate,
+  } from 'react-router-dom';
 import styled from 'styled-components/macro';
-// import {
-  // Navigate,
-  // Routes,
-  // Route,
-//   useLocation,
-//   useNavigate,
-// } from 'react-router-dom';
 
 import {
-  What
-} from './components';
-// import { useKeyPress } from './hooks';
-// import map from './map';
+  SelectList
+} from 'src/components';
+import { useKeyPress } from 'src/hooks';
+import map from 'src/map';
+import { Direction } from 'src/types';
+import { colors, keyDirectionMap } from 'src/util';
 
-// const lineOpacity = 0.05;
-// const Background = styled.div`
-//   /* background: linear-gradient(-45deg, #13385b, #12355b, #12335c, #11305c, #102d5d, #102a5d, #0f275d, #0f245e, #0e215e);  */
-//   background-color: #000;
-//   min-height: 100vh;
-//   position: relative;
-//   &:after {
-//     content: '';
-//     height: 100%;
-//     width: 100%;
-//     display: block;
-//     background: linear-gradient(
-//       to bottom,
-//       transparent,
-//       transparent 50%,
-//       hsla(0, 0%, 0%, ${lineOpacity}) 50%,
-//       hsla(0, 0%, 0%, ${lineOpacity})
-//     );
-//     background-size: 100% 8px;
-//     position: absolute;
-//     top: 0;
-//   }
-// `;
+// TODO: update export formats
+export default function App() {
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  /* align-items: flex-start; */
-  align-items: center;
-  min-height: 100vh;
-`;
+  const { pathname } = useLocation();
+  const categoryPath = pathname.split('/')[1] ?? null;
+  const categoryIdx = map.findIndex(category => category.path === categoryPath);
+  const itemPath = pathname.split('/')[2] ?? null;
+  const itemIdx = map[categoryIdx].items.findIndex(item => item.path === itemPath);
 
-function App() {
+  const navigate = useNavigate();
 
-  // const { pathname } = useLocation();
-  // const pos = getMapPos(map, pathname)!;
-  // const [dir, setDir] = useState<Direction>('Teleport');
-  // const navigate = useNavigate();
+  const directionMove = (dir: Direction): void => {
+    if (dir === 'Left' && itemPath === null && categoryIdx > 0) {
+      navigate(map[categoryIdx - 1].path);
+    }
+    if (dir === 'Right' && itemPath === null && categoryIdx < map.length - 1) {
+      navigate(map[categoryIdx + 1].path);
+    }
+    if (dir === 'Up' && itemPath !== null) {
+      if (itemIdx === 0) {
+        navigate(categoryPath);
+      } else {
+        navigate(`${categoryPath}/${map[categoryIdx].items[itemIdx - 1].path}`);
+      }
+    }
+    if (dir === 'Down') {
+      if (itemPath === null) {
+        navigate(`${categoryPath}/${map[categoryIdx].items[0].path}`);
+      } else if (itemIdx < map[categoryIdx].items.length - 1) {
+        navigate(`${categoryPath}/${map[categoryIdx].items[itemIdx + 1].path}`);
+      }
+    }
+  };
+  const onDirectionPress = (event: KeyboardEvent): void => {
+    directionMove(keyDirectionMap[event.key]);
+  };
+  useKeyPress(Object.keys(keyDirectionMap), onDirectionPress);
 
-  // const movePos = (dir: Direction): void => {
-  //   if (dir === 'Up' && map[pos.y - 1] && map[pos.y - 1][pos.x]) {
-  //     navigate(map[pos.y - 1][pos.x].path);
-  //     setDir(dir);
-  //   }
-  //   if (dir === 'Down' && map[pos.y + 1] && map[pos.y + 1][pos.x]) {
-  //     navigate(map[pos.y + 1][pos.x].path);
-  //     setDir(dir);
-  //   }
-  //   if (dir === 'Left' && map[pos.y][pos.x - 1]) {
-  //     navigate(map[pos.y][pos.x - 1].path);
-  //     setDir(dir);
-  //   }
-  //   if (dir === 'Right' && map[pos.y][pos.x + 1]) {
-  //     navigate(map[pos.y][pos.x + 1].path)
-  //     setDir(dir);
-  //   }
-  // };
-  // const onArrowPress = (event: KeyboardEvent): void => {
-  //   movePos(keyDirectionMap[event.key]);
-  // };
-  // useKeyPress(
-  //   ['Up', 'Down', 'Left', 'Right'].map(d => `Arrow${d}`)
-  //     .concat(['w', 'a', 's', 'd']), 
-  //   onArrowPress,
-  // );
-
+  const onEnterEscape = (event: KeyboardEvent): void => {
+    if (event.key === 'Enter' && itemPath === null) {
+      navigate(`${categoryPath}/${map[categoryIdx].items[0].path}`);
+    }
+    if (event.key === 'Escape' && itemPath !== null) {
+      navigate(categoryPath);
+    }
+  }
+  useKeyPress(['Enter', 'Escape'], onEnterEscape);
   
   return (
     <Container>
+  
+      <CategoriesContainer>
+        {map.map(category => (
+          <TempSquare
+            key={category.name}
+            isSelected={category.path === categoryPath && itemPath === null}
+            isActive={category.path === categoryPath && itemPath !== null}
+            onClick={() => alert(`GO TO: ${category.path}`)}
+          >{category.name}</TempSquare>
+        ))}
+      </CategoriesContainer>
+
+      <SelectList key={categoryPath} items={map[categoryIdx].items} activeIdx={itemIdx} />
+
       {/* <AreasContainer>
         <MapAreaWrapper>
           {pos && <MapArea {...mapAreaProps} />}
@@ -102,13 +98,42 @@ function App() {
             />
           </Routes>
         </PlaceAreaWrapper>
-      </AreasContainer>
-      <FooterWrapper>
+      </AreasContainer> */}
+  
+ 
+      {/* <FooterWrapper>
         <Footer />
-      </FooterWrapper> */}
-      <What />
+      </FooterWrapper> */} 
+ 
     </Container>
   );
 }
 
-export default App;
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  /* align-items: flex-start; */
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100%;
+`;
+
+const CategoriesContainer = styled.div`
+  display: flex;
+`;
+
+const TempSquare = styled.div<{ isSelected: boolean, isActive: boolean }>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  height: 200px;
+  background-color: ${({ isSelected, isActive }) => isSelected ? colors.primary : isActive ? '#00c0ff85' : colors.inactive };
+  color: ${({ isSelected, isActive }) => (isSelected || isActive) ? colors.white : colors.primary };
+  margin-bottom: 40px;
+  cursor: pointer;
+  &:not(:first-child) {
+    margin-left: 20px;
+  }
+`;
