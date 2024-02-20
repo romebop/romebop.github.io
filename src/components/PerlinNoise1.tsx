@@ -209,4 +209,6 @@ const CoolThing: FC = () => {
   return <CanvasWrapper ref={canvasWrapperRef}></CanvasWrapper>;
 };
 
-export { CoolThing };
+export {
+  CoolThing
+};

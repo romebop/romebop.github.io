@@ -1,6 +1,6 @@
-<svg viewBox="0 0 157 114" fill="none">
-  <rect x="139" width="18" height="18" fill="inherit"/>
-  <rect x="139" y="96" width="18" height="18" fill="inherit"/>
-  <path d="M47 93L157 57L47 21L0 57L47 93Z" fill="inherit"/>
-  <path d="M50 57C50 61.9706 45.9706 66 41 66C36.0294 66 32 61.9706 32 57C32 52.0294 36.0294 48 41 48C45.9706 48 50 52.0294 50 57Z" fill="white"/>
+<svg viewBox='0 0 157 114' fill='none'>
+  <rect x='139' width='18' height='18' fill='inherit'/>
+  <rect x='139' y='96' width='18' height='18' fill='inherit'/>
+  <path d='M47 93L157 57L47 21L0 57L47 93Z' fill='inherit'/>
+  <path d='M50 57C50 61.9706 45.9706 66 41 66C36.0294 66 32 61.9706 32 57C32 52.0294 36.0294 48 41 48C45.9706 48 50 52.0294 50 57Z' fill='white'/>
 </svg>

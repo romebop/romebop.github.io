@@ -6,6 +6,10 @@ import App from './App';
 import { Background, Filter, Mobile } from './components';
 
 const GlobalStyle = createGlobalStyle`
+  html {
+    height: 100%;
+  }
+
   body {
     margin: 0;
     padding: 0;
@@ -18,7 +22,7 @@ const GlobalStyle = createGlobalStyle`
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 100vh;
+    height: 100%;
   }
 
   #root {
@@ -26,6 +30,7 @@ const GlobalStyle = createGlobalStyle`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    height: 100%;
   }
 
   code {

@@ -24,8 +24,8 @@ const Background: FC = () => {
 
       const { width, height } = windowDimensions;
       const len = height;
-      const circleOffset = len / 30;
-      const lineOffset = len / 12;
+      const circleOffset = len / 34;
+      const lineOffset = len / 16;
 
       const worldAmp = circleOffset / 4;
       const miniAmp = circleOffset / 8;
@@ -34,7 +34,7 @@ const Background: FC = () => {
       p.setup = () => {
         p.createCanvas(width, height);
         p.stroke(colors.inactive);
-        p.strokeWeight(3);
+        p.strokeWeight(2);
         p.fill('rgba(0, 0, 0, 0)');
         p.frameRate(120);
       };
@@ -132,4 +132,6 @@ const Background: FC = () => {
   return <CanvasWrapper ref={canvasWrapperRef}></CanvasWrapper>;
 };
 
-export { Background };
+export {
+  Background,
+};

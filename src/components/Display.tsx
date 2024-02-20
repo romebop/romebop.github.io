@@ -2,18 +2,22 @@ import { FC } from 'react';
 import styled from 'styled-components/macro';
 
 const Container = styled.div`
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  display: grid;
+  place-content: center;
 `;
 
 interface DisplayProps {
-  bobo: string;
+  header: string;
+  description?: string;
+  imgName?: string;
 }
 
-const Display: FC<DisplayProps> = () => {
-
+const Display: FC<DisplayProps> = ({ header }) => {
   return (
-    <Container>
-
-    </Container>
+    <Container>{header}</Container>
   );
 };
 

@@ -1,8 +1,10 @@
 import { FC, useState } from 'react';
-import styled, { keyframes } from 'styled-components/macro';
+import styled from 'styled-components/macro';
 
 import skull from 'src/assets/skull.png';
 import { colors } from 'src/util';
+import { orbit } from 'src/util/keyframes';
+import { DEFAULT_EASING } from 'src/util/constants';
 
 const Mobile: FC = () => {
 
@@ -34,7 +36,6 @@ const Container = styled.div`
 
 const inDuration = 180;
 const outDuration = 160;
-const easingFunction = 'ease-in-out';
 
 const Backdrop = styled.div<{ isActive: boolean }>`
   position: absolute;
@@ -44,7 +45,7 @@ const Backdrop = styled.div<{ isActive: boolean }>`
   opacity: ${({ isActive }) => isActive ? 1 : 0};
   transition-property: width, height, opacity;
   transition-duration: ${({ isActive }) => isActive ? inDuration : outDuration}ms;
-  transition-timing-function: ${easingFunction};
+  transition-timing-function: ${DEFAULT_EASING};
 `;
 
 const squareBorderLen = 170;
@@ -57,19 +58,10 @@ const SquareBorder = styled.div<{ isActive: boolean }>`
   opacity: ${({ isActive }) => isActive ? 1 : 0};
   transition-property: width, height, opacity;
   transition-duration: ${({ isActive }) => isActive ? inDuration : outDuration}ms;
-  transition-timing-function: ${easingFunction};
+  transition-timing-function: ${DEFAULT_EASING};
 `;
 
 const orbitRadius = 10;
-const orbit = keyframes`
-  from {
-    transform: rotate(0deg) translateX(${orbitRadius}px);
-  }
-  to {
-    transform: rotate(360deg) translateX(${orbitRadius}px);
-  }
-`;
-
 const orbitCircleLen = 40;
 const orbitCircleBorderLen = 6;
 const orbitCircleInnerBorderLen = 4;
@@ -96,8 +88,8 @@ const OrbitCircle = styled.div<{ isActive: boolean }>`
   opacity: ${({ isActive }) => isActive ? 1 : 0};
   transition-property: left, bottom, opacity;
   transition-duration: ${({ isActive }) => isActive ? inDuration : outDuration}ms;
-  transition-timing-function: ${easingFunction};
-  animation: ${orbit} 10s linear infinite;
+  transition-timing-function: ${DEFAULT_EASING};
+  animation: ${orbit(orbitRadius)} 10s linear infinite;
 `;
 
 const circleLen = 24;
@@ -112,7 +104,7 @@ const Circle = styled.div<{ isActive: boolean }>`
   opacity: ${({ isActive }) => isActive ? 1 : 0};
   transition-property: right, bottom, opacity;
   transition-duration: ${({ isActive }) => isActive ? inDuration : outDuration}ms;
-  transition-timing-function: ${easingFunction};
+  transition-timing-function: ${DEFAULT_EASING};
 `;
 
 const squareLen = 14;
@@ -126,7 +118,7 @@ const SquareA = styled.div<{ isActive: boolean }>`
   opacity: ${({ isActive }) => isActive ? 1 : 0};
   transition-property: right, top, opacity;
   transition-duration: ${({ isActive }) => isActive ? inDuration : outDuration}ms;
-  transition-timing-function: ${easingFunction};
+  transition-timing-function: ${DEFAULT_EASING};
 `;
 
 const SquareB = styled.div<{ isActive: boolean }>`
@@ -139,7 +131,7 @@ const SquareB = styled.div<{ isActive: boolean }>`
   opacity: ${({ isActive }) => isActive ? 1 : 0};
   transition-property: left, top, opacity;
   transition-duration: ${({ isActive }) => isActive ? inDuration : outDuration}ms;
-  transition-timing-function: ${easingFunction};
+  transition-timing-function: ${DEFAULT_EASING};
 `;
 
 const SkullImage = styled.img`
@@ -147,4 +139,6 @@ const SkullImage = styled.img`
   cursor: pointer;
 `;
 
-export { Mobile };
+export {
+  Mobile,
+};

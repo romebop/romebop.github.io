@@ -18,5 +18,3 @@ export const keyDirectionMap: Record<string, Direction> = {
   a: 'Left',
   d: 'Right',
 };
-
-export const tickDuration = 1000 / 45;

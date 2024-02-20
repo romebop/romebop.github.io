@@ -1,18 +1,20 @@
 import { FC, } from 'react';
-import styled, { css, keyframes } from 'styled-components/macro';
+import styled, { css } from 'styled-components/macro';
 
 import { ReactComponent as PointerSVG } from 'src/assets/Cursor.svg';
-import { colors, tickDuration } from 'src/util';
+import { colors } from 'src/util';
+import { DEFAULT_EASING, TICK_DURATION } from 'src/util/constants';
+import { flicker } from 'src/util/keyframes';
 
-interface SelectItemProps {
+interface ListItemProps {
   text: string;
   isSelected: boolean;
-  clickHandler: () => void;
+  handleClick: () => void;
 }
 
-const SelectItem: FC<SelectItemProps> = ({ text, isSelected, clickHandler }) => {
+const ListItem: FC<ListItemProps> = ({ text, isSelected, handleClick }) => {
   return (
-    <Container onClick={clickHandler}>
+    <Container onClick={handleClick}>
       <StyledPointerSVG {...{ isSelected }} />
       <Shadow {...{ isSelected }} />
       <TopLine {...{ isSelected }} />
@@ -24,9 +26,6 @@ const SelectItem: FC<SelectItemProps> = ({ text, isSelected, clickHandler }) => 
     </Container>
   );
 };
-
-const cubicEasingFunction = 'cubic-bezier(0.27, 1.13, 0.88, 0.96)';
-const etcEasingFunction = 'ease-in-out';
 
 const height = 50;
 const width = 440;
@@ -55,8 +54,8 @@ const StyledPointerSVG = styled(({ isSelected, ...props }) => (
   opacity: ${({ isSelected }) => isSelected ? 1 : 0};
   transition:
     opacity
-    ${({ isSelected }) => isSelected ? (5 * tickDuration) : (4 * tickDuration)}ms
-    ${etcEasingFunction};
+    ${({ isSelected }) => isSelected ? (5 * TICK_DURATION) : (4 * TICK_DURATION)}ms
+    ${DEFAULT_EASING};
 `;
 
 const Shadow = styled.div<{ isSelected: boolean }>`
@@ -70,10 +69,11 @@ const Shadow = styled.div<{ isSelected: boolean }>`
   opacity: ${({ isSelected }) => isSelected ? 0.25 : 0};
   transition:
     opacity
-    ${({ isSelected }) => isSelected ? (5 * tickDuration) : (4 * tickDuration)}ms
-    ${etcEasingFunction};
+    ${({ isSelected }) => isSelected ? (5 * TICK_DURATION) : (4 * TICK_DURATION)}ms
+    ${DEFAULT_EASING};
 `;
 
+const fillEasing = 'cubic-bezier(0.27, 1.13, 0.88, 0.96)';
 const FillBar = styled.div<{ isSelected: boolean }>`
   position: absolute;
   top: 0;
@@ -84,8 +84,8 @@ const FillBar = styled.div<{ isSelected: boolean }>`
   width: ${({ isSelected }) => isSelected ? '100%' : 0};
   transition:
     width
-    ${({ isSelected }) => isSelected ? (12 * tickDuration) : (5 * tickDuration)}ms
-    ${cubicEasingFunction};
+    ${({ isSelected }) => isSelected ? (12 * TICK_DURATION) : (5 * TICK_DURATION)}ms
+    ${fillEasing};
 `;
 
 const contentSquareLength = 26;
@@ -96,8 +96,8 @@ const ContentSquare = styled.div<{ isSelected: boolean }>`
   background-color: ${({ isSelected }) => isSelected ? colors.white : colors.primary};
   transition:
     background-color
-    ${({ isSelected }) => isSelected ? (5 * tickDuration) : (2 * tickDuration)}ms
-    ${etcEasingFunction};
+    ${({ isSelected }) => isSelected ? (5 * TICK_DURATION) : (2 * TICK_DURATION)}ms
+    ${DEFAULT_EASING};
 `;
 
 const Text = styled.div<{ isSelected: boolean }>`
@@ -113,8 +113,8 @@ const Text = styled.div<{ isSelected: boolean }>`
   color: ${({ isSelected }) => isSelected ? colors.white : colors.primary};
   transition:
     color
-    ${({ isSelected }) => isSelected ? (5 * tickDuration) : (2 * tickDuration)}ms
-    ${etcEasingFunction};
+    ${({ isSelected }) => isSelected ? (5 * TICK_DURATION) : (2 * TICK_DURATION)}ms
+    ${DEFAULT_EASING};
 `;
 
 const distance = 7;
@@ -129,8 +129,8 @@ const TopLine = styled.div<{ isSelected: boolean }>`
   top: ${({ isSelected }) => isSelected ? -distance : 0}px;
   opacity: ${({ isSelected }) => isSelected ? 1 : 0};
   transition-property: top, opacity;
-  transition-duration: ${({ isSelected }) => isSelected ? (5 * tickDuration) : (4 * tickDuration)}ms;
-  transition-timing-function: ${etcEasingFunction};
+  transition-duration: ${({ isSelected }) => isSelected ? (5 * TICK_DURATION) : (4 * TICK_DURATION)}ms;
+  transition-timing-function: ${DEFAULT_EASING};
 `;
 
 const BottomLine = styled.div<{ isSelected: boolean }>`
@@ -144,20 +144,8 @@ const BottomLine = styled.div<{ isSelected: boolean }>`
   bottom: ${({ isSelected }) => isSelected ? -distance : 0}px;
   opacity: ${({ isSelected }) => isSelected ? 1 : 0};
   transition-property: bottom, opacity;
-  transition-duration: ${({ isSelected }) => isSelected ? (5 * tickDuration) : (4 * tickDuration)}ms;
-  transition-timing-function: ${etcEasingFunction};
-`;
-
-const flicker = keyframes`
-  0%,
-  52.5%,
-  100% {
-    opacity: 0;
-  }
-  15%,
-  35% {
-    opacity: 0.25;
-  }
+  transition-duration: ${({ isSelected }) => isSelected ? (5 * TICK_DURATION) : (4 * TICK_DURATION)}ms;
+  transition-timing-function: ${DEFAULT_EASING};
 `;
 
 const Filter = styled.div<{ isSelected: boolean }>`
@@ -169,11 +157,11 @@ const Filter = styled.div<{ isSelected: boolean }>`
   background-color: #fff;
   opacity: 0;
   ${({ isSelected }) => isSelected && css`
-    animation: ${flicker} ${tickDuration * 40 * 1.4}ms ease-in-out infinite;
+    animation: ${flicker} ${TICK_DURATION * 40 * 1.4}ms ease-in-out infinite;
   `}
 `;
 
 export {
-  SelectItem,
-  type SelectItemProps,
+  ListItem,
+  type ListItemProps,
 };

@@ -1,5 +1,3 @@
-type Direction = 'Up' | 'Down' | 'Left' | 'Right';
-
 interface Category {
   path: string;
   name: string;
@@ -15,6 +13,15 @@ interface Item {
   imgName?: string;
 }
 
+interface Position {
+  categoryIdx: number;
+  itemIdx: number;
+}
+
+type Direction = 'Up' | 'Down' | 'Left' | 'Right';
+
+type Action = Direction | 'Enter' | 'Escape';
+
 interface HSL {
   hue: number;
   saturation: number;
@@ -22,8 +29,10 @@ interface HSL {
 }
 
 export {
+  type Action,
   type Category,
   type Direction,
   type Item,
   type HSL,
+  type Position,
 }

@@ -22,10 +22,11 @@ module.exports = {
     '@typescript-eslint',
   ],
   'rules': {
+    // 'comma-dangle': ['error', 'always-multiline'],
     'react/react-in-jsx-scope': 'off' ,
     'quotes': ['error', 'single', { 'allowTemplateLiterals': true }],
-    '@typescript-eslint/no-non-null-assertion': 'off',
     // '@typescript-eslint/no-explicit-any': 'off',
-    // 'comma-dangle': ['error', 'always-multiline'],
+    '@typescript-eslint/no-non-null-assertion': 'off',
+    '@typescript-eslint/no-unused-vars': ['warn', { 'ignoreRestSiblings': true }],
   },
 }

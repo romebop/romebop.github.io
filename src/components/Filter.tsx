@@ -16,4 +16,6 @@ const StyledFilter = styled.div`
 
 const Filter: FC = () => <StyledFilter />;
 
-export { Filter };
+export {
+  Filter,
+};

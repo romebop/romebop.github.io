@@ -1,4 +1,4 @@
-import { Category } from './types';
+import { Action, Category, Position } from './types';
 
 const appCategory: Category = {
   path: 'app',
@@ -92,4 +92,32 @@ const map: Category[] = [
   soundCategory,
 ];
 
+function getNewPosition(
+  { categoryIdx, itemIdx }: Position,
+  action: Action,
+): Position {
+  if (action === 'Left' && itemIdx === -1 && categoryIdx > 0) {
+    return { categoryIdx: categoryIdx - 1, itemIdx };
+  }
+  if (action === 'Right' && itemIdx === -1 && categoryIdx < map.length - 1) {
+    return { categoryIdx: categoryIdx + 1, itemIdx };
+  }
+  if (action === 'Up' && itemIdx > -1) {
+    return { categoryIdx, itemIdx: itemIdx - 1 };
+  }
+  if (action === 'Down' && itemIdx < map[categoryIdx].items.length - 1) {
+    return { categoryIdx, itemIdx: itemIdx + 1 };
+  }
+  if (action === 'Enter' && itemIdx === -1) {
+    return { categoryIdx, itemIdx: 0 };
+  }
+  if (action === 'Escape' && itemIdx > -1) {
+    return { categoryIdx, itemIdx: -1 };
+  }
+  return { categoryIdx, itemIdx };
+}
+
 export default map;
+export {
+  getNewPosition,
+};
