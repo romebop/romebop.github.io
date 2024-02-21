@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components/macro';
 
 import { ReactComponent as PointerSVG } from 'src/assets/Cursor.svg';
 import { colors } from 'src/util';
-import { DEFAULT_EASING, TICK_DURATION } from 'src/util/constants';
+import { DEFAULT_EASING, FLICKER_DURATION, TICK_DURATION } from 'src/util/constants';
 import { flicker } from 'src/util/keyframes';
 
 interface ListItemProps {
@@ -157,7 +157,7 @@ const Filter = styled.div<{ isSelected: boolean }>`
   background-color: #fff;
   opacity: 0;
   ${({ isSelected }) => isSelected && css`
-    animation: ${flicker} ${TICK_DURATION * 40 * 1.4}ms ease-in-out infinite;
+    animation: ${flicker} ${FLICKER_DURATION}ms ${DEFAULT_EASING} infinite;
   `}
 `;
 

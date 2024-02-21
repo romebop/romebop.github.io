@@ -7,7 +7,7 @@ const StyledFilter = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background-size: 8px 8px;
+  background-size: 7px 7px;
   background-image:
     linear-gradient(to right,rgba(0,0,0,0.01) 3px, transparent 2px),
     linear-gradient(to bottom,rgba(0,0,0,0.01) 3px, transparent 2px);

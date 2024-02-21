@@ -3,7 +3,12 @@ import styled, { keyframes } from 'styled-components/macro';
 
 import { ListItem } from 'src/components'
 import { colors } from 'src/util';
-import { DEFAULT_EASING, TICK_DURATION } from 'src/util/constants';
+import {
+  DEFAULT_EASING,
+  INITIAL_DELAY,
+  INIT_DURATION,
+  TICK_DURATION,
+ } from 'src/util/constants';
 import { expandHeight } from 'src/util/keyframes';
 
 interface ListProps {
@@ -43,16 +48,14 @@ const Container = styled.div`
   align-items: center;
 `;
 
-const initialDelay = 8 * TICK_DURATION;
-const expandDuration = 5 * TICK_DURATION;
 const SideLines = styled.div`
   display: flex;
   margin-right: 41px;
   animation:
     ${expandHeight}
-    ${expandDuration}ms
+    ${INIT_DURATION}ms
     ${DEFAULT_EASING}
-    ${initialDelay}ms
+    ${INITIAL_DELAY}ms
     forwards;
 `;
 
@@ -93,9 +96,10 @@ const ItemWrapper = styled.div<{ index: number }>`
   animation:
     ${slideInItem}
     ${slideInDuration}ms
-    ${DEFAULT_EASING}
-    ${({ index }) => initialDelay + expandDuration + TICK_DURATION + (index * cascadeDelay)}ms
+    ${'ease-out'}
+    ${({ index }) => INITIAL_DELAY + INIT_DURATION + TICK_DURATION + (index * cascadeDelay)}ms
     forwards;
+  will-change: left, opacity;
 `;
 
 export {

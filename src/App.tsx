@@ -21,7 +21,7 @@ import { useKeyPress } from 'src/hooks';
 import map, { getNewPosition } from 'src/map';
 import { Action, Category, Item, Position } from 'src/types';
 import { colors, keyDirectionMap } from 'src/util';
-import { DEFAULT_EASING, TICK_DURATION } from './util/constants';
+import { DEFAULT_EASING, INITIAL_DELAY, INIT_DURATION } from './util/constants';
 
 function App() {
 
@@ -65,7 +65,7 @@ function App() {
             <CSSTransition
               key={categoryPath}
               classNames='fade'
-              timeout={fadeDuration}
+              timeout={INIT_DURATION}
             >
               <ListWrapper>
                 <Routes {...{ location }} >
@@ -97,9 +97,9 @@ function App() {
 
           <DisplayTransitionGroup>
             <CSSTransition
-              key={location.pathname}
+              key={categoryPath}
               classNames='fade'
-              timeout={fadeDuration}
+              timeout={INIT_DURATION}
             >
               <DisplayWrapper>
                 <Routes {...{ location }}>
@@ -197,14 +197,13 @@ const ListTransitionGroup = styled(TransitionGroup)`
   grid-template-areas: 'stack';
 `;
 
-const fadeDuration = TICK_DURATION * 5;
 const ListWrapper = styled.div`
   grid-area: stack;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  transition: opacity ${fadeDuration}ms ${DEFAULT_EASING};
+  transition: opacity ${INIT_DURATION}ms ${DEFAULT_EASING};
 
   &.fade-exit.fade-exit-active {
     opacity: 0;
@@ -219,10 +218,11 @@ const DisplayTransitionGroup = styled(TransitionGroup)`
 
 const DisplayWrapper = styled.div`
   grid-area: stack;
-  transition: opacity ${fadeDuration}ms ${DEFAULT_EASING};
+  transition: opacity ${INIT_DURATION}ms ${DEFAULT_EASING};
 
   &.fade-enter {
     opacity: 0;
+    transition-delay: ${INITIAL_DELAY}ms;
   }
 
   &.fade-enter.fade-enter-active {
