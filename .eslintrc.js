@@ -26,6 +26,7 @@ module.exports = {
     'react/react-in-jsx-scope': 'off' ,
     'quotes': ['error', 'single', { 'allowTemplateLiterals': true }],
     // '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-non-null-assertion': 'off',
     '@typescript-eslint/no-unused-vars': ['warn', { 'ignoreRestSiblings': true }],
   },

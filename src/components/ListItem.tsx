@@ -2,6 +2,7 @@ import { FC, } from 'react';
 import styled, { css } from 'styled-components/macro';
 
 import { ReactComponent as PointerSVG } from 'src/assets/Cursor.svg';
+import { useScramble } from 'src/hooks';
 import { colors } from 'src/util';
 import { DEFAULT_EASING, FLICKER_DURATION, TICK_DURATION } from 'src/util/constants';
 import { flicker } from 'src/util/keyframes';
@@ -10,19 +11,23 @@ interface ListItemProps {
   text: string;
   isSelected: boolean;
   handleClick: () => void;
+  animationDelay?: number;
 }
 
-const ListItem: FC<ListItemProps> = ({ text, isSelected, handleClick }) => {
+const ListItem: FC<ListItemProps> = ({ text, isSelected, handleClick, animationDelay = 0 }) => {
+
+  const ref = useScramble({ text, animationDelay }) as any;
+
   return (
     <Container onClick={handleClick}>
-      <StyledPointerSVG {...{ isSelected }} />
-      <Shadow {...{ isSelected }} />
-      <TopLine {...{ isSelected }} />
-      <BottomLine {...{ isSelected }} />
+      <StyledPointerSVG {...{ isSelected, animationDelay }} />
+      <Shadow {...{ isSelected, animationDelay }} />
+      <TopLine {...{ isSelected, animationDelay }} />
+      <BottomLine {...{ isSelected, animationDelay }} />
       <FillBar {...{ isSelected}} />
-      <ContentSquare {...{ isSelected }} />
-      <Text {...{ isSelected }}>{text}</Text>
-      <Filter {...{ isSelected}}/>
+      <ContentSquare {...{ isSelected, animationDelay }} />
+      <Text {...{ ref, isSelected, animationDelay }} />
+      <Filter {...{ isSelected, animationDelay }}/>
     </Container>
   );
 };
@@ -42,9 +47,9 @@ const Container = styled.div`
   position: relative;
 `;
 
-const StyledPointerSVG = styled(({ isSelected, ...props }) => (
+const StyledPointerSVG = styled(({ isSelected, animationDelay, ...props }) => (
   <PointerSVG {...props} />
-))<{ isSelected: boolean }>`
+))<{ isSelected: boolean, animationDelay: number }>`
   position: absolute;
   left: -60px;
   width: 40px;
