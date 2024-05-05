@@ -4,12 +4,14 @@ import styled, { keyframes } from 'styled-components/macro';
 import { ListItem } from 'src/components'
 import { colors } from 'src/util';
 import {
+  CASCADE_DELAY,
   DEFAULT_EASING,
   INITIAL_DELAY,
   INIT_DURATION,
+  SLIDE_IN_DURATION,
   TICK_DURATION,
  } from 'src/util/constants';
-import { expandHeight } from 'src/util/keyframes';
+import { changeHeight } from 'src/util/keyframes';
 
 interface ListProps {
   items: string[];
@@ -18,6 +20,9 @@ interface ListProps {
 }
 
 const List: FC<ListProps> = ({ items, activeIdx, handleItemClick }) => {
+
+  const baseAnimationDelay = INITIAL_DELAY + INIT_DURATION + TICK_DURATION;
+  
   return (
     <Container>
       <SideLines>
@@ -34,6 +39,7 @@ const List: FC<ListProps> = ({ items, activeIdx, handleItemClick }) => {
               text={item}
               isSelected={idx === activeIdx}
               handleClick={handleItemClick(item)}
+              animationDelay={(baseAnimationDelay + (idx * CASCADE_DELAY) + (TICK_DURATION * 2)) * 1}
             />
           </ItemWrapper>
         )}
@@ -52,7 +58,7 @@ const SideLines = styled.div`
   display: flex;
   margin-right: 41px;
   animation:
-    ${expandHeight}
+    ${changeHeight(0, 100)}
     ${INIT_DURATION}ms
     ${DEFAULT_EASING}
     ${INITIAL_DELAY}ms
@@ -88,16 +94,14 @@ const slideInItem = keyframes`
     opacity: 1;
   }
 `;
-const slideInDuration = 9 * TICK_DURATION;
-const cascadeDelay = TICK_DURATION;
 const ItemWrapper = styled.div<{ index: number }>`
   position: relative;
   opacity: 0;
   animation:
     ${slideInItem}
-    ${slideInDuration}ms
+    ${SLIDE_IN_DURATION}ms
     ${'ease-out'}
-    ${({ index }) => INITIAL_DELAY + INIT_DURATION + TICK_DURATION + (index * cascadeDelay)}ms
+    ${({ index }) => INITIAL_DELAY + INIT_DURATION + TICK_DURATION + (index * CASCADE_DELAY)}ms
     forwards;
   will-change: left, opacity;
 `;
