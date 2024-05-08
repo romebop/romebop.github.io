@@ -5,15 +5,7 @@ import { ReactComponent as PointerSVG } from 'src/assets/Cursor.svg';
 import { useScramble } from 'src/hooks';
 import { colors } from 'src/util';
 import { DEFAULT_EASING, FLICKER_DURATION, TICK_DURATION } from 'src/util/constants';
-import {
-  changeBackgroundColor,
-  changeBottom,
-  changeColor,
-  changeOpacity,
-  changeTop,
-  changeWidth,
-  flicker,
-} from 'src/util/keyframes';
+import { flicker } from 'src/util/keyframes';
 
 interface ListItemProps {
   text: string;
@@ -29,30 +21,37 @@ const ListItem: FC<ListItemProps> = ({
     animationDelay = 0,
   }) => {
 
-  const [isLoading, setIsLoading] = useState<boolean>(animationDelay !== 0);
+  const [isLoading, setIsLoading] = useState<boolean>(animationDelay > 0);
+  const [internalIsSelected, setInternalIsSelected] = useState<boolean>(false)
 
   useEffect(() => {
     const timeoutID = setTimeout(() => {
       setIsLoading(false);
-    }, animationDelay)
+    }, animationDelay);
 
     return () => {
       clearTimeout(timeoutID);
     };
-  }, [animationDelay])
+  }, [animationDelay]);
+
+  useEffect(() => {
+    if (!isLoading) {
+      setInternalIsSelected(isSelected);
+    }
+  }, [isLoading, isSelected]);
 
   const ref = useScramble({ text, animationDelay }) as any;
 
   return (
     <Container onClick={handleClick}>
-      <StyledPointerSVG {...{ isSelected, isLoading, animationDelay }} />
-      <Shadow {...{ isSelected, isLoading, animationDelay }} />
-      <TopLine {...{ isSelected, isLoading, animationDelay }} />
-      <BottomLine {...{ isSelected, isLoading, animationDelay }} />
-      <FillBar {...{ isSelected, isLoading, animationDelay }} />
-      <ContentSquare {...{ isSelected, isLoading, animationDelay }} />
-      <Text {...{ ref, isSelected, isLoading, animationDelay }} />
-      <Filter {...{ isSelected, isLoading, animationDelay }}/>
+      <StyledPointerSVG isSelected={internalIsSelected} />
+      <Shadow isSelected={internalIsSelected} />
+      <TopLine isSelected={internalIsSelected} />
+      <BottomLine isSelected={internalIsSelected} />
+      <FillBar isSelected={internalIsSelected} />
+      <ContentSquare isSelected={internalIsSelected} />
+      <Text {...{ ref }} isSelected={internalIsSelected} />
+      <Filter isSelected={internalIsSelected} />
     </Container>
   );
 };
@@ -72,9 +71,9 @@ const Container = styled.div`
   position: relative;
 `;
 
-const StyledPointerSVG = styled(({ isSelected, isLoading, animationDelay, ...props }) => (
+const StyledPointerSVG = styled(({ isSelected, ...props }) => (
   <PointerSVG {...props} />
-))<{ isSelected: boolean, isLoading: boolean, animationDelay: number }>`
+))<{ isSelected: boolean }>`
   position: absolute;
   left: -60px;
   width: 40px;
@@ -82,16 +81,14 @@ const StyledPointerSVG = styled(({ isSelected, isLoading, animationDelay, ...pro
   fill: ${colors.primary};
   pointer-events: none;
 
-  opacity: 0;
-  animation:
-    ${({ isSelected }) => isSelected ? changeOpacity(0, 1) : changeOpacity(1, 0)}
+  opacity: ${({ isSelected }) => isSelected ? 1 : 0};
+  transition:
+    opacity
     ${({ isSelected }) => isSelected ? (5 * TICK_DURATION) : (4 * TICK_DURATION)}ms
     ${DEFAULT_EASING}
-    ${({ isLoading, animationDelay }) => isLoading ? animationDelay : 0}ms
-    forwards;
 `;
 
-const Shadow = styled.div<{ isSelected: boolean, isLoading: boolean, animationDelay: number }>`
+const Shadow = styled.div<{ isSelected: boolean }>`
   position: absolute;
   top: 0;
   left: 0;
@@ -100,17 +97,15 @@ const Shadow = styled.div<{ isSelected: boolean, isLoading: boolean, animationDe
   z-index: -1;
   box-shadow: 2px 2px 4px 0px #000;
 
-  opacity: 0;
-  animation:
-    ${({ isSelected }) => isSelected ? changeOpacity(0, 0.25) : changeOpacity(0.25, 0)}
+  opacity: ${({ isSelected }) => isSelected ? 0.25 : 0};
+  transition:
+    opacity
     ${({ isSelected }) => isSelected ? (5 * TICK_DURATION) : (4 * TICK_DURATION)}ms
-    ${DEFAULT_EASING}
-    ${({ isLoading, animationDelay }) => isLoading ? animationDelay : 0}ms
-    forwards;
+    ${DEFAULT_EASING};
 `;
 
 const fillEasing = 'cubic-bezier(0.27, 1.13, 0.88, 0.96)';
-const FillBar = styled.div<{ isSelected: boolean, isLoading: boolean, animationDelay: number }>`
+const FillBar = styled.div<{ isSelected: boolean }>`
   position: absolute;
   top: 0;
   left: 0;
@@ -118,33 +113,27 @@ const FillBar = styled.div<{ isSelected: boolean, isLoading: boolean, animationD
   background-color: ${colors.primary};
   z-index: 0;
 
-  width: 0;
-  animation:
-    ${({ isSelected }) => isSelected ? changeWidth(0, 100) : changeWidth(100, 0)}
+  width: ${({ isSelected }) => isSelected ? '100%' : 0};
+  transition:
+    width
     ${({ isSelected }) => isSelected ? (12 * TICK_DURATION) : (5 * TICK_DURATION)}ms
-    ${fillEasing}
-    ${({ isLoading, animationDelay }) => isLoading ? animationDelay : 0}ms
-    forwards;
+    ${fillEasing};
 `;
 
 const contentSquareLength = 26;
-const ContentSquare = styled.div<{ isSelected: boolean, isLoading: boolean, animationDelay: number }>`
+const ContentSquare = styled.div<{ isSelected: boolean }>`
   width: ${contentSquareLength}px;
   height: ${contentSquareLength}px;
   z-index: 1;
 
-  background-color: ${colors.primary};
-  animation:
-    ${({ isSelected }) => isSelected
-      ? changeBackgroundColor(colors.primary, colors.white)
-      : changeBackgroundColor(colors.white, colors.primary) }
+  background-color: ${({ isSelected }) => isSelected ? colors.white : colors.primary};
+  transition:
+    background-color
     ${({ isSelected }) => isSelected ? (5 * TICK_DURATION) : (2 * TICK_DURATION)}ms
-    ${DEFAULT_EASING}
-    ${({ isLoading, animationDelay }) => isLoading ? animationDelay : 0}ms
-    forwards;
+    ${DEFAULT_EASING};
 `;
 
-const Text = styled.div<{ isSelected: boolean, isLoading: boolean, animationDelay: number }>`
+const Text = styled.div<{ isSelected: boolean }>`
   margin-left: 10px;
   height: ${length}px;
   display: flex;
@@ -155,20 +144,16 @@ const Text = styled.div<{ isSelected: boolean, isLoading: boolean, animationDela
   /* text-transform: uppercase; */
   z-index: 1;
 
-  color: ${colors.primary};
-  animation:
-    ${({ isSelected }) => isSelected
-      ? changeColor(colors.primary, colors.white)
-      : changeColor(colors.white, colors.primary)}
+  color: ${({ isSelected }) => isSelected ? colors.white : colors.primary};
+  transition:
+    color
     ${({ isSelected }) => isSelected ? (5 * TICK_DURATION) : (2 * TICK_DURATION)}ms
-    ${DEFAULT_EASING}
-    ${({ isLoading, animationDelay }) => isLoading ? animationDelay : 0}ms
-    forwards;
+    ${DEFAULT_EASING};
 `;
 
 const distance = 7;
 const thickness = 3;
-const TopLine = styled.div<{ isSelected: boolean, isLoading: boolean, animationDelay: number }>`
+const TopLine = styled.div<{ isSelected: boolean }>`
   position: absolute;
   height: ${thickness}px;
   width: 100%;
@@ -176,18 +161,14 @@ const TopLine = styled.div<{ isSelected: boolean, isLoading: boolean, animationD
   left: 0;
   z-index: -1;
 
-  top: 0;
-  opacity: 0;
-  animation-name:
-    ${({ isSelected }) => isSelected ? changeTop(0, -distance) : changeTop(-distance, 0)},
-    ${({ isSelected }) => isSelected ? changeOpacity(0, 1) : changeOpacity(1, 0)};
-  animation-duration: ${({ isSelected }) => isSelected ? (5 * TICK_DURATION) : (4 * TICK_DURATION)}ms;
-  animation-timing-function: ${DEFAULT_EASING};
-  animation-delay: ${({ isLoading, animationDelay }) => isLoading ? animationDelay : 0}ms;
-  animation-fill-mode: forwards;
+  top: ${({ isSelected }) => isSelected ? -distance : 0}px;
+  opacity: ${({ isSelected }) => isSelected ? 1 : 0};
+  transition-property: top, opacity;
+  transition-duration: ${({ isSelected }) => isSelected ? (5 * TICK_DURATION) : (4 * TICK_DURATION)}ms;
+  transition-timing-function: ${DEFAULT_EASING};
 `;
 
-const BottomLine = styled.div<{ isSelected: boolean, isLoading: boolean, animationDelay: number }>`
+const BottomLine = styled.div<{ isSelected: boolean }>`
   position: absolute;
   height: ${thickness}px;
   width: 100%;
@@ -195,18 +176,14 @@ const BottomLine = styled.div<{ isSelected: boolean, isLoading: boolean, animati
   left: 0;
   z-index: -1;
 
-  bottom: 0;
-  opacity: 0;
-  animation-name:
-    ${({ isSelected }) => isSelected ? changeBottom(0, -distance) : changeBottom(-distance, 0)},
-    ${({ isSelected }) => isSelected ? changeOpacity(0, 1) : changeOpacity(1, 0)};
-  animation-duration: ${({ isSelected }) => isSelected ? (5 * TICK_DURATION) : (4 * TICK_DURATION)}ms;
-  animation-timing-function: ${DEFAULT_EASING};
-  animation-delay: ${({ isLoading, animationDelay }) => isLoading ? animationDelay : 0}ms;
-  animation-fill-mode: forwards;
+  bottom: ${({ isSelected }) => isSelected ? -distance : 0}px;
+  opacity: ${({ isSelected }) => isSelected ? 1 : 0};
+  transition-property: bottom, opacity;
+  transition-duration: ${({ isSelected }) => isSelected ? (5 * TICK_DURATION) : (4 * TICK_DURATION)}ms;
+  transition-timing-function: ${DEFAULT_EASING};
 `;
 
-const Filter = styled.div<{ isSelected: boolean, isLoading: boolean, animationDelay: number }>`
+const Filter = styled.div<{ isSelected: boolean }>`
   position: absolute;
   top: 0;
   left: 0;
@@ -214,12 +191,11 @@ const Filter = styled.div<{ isSelected: boolean, isLoading: boolean, animationDe
   height: 100%;
   background-color: #fff;
   opacity: 0;
-  ${({ isSelected, isLoading, animationDelay }) => isSelected && css`
+  ${({ isSelected }) => isSelected && css`
     animation:
       ${flicker}
       ${FLICKER_DURATION}ms
       ${DEFAULT_EASING}
-      ${isLoading ? animationDelay : 0}ms
       infinite;
   `}
 `;

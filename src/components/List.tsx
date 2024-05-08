@@ -39,7 +39,7 @@ const List: FC<ListProps> = ({ items, activeIdx, handleItemClick }) => {
               text={item}
               isSelected={idx === activeIdx}
               handleClick={handleItemClick(item)}
-              animationDelay={(baseAnimationDelay + (idx * CASCADE_DELAY) + (TICK_DURATION * 2)) * 1}
+              animationDelay={baseAnimationDelay + (idx * CASCADE_DELAY) + (TICK_DURATION * 2)}
             />
           </ItemWrapper>
         )}
