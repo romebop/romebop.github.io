@@ -1,6 +1,8 @@
 import { Direction } from 'src/types';
 
 export * from './colors';
+export * from './constants';
+export * from './keyframes';
 
 function getAcronym(name: string): string {
   return name.split(/[\s-]+/)

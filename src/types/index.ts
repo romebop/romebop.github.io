@@ -1,6 +1,7 @@
 interface Category {
   path: string;
   name: string;
+  description: string;
   items: Item[];
 }
 

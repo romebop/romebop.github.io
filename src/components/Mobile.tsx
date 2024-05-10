@@ -2,9 +2,9 @@ import { FC, useState } from 'react';
 import styled from 'styled-components/macro';
 
 import skull from 'src/assets/skull.png';
-import { colors } from 'src/util';
-import { orbit } from 'src/util/keyframes';
-import { DEFAULT_EASING } from 'src/util/constants';
+import { DEFAULT_EASING, colors, orbit  } from 'src/util';
+
+// TODO: animate with transform
 
 const Mobile: FC = () => {
 

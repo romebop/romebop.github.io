@@ -1,65 +1,11 @@
 import { keyframes } from 'styled-components/macro';
 
-const changeBackgroundColor = (start: string, end: string) => keyframes`
+const scaleHeight = (start: number, end: number) => keyframes`
   from {
-    background-color: ${start};
+    transform: scaleY(${start});
   }
   to {
-    background-color: ${end};
-  }
-`;
-
-const changeColor = (start: string, end: string) => keyframes`
-  from {
-    color: ${start};
-  }
-  to {
-    color: ${end};
-  }
-`;
-
-const changeHeight = (startPercentValue: number, endPercentValue: number) => keyframes`
-  from {
-    height: ${startPercentValue}%;
-  }
-  to {
-    height: ${endPercentValue}%;
-  }
-`;
-
-const changeOpacity = (start: number, end: number) => keyframes`
-  from {
-    opacity: ${start};
-  }
-  to {
-    opacity: ${end};
-  }
-`;
-
-const changeWidth = (startPercentValue: number, endPercentValue: number) => keyframes`
-  from {
-    width: ${startPercentValue}%;
-  }
-  to {
-    width: ${endPercentValue}%;
-  }
-`;
-
-const changeBottom = (start: number, end: number) => keyframes`
-  from {
-    bottom: ${start}px
-  }
-  to {
-    bottom: ${end}px
-  }
-`;
-
-const changeTop = (start: number, end: number) => keyframes`
-  from {
-    top: ${start}px;
-  }
-  to {
-    top: ${end}px;
+    transform: scaleY(${end});
   }
 `;
 
@@ -85,13 +31,7 @@ const orbit = (orbitRadius: number) => keyframes`
 `;
 
 export {
-  changeBackgroundColor,
-  changeBottom,
-  changeColor,
-  changeHeight,
-  changeOpacity,
-  changeTop,
-  changeWidth,
+  scaleHeight,
   flicker,
   orbit,
 };

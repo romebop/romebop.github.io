@@ -99,7 +99,10 @@ function App() {
             <CSSTransition
               key={categoryPath}
               classNames='fade'
-              timeout={INIT_DURATION}
+              timeout={{
+                enter: INITIAL_DELAY + INIT_DURATION,
+                exit: INIT_DURATION,
+              }}
             >
               <DisplayWrapper>
                 <Routes {...{ location }}>
@@ -125,9 +128,33 @@ function App() {
             </CSSTransition>
           </DisplayTransitionGroup>
           
-          <NoteWrapper>
-            <Note />
-          </NoteWrapper>
+          <NoteTransitionGroup>
+            <CSSTransition
+              key={categoryPath}
+              classNames='fade'
+              timeout={{
+                enter: INITIAL_DELAY + INIT_DURATION,
+                exit: INIT_DURATION,
+              }}
+            >
+              <NoteWrapper>
+                <Routes {...{ location }} >
+                  {map.map((category: Category) =>
+                    <Route
+                      key={category.path}
+                      path={`/${category.path}/:itemPath?`}
+                      element={
+                        <Note
+                          key={category.path}
+                          text={category.description}
+                        />
+                      }
+                    />
+                  )}
+                </Routes>
+              </NoteWrapper>
+            </CSSTransition>
+          </NoteTransitionGroup>
 
         </ContentGrid>
       </ContentContainer>
@@ -182,8 +209,14 @@ const TempSquare = styled.div<{ isSelected: boolean, isActive: boolean }>`
   align-items: center;
   width: 100px;
   height: 100px;
-  background-color: ${({ isSelected, isActive }) => isSelected ? colors.primary : isActive ? '#00c0ff85' : colors.inactive };
-  color: ${({ isSelected, isActive }) => (isSelected || isActive) ? colors.white : colors.primary };
+  background-color: ${({ isSelected, isActive }) => isSelected
+    ? colors.primary
+    : isActive
+      ? '#00c0ff85'
+      : colors.inactive };
+  color: ${({ isSelected, isActive }) => (isSelected || isActive)
+    ? colors.white
+    : colors.primary};
   margin-bottom: 40px;
   cursor: pointer;
   &:not(:first-child) {
@@ -203,10 +236,14 @@ const ListWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  transition: opacity ${INIT_DURATION}ms ${DEFAULT_EASING};
 
-  &.fade-exit.fade-exit-active {
+  &.fade-exit {
+    opacity: 1;
+  }
+
+  &.fade-exit-active {
     opacity: 0;
+    transition: opacity ${INIT_DURATION}ms ${DEFAULT_EASING};
   }
 `;
 
@@ -218,24 +255,57 @@ const DisplayTransitionGroup = styled(TransitionGroup)`
 
 const DisplayWrapper = styled.div`
   grid-area: stack;
-  transition: opacity ${INIT_DURATION}ms ${DEFAULT_EASING};
 
   &.fade-enter {
     opacity: 0;
-    transition-delay: ${INITIAL_DELAY}ms;
   }
 
-  &.fade-enter.fade-enter-active {
+  &.fade-enter-active {
+    opacity: 1;
+    transition: opacity ${INIT_DURATION}ms ${DEFAULT_EASING} ${INITIAL_DELAY}ms;
+  }
+
+  &.fade-exit {
     opacity: 1;
   }
 
-  &.fade-exit.fade-exit-active {
+  &.fade-exit-active {
     opacity: 0;
+    transition: opacity ${INIT_DURATION}ms ${DEFAULT_EASING};
   }
 `;
 
-const NoteWrapper = styled.div`
+const NoteTransitionGroup = styled(TransitionGroup)`
   grid-area: note;
+  display: grid;
+  grid-template-areas: 'stack';
+`;
+
+const NoteWrapper = styled.div`
+  grid-area: stack;
+
+  &.fade-enter {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  &.fade-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition:
+      opacity ${INIT_DURATION}ms ${DEFAULT_EASING} ${INITIAL_DELAY}ms,
+      transform ${INIT_DURATION}ms ${DEFAULT_EASING} ${INITIAL_DELAY}ms;
+  }
+
+  &.fade-exit {
+    opacity: 1;
+  }
+
+  &.fade-exit-active {
+    opacity: 0;
+    transition:
+      opacity ${INIT_DURATION}ms ${DEFAULT_EASING};
+  }
 `;
 
 const FooterWrapper = styled.div`

@@ -3,9 +3,13 @@ import styled, { css } from 'styled-components/macro';
 
 import { ReactComponent as PointerSVG } from 'src/assets/Cursor.svg';
 import { useScramble } from 'src/hooks';
-import { colors } from 'src/util';
-import { DEFAULT_EASING, FLICKER_DURATION, TICK_DURATION } from 'src/util/constants';
-import { flicker } from 'src/util/keyframes';
+import {
+  DEFAULT_EASING,
+  FLICKER_DURATION,
+  TICK_DURATION,
+  colors,
+  flicker,
+} from 'src/util';
 
 interface ListItemProps {
   text: string;
@@ -40,7 +44,7 @@ const ListItem: FC<ListItemProps> = ({
     }
   }, [isLoading, isSelected]);
 
-  const ref = useScramble({ text, animationDelay }) as any;
+  const ref = useScramble({ text, animationDelay: animationDelay + (8 * TICK_DURATION) }) as any;
 
   return (
     <Container onClick={handleClick}>
@@ -109,13 +113,15 @@ const FillBar = styled.div<{ isSelected: boolean }>`
   position: absolute;
   top: 0;
   left: 0;
+  width: 100%;
   height: 100%;
   background-color: ${colors.primary};
   z-index: 0;
 
-  width: ${({ isSelected }) => isSelected ? '100%' : 0};
+  transform: scaleX(${({ isSelected }) => isSelected ? 1 : 0});
+  transform-origin: left;
   transition:
-    width
+    transform
     ${({ isSelected }) => isSelected ? (12 * TICK_DURATION) : (5 * TICK_DURATION)}ms
     ${fillEasing};
 `;
@@ -155,30 +161,32 @@ const distance = 7;
 const thickness = 3;
 const TopLine = styled.div<{ isSelected: boolean }>`
   position: absolute;
+  top: 0;
   height: ${thickness}px;
   width: 100%;
   background-color: ${colors.primary};
   left: 0;
   z-index: -1;
 
-  top: ${({ isSelected }) => isSelected ? -distance : 0}px;
+  transform: translateY(${({ isSelected }) => isSelected ? -distance : 0}px);
   opacity: ${({ isSelected }) => isSelected ? 1 : 0};
-  transition-property: top, opacity;
+  transition-property: transform, opacity;
   transition-duration: ${({ isSelected }) => isSelected ? (5 * TICK_DURATION) : (4 * TICK_DURATION)}ms;
   transition-timing-function: ${DEFAULT_EASING};
 `;
 
 const BottomLine = styled.div<{ isSelected: boolean }>`
   position: absolute;
+  bottom: 0;
   height: ${thickness}px;
   width: 100%;
   background-color: ${colors.primary};
   left: 0;
   z-index: -1;
 
-  bottom: ${({ isSelected }) => isSelected ? -distance : 0}px;
+  transform: translateY(${({ isSelected }) => isSelected ? distance : 0}px);
   opacity: ${({ isSelected }) => isSelected ? 1 : 0};
-  transition-property: bottom, opacity;
+  transition-property: transform, opacity;
   transition-duration: ${({ isSelected }) => isSelected ? (5 * TICK_DURATION) : (4 * TICK_DURATION)}ms;
   transition-timing-function: ${DEFAULT_EASING};
 `;

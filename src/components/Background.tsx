@@ -44,6 +44,7 @@ const Background: FC = () => {
 
         p.translate(p.sin(deg) * worldAmp, -p.cos(deg) * worldAmp);
 
+        
         // circles
         p.ellipse(0, 0, len, len);
         p.ellipse(

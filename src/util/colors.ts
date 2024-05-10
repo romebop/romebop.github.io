@@ -6,6 +6,7 @@ const colors = {
   inactive: '#e2e2e2',
   background: '#f0f1f7',
   white: '#fff',
+  shadow: '#ccc',
 };
 
 function getHslString({ hue, saturation, lightness }: HSL): string {

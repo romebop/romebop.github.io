@@ -15,7 +15,7 @@ const useScramble = ({ text, animationDelay = 0 }: UseScrambleProps): RefObject<
   const stepsPerIndex = 2;
   const stepCountRef = useRef<number>(0);
   const elapsedRef = useRef(0);
-  const fpsInterval = 1000 / 15;
+  const fpsInterval = 1000 / 60;
 
   useEffect(() => {
     setTimeout(() => {
