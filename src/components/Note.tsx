@@ -1,13 +1,19 @@
-import { FC } from 'react';
-import styled from 'styled-components/macro';
+import { FC, ReactNode } from 'react';
+import styled, { keyframes } from 'styled-components/macro';
 
-import { THICK_LINE_WIDTH, THIN_LINE_WIDTH, colors } from 'src/util';
+import {
+  DEFAULT_EASING,
+  INIT_DURATION,
+  THICK_LINE_WIDTH,
+  THIN_LINE_WIDTH,
+  colors,
+} from 'src/util';
 
 interface NoteProps {
-  text: string;
+  children: ReactNode;
 }
 
-const Note: FC<NoteProps> = ({ text }) => {
+const Note: FC<NoteProps> = ({ children }) => {
   return (
     <Container>
       <Shadow />
@@ -15,7 +21,7 @@ const Note: FC<NoteProps> = ({ text }) => {
         <ThickLine />
         <ThinLine />
       </SideLines>
-      <Text>{text}</Text>
+      {children}
       <Block />
     </Container>
   );
@@ -33,14 +39,29 @@ const Container = styled.div`
   box-sizing: border-box;
 `;
 
+const moveShadow = keyframes`
+  from {
+    transform: translate(0, 0);
+  }
+  to {
+    transform: translate(4px, 4px);
+  }
+`;
+
 const Shadow = styled.div`
   background-color: ${colors.shadow};
   width: 100%;
   height: 100%;
   z-index: -1;
   position: absolute;
-  top: 4px;
-  left: 4px;
+  top: 0;
+  left: 0;
+  animation:
+    ${moveShadow}
+    ${INIT_DURATION}ms
+    ${DEFAULT_EASING}
+    ${INIT_DURATION * 1.6}ms
+    forwards
 `;
 
 const SideLines = styled.div`
@@ -72,8 +93,6 @@ const Block = styled.div`
   bottom: 8px;
   background-color: ${colors.primary};
 `;
-
-const Text = styled.div``;
 
 export {
   Note,

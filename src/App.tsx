@@ -20,7 +20,7 @@ import {
 import { useKeyPress } from 'src/hooks';
 import map, { getNewPosition } from 'src/map';
 import { Action, Category, Item, Position } from 'src/types';
-import { colors, keyDirectionMap } from 'src/util';
+import { colors, fadeIn, keyDirectionMap } from 'src/util';
 import { DEFAULT_EASING, INITIAL_DELAY, INIT_DURATION } from './util/constants';
 
 function App() {
@@ -103,6 +103,8 @@ function App() {
                 enter: INITIAL_DELAY + INIT_DURATION,
                 exit: INIT_DURATION,
               }}
+              appear
+              in
             >
               <DisplayWrapper>
                 <Routes {...{ location }}>
@@ -136,6 +138,8 @@ function App() {
                 enter: INITIAL_DELAY + INIT_DURATION,
                 exit: INIT_DURATION,
               }}
+              appear
+              in
             >
               <NoteWrapper>
                 <Routes {...{ location }} >
@@ -144,10 +148,9 @@ function App() {
                       key={category.path}
                       path={`/${category.path}/:itemPath?`}
                       element={
-                        <Note
-                          key={category.path}
-                          text={category.description}
-                        />
+                        <Note key={category.path}>
+                          <div>{itemPath}</div>
+                        </Note>
                       }
                     />
                   )}
@@ -201,6 +204,13 @@ const ContentGrid = styled.div`
 const CategoriesContainer = styled.div`
   grid-area: categories;
   display: flex;
+  opacity: 0;
+  animation:
+    ${fadeIn}
+    ${INIT_DURATION}ms
+    ${DEFAULT_EASING}
+    ${INITIAL_DELAY}ms
+    forwards
 `;
 
 const TempSquare = styled.div<{ isSelected: boolean, isActive: boolean }>`
@@ -256,11 +266,11 @@ const DisplayTransitionGroup = styled(TransitionGroup)`
 const DisplayWrapper = styled.div`
   grid-area: stack;
 
-  &.fade-enter {
+  &.fade-appear, &.fade-enter {
     opacity: 0;
   }
 
-  &.fade-enter-active {
+  &.fade-appear-active, &.fade-enter-active {
     opacity: 1;
     transition: opacity ${INIT_DURATION}ms ${DEFAULT_EASING} ${INITIAL_DELAY}ms;
   }
@@ -284,16 +294,16 @@ const NoteTransitionGroup = styled(TransitionGroup)`
 const NoteWrapper = styled.div`
   grid-area: stack;
 
-  &.fade-enter {
+  &.fade-appear, &.fade-enter {
     opacity: 0;
     transform: translateY(30px);
   }
 
-  &.fade-enter-active {
+  &.fade-appear-active, &.fade-enter-active {
     opacity: 1;
     transform: translateY(0);
     transition:
-      opacity ${INIT_DURATION}ms ${DEFAULT_EASING} ${INITIAL_DELAY}ms,
+      opacity ${INIT_DURATION / 2}ms ${DEFAULT_EASING} ${INITIAL_DELAY}ms,
       transform ${INIT_DURATION}ms ${DEFAULT_EASING} ${INITIAL_DELAY}ms;
   }
 

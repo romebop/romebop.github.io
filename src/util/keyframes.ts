@@ -1,11 +1,11 @@
 import { keyframes } from 'styled-components/macro';
 
-const scaleHeight = (start: number, end: number) => keyframes`
+const fadeIn = keyframes`
   from {
-    transform: scaleY(${start});
+    opacity: 0;
   }
   to {
-    transform: scaleY(${end});
+    opacity: 1;
   }
 `;
 
@@ -21,6 +21,15 @@ const flicker = keyframes`
   }
 `;
 
+const scaleHeight = (start: number, end: number) => keyframes`
+  from {
+    transform: scaleY(${start});
+  }
+  to {
+    transform: scaleY(${end});
+  }
+`;
+
 const orbit = (orbitRadius: number) => keyframes`
   from {
     transform: rotate(0deg) translateX(${orbitRadius}px);
@@ -31,7 +40,8 @@ const orbit = (orbitRadius: number) => keyframes`
 `;
 
 export {
-  scaleHeight,
+  fadeIn,
   flicker,
   orbit,
+  scaleHeight,
 };
