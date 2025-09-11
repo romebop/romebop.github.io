@@ -20,8 +20,15 @@ import {
 import { useKeyPress } from 'src/hooks';
 import map, { getNewPosition } from 'src/map';
 import { Action, Category, Item, Position } from 'src/types';
-import { colors, fadeIn, keyDirectionMap } from 'src/util';
-import { DEFAULT_EASING, INITIAL_DELAY, INIT_DURATION } from './util/constants';
+import {
+  DEFAULT_EASING,
+  // FILL_BAR_DURATION,
+  INITIAL_DELAY,
+  INIT_DURATION, 
+  colors,
+  fadeIn,
+  keyDirectionMap,
+} from 'src/util';
 
 function App() {
 
@@ -142,15 +149,55 @@ function App() {
               in
             >
               <NoteWrapper>
-                <Routes {...{ location }} >
+                <Routes
+                  {...{ location }}
+                >
                   {map.map((category: Category) =>
                     <Route
                       key={category.path}
-                      path={`/${category.path}/:itemPath?`}
+                      path={`/${category.path}/*`}
                       element={
-                        <Note key={category.path}>
-                          <div>{itemPath}</div>
+
+                        // <Note key={category.path}>
+                        //   <NoteTextTransitionGroup>
+                        //     <CSSTransition
+                        //       key={itemPath}
+                        //       classNames='slideFade'
+                        //       timeout={{ enter: FILL_BAR_DURATION }}
+                        //     >
+                        //       <NoteTextWrapper>
+                        //         <Routes
+                        //           {...{ location }}
+                        //           key={itemPath}
+                        //         >
+                        //           {map.map((category: Category) =>
+                        //             category.items.map((item: Item) =>
+                        //               <Route
+                        //                 key={`${category.path}-${item.path}`}
+                        //                 path={`/${category.path}/${item.path}`}
+                        //                 element={<NoteText>{item.description}</NoteText>}
+                        //               />
+                        //             )
+                        //           )}
+                        //         </Routes>
+                        //       </NoteTextWrapper>
+                        //     </CSSTransition>
+                        //   </NoteTextTransitionGroup>
+                        // </Note>
+
+                        <Note>
+                          <Routes>
+                            {category.items.map((item: Item) => 
+                              <Route
+                                key={`${item.path}`}
+                                path={`/${item.path}`}
+                                element={<NoteText>{item.description}</NoteText>}
+                              />
+                            )}
+                          </Routes>
                         </Note>
+
+                        // <Note><NoteText>{itemPath}</NoteText></Note>
                       }
                     />
                   )}
@@ -316,6 +363,18 @@ const NoteWrapper = styled.div`
     transition:
       opacity ${INIT_DURATION}ms ${DEFAULT_EASING};
   }
+`;
+
+/* const NoteTextTransitionGroup = styled(TransitionGroup)`
+  display: grid;
+  grid-template-areas: 'stack';
+`;
+
+const NoteTextWrapper = styled.div`
+  grid-area: stack;
+`; */
+
+const NoteText = styled.div`
 `;
 
 const FooterWrapper = styled.div`

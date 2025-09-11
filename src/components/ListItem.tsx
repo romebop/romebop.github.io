@@ -5,6 +5,7 @@ import { ReactComponent as PointerSVG } from 'src/assets/Cursor.svg';
 import { useScramble } from 'src/hooks';
 import {
   DEFAULT_EASING,
+  FILL_BAR_DURATION,
   FLICKER_DURATION,
   TICK_DURATION,
   colors,
@@ -122,7 +123,7 @@ const FillBar = styled.div<{ isSelected: boolean }>`
   transform-origin: left;
   transition:
     transform
-    ${({ isSelected }) => isSelected ? (12 * TICK_DURATION) : (5 * TICK_DURATION)}ms
+    ${({ isSelected }) => isSelected ? FILL_BAR_DURATION : (5 * TICK_DURATION)}ms
     ${fillEasing};
 `;
 
