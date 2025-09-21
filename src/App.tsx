@@ -14,7 +14,7 @@ import styled from 'styled-components/macro';
 import {
   Display,
   Footer,
-  Note,
+  Note, NOTE_TEXT_PADDING,
   List,
 } from 'src/components';
 import { useKeyPress } from 'src/hooks';
@@ -22,7 +22,8 @@ import map, { getNewPosition } from 'src/map';
 import { Action, Category, Item, Position } from 'src/types';
 import {
   DEFAULT_EASING,
-  // FILL_BAR_DURATION,
+  FILL_BAR_DURATION,
+  FILL_EASING,
   INITIAL_DELAY,
   INIT_DURATION, 
   colors,
@@ -149,55 +150,49 @@ function App() {
               in
             >
               <NoteWrapper>
-                <Routes
-                  {...{ location }}
-                >
+                <Routes {...{ location }} >
                   {map.map((category: Category) =>
                     <Route
                       key={category.path}
                       path={`/${category.path}/*`}
                       element={
 
-                        // <Note key={category.path}>
-                        //   <NoteTextTransitionGroup>
-                        //     <CSSTransition
-                        //       key={itemPath}
-                        //       classNames='slideFade'
-                        //       timeout={{ enter: FILL_BAR_DURATION }}
-                        //     >
-                        //       <NoteTextWrapper>
-                        //         <Routes
-                        //           {...{ location }}
-                        //           key={itemPath}
-                        //         >
-                        //           {map.map((category: Category) =>
-                        //             category.items.map((item: Item) =>
-                        //               <Route
-                        //                 key={`${category.path}-${item.path}`}
-                        //                 path={`/${category.path}/${item.path}`}
-                        //                 element={<NoteText>{item.description}</NoteText>}
-                        //               />
-                        //             )
-                        //           )}
-                        //         </Routes>
-                        //       </NoteTextWrapper>
-                        //     </CSSTransition>
-                        //   </NoteTextTransitionGroup>
-                        // </Note>
-
                         <Note>
-                          <Routes>
-                            {category.items.map((item: Item) => 
-                              <Route
-                                key={`${item.path}`}
-                                path={`/${item.path}`}
-                                element={<NoteText>{item.description}</NoteText>}
-                              />
-                            )}
-                          </Routes>
+                          <NoteTextTransitionGroup>
+                            <CSSTransition
+                              key={itemPath}
+                              classNames='slideFade'
+                              timeout={{ enter: FILL_BAR_DURATION }}
+                            >
+                              <NoteTextWrapper>
+                                <Routes {...{ location }} >
+                                  {category.items.map((item: Item) =>
+                                    <Route
+                                      key={`${item.path}`}
+                                      path={`/${item.path}`}
+                                      element={
+                                        <NoteText>{item.description}</NoteText>
+                                      }
+                                    />
+                                  )}
+                                </Routes>
+                              </NoteTextWrapper>
+                            </CSSTransition>
+                          </NoteTextTransitionGroup>
                         </Note>
 
-                        // <Note><NoteText>{itemPath}</NoteText></Note>
+                        // <Note>
+                        //   <Routes>
+                        //     {category.items.map((item: Item) => 
+                        //       <Route
+                        //         key={`${item.path}`}
+                        //         path={`/${item.path}`}
+                        //         element={<NoteText>{item.description}</NoteText>}
+                        //       />
+                        //     )}
+                        //   </Routes>
+                        // </Note>
+
                       }
                     />
                   )}
@@ -365,14 +360,35 @@ const NoteWrapper = styled.div`
   }
 `;
 
-/* const NoteTextTransitionGroup = styled(TransitionGroup)`
+const NoteTextTransitionGroup = styled(TransitionGroup)`
   display: grid;
   grid-template-areas: 'stack';
 `;
 
 const NoteTextWrapper = styled.div`
   grid-area: stack;
-`; */
+
+  &.slideFade-appear, &.slideFade-enter {
+    opacity: 0;
+    transform: translateX(-${NOTE_TEXT_PADDING}px);
+  }
+
+  &.slideFade-appear-active, &.slideFade-enter-active {
+    opacity: 1;
+    transform: translateX(0);
+    transition:
+      opacity ${INIT_DURATION}ms ${DEFAULT_EASING},
+      transform ${FILL_BAR_DURATION}ms ${FILL_EASING};
+  }
+
+  &.slideFade-exit {
+    opacity: 1;
+  }
+
+  &.slideFade-exit-active {
+    opacity: 0;
+  }
+`;
 
 const NoteText = styled.div`
 `;

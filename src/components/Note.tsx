@@ -27,6 +27,7 @@ const Note: FC<NoteProps> = ({ children }) => {
   );
 };
 
+const NOTE_TEXT_PADDING = 48;
 const Container = styled.div`
   width: 100%;
   height: 100%;
@@ -35,7 +36,7 @@ const Container = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  padding: 0 48px;
+  padding: 0 ${NOTE_TEXT_PADDING}px;
   box-sizing: border-box;
 `;
 
@@ -96,4 +97,5 @@ const Block = styled.div`
 
 export {
   Note,
+  NOTE_TEXT_PADDING,
 };
