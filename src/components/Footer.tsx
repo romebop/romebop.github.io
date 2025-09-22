@@ -9,7 +9,7 @@ const Text = styled.div`
 `;
 
 const Footer: FC = () => (
-  <Text>© 2024-present romebop.io</Text>
+  <Text>© 2025-present romebop.io</Text>
 );
 
 export {

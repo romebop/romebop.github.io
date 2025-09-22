@@ -6,7 +6,7 @@ import { useScramble } from 'src/hooks';
 import {
   DEFAULT_EASING,
   FILL_BAR_DURATION,
-  FILL_EASING,
+  FILL_BAR_EASING,
   FLICKER_DURATION,
   TICK_DURATION,
   colors,
@@ -124,7 +124,7 @@ const FillBar = styled.div<{ isSelected: boolean }>`
   transition:
     transform
     ${({ isSelected }) => isSelected ? FILL_BAR_DURATION : (5 * TICK_DURATION)}ms
-    ${FILL_EASING};
+    ${FILL_BAR_EASING};
 `;
 
 const contentSquareLength = 26;

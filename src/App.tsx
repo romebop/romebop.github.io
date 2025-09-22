@@ -23,7 +23,7 @@ import { Action, Category, Item, Position } from 'src/types';
 import {
   DEFAULT_EASING,
   FILL_BAR_DURATION,
-  FILL_EASING,
+  FILL_BAR_EASING,
   INITIAL_DELAY,
   INIT_DURATION, 
   colors,
@@ -166,9 +166,16 @@ function App() {
                             >
                               <NoteTextWrapper>
                                 <Routes {...{ location }} >
+                                  <Route
+                                    key={category.path}
+                                    path={'/'}
+                                    element={
+                                      <NoteText>{category.description}</NoteText>
+                                    }
+                                  />
                                   {category.items.map((item: Item) =>
                                     <Route
-                                      key={`${item.path}`}
+                                      key={item.path}
                                       path={`/${item.path}`}
                                       element={
                                         <NoteText>{item.description}</NoteText>
@@ -378,7 +385,7 @@ const NoteTextWrapper = styled.div`
     transform: translateX(0);
     transition:
       opacity ${INIT_DURATION}ms ${DEFAULT_EASING},
-      transform ${FILL_BAR_DURATION}ms ${FILL_EASING};
+      transform ${FILL_BAR_DURATION}ms ${FILL_BAR_EASING};
   }
 
   &.slideFade-exit {
@@ -391,6 +398,8 @@ const NoteTextWrapper = styled.div`
 `;
 
 const NoteText = styled.div`
+  color: ${colors.primary};
+  font-size: 24px;
 `;
 
 const FooterWrapper = styled.div`
