@@ -1,8 +1,12 @@
+import { ReactComponent as Circle } from './assets/Circle.svg';
+import { ReactComponent as Square } from './assets/Square.svg';
+import { ReactComponent as Triangle } from './assets/Triangle.svg';
 import { Action, Category, Position } from './types';
 
 const appCategory: Category = {
   path: 'app',
   name: 'Apps',
+  shape: Circle,
   description: 'Application Category',
   items: [
     {
@@ -26,6 +30,7 @@ const appCategory: Category = {
 const visCategory: Category = {
   path: 'vis',
   name: 'Visuals',
+  shape: Square,
   description: 'Visualization Category',
   items: [
     {
@@ -64,6 +69,7 @@ const visCategory: Category = {
 const soundCategory: Category = {
   path: 'sound',
   name: 'Sounds',
+  shape: Triangle,
   description: 'Sound Category',
   items: [
     {

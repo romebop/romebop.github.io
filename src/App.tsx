@@ -65,7 +65,7 @@ function App() {
                 isSelected={category.path === categoryPath && itemPath === null}
                 isActive={category.path === categoryPath && itemPath !== null}
                 onClick={() => navigate(`/${category.path}`)}
-              >{category.name}</TempSquare>
+              ><category.shape /></TempSquare>
             ))}
           </CategoriesContainer>
 
@@ -156,7 +156,6 @@ function App() {
                       key={category.path}
                       path={`/${category.path}/*`}
                       element={
-
                         <Note>
                           <NoteTextTransitionGroup>
                             <CSSTransition
@@ -187,19 +186,6 @@ function App() {
                             </CSSTransition>
                           </NoteTextTransitionGroup>
                         </Note>
-
-                        // <Note>
-                        //   <Routes>
-                        //     {category.items.map((item: Item) => 
-                        //       <Route
-                        //         key={`${item.path}`}
-                        //         path={`/${item.path}`}
-                        //         element={<NoteText>{item.description}</NoteText>}
-                        //       />
-                        //     )}
-                        //   </Routes>
-                        // </Note>
-
                       }
                     />
                   )}

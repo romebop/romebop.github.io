@@ -1,6 +1,9 @@
+import { FC } from 'react';
+
 interface Category {
   path: string;
   name: string;
+  shape: FC;
   description: string;
   items: Item[];
 }
