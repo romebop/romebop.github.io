@@ -2,6 +2,7 @@ export * from './Background';
 export * from './Display';
 export * from './Filter';
 export * from './Footer';
+export * from './Header';
 export * from './List';
 export * from './ListItem';
 export * from './Mobile';

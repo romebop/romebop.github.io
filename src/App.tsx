@@ -14,6 +14,7 @@ import styled from 'styled-components/macro';
 import {
   Display,
   Footer,
+  Header,
   Note, NOTE_TEXT_PADDING,
   List,
 } from 'src/components';
@@ -55,17 +56,44 @@ function App() {
   
   return (
     <>
+      <HeaderContainer>
+        <HeaderTransitionGroup>
+          <CSSTransition
+            key={categoryPath}
+            classNames='fade'
+            timeout={INIT_DURATION}
+          >
+            <HeaderWrapper>
+              <Routes {...{ location }} >
+                {map.map((category: Category) =>
+                  <Route
+                    key={category.path}
+                    path={`/${category.path}/:itemPath?`}
+                    element={
+                      <Header text={category.name} />
+                    }
+                  />
+                )}
+              </Routes>
+            </HeaderWrapper>
+          </CSSTransition>
+
+        </HeaderTransitionGroup>
+      </HeaderContainer>
+
       <ContentContainer>
         <ContentGrid>
 
           <CategoriesContainer>
             {map.map(category => (
-              <TempSquare
+              <CategoryBox
                 key={category.path}
                 isSelected={category.path === categoryPath && itemPath === null}
                 isActive={category.path === categoryPath && itemPath !== null}
                 onClick={() => navigate(`/${category.path}`)}
-              ><category.shape /></TempSquare>
+              >
+                <category.shape />
+              </CategoryBox>
             ))}
           </CategoriesContainer>
 
@@ -204,6 +232,20 @@ function App() {
   );
 }
 
+const HeaderContainer = styled.div`
+  position: relative;
+  margin-top: 40px;
+`;
+
+const HeaderTransitionGroup = styled(TransitionGroup)`
+`;
+
+const HeaderWrapper = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+`;
+
 const DisplayPlaceholder = styled.div`
   width: 100%;
   height: 100%;
@@ -248,7 +290,7 @@ const CategoriesContainer = styled.div`
     forwards
 `;
 
-const TempSquare = styled.div<{ isSelected: boolean, isActive: boolean }>`
+const CategoryBox = styled.div<{ isSelected: boolean, isActive: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -266,6 +308,11 @@ const TempSquare = styled.div<{ isSelected: boolean, isActive: boolean }>`
   cursor: pointer;
   &:not(:first-child) {
     margin-left: 20px;
+  }
+
+  & > svg {
+    transform: scale(${({ isSelected, isActive }) => (isSelected || isActive) ? 0.6 : 0.4 });
+    transition: transform ${INIT_DURATION}ms ${DEFAULT_EASING};
   }
 `;
 
