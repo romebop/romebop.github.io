@@ -1,6 +1,6 @@
 import { useEffect, useRef, RefObject } from 'react';
 
-import { getRandomChar } from 'src/util';
+import { TICK_DURATION, getRandomChar } from 'src/util';
 
 interface UseScrambleProps {
   text: string;
@@ -15,7 +15,7 @@ const useScramble = ({ text, animationDelay = 0 }: UseScrambleProps): RefObject<
   const stepsPerIndex = 2;
   const stepCountRef = useRef<number>(0);
   const elapsedRef = useRef(0);
-  const fpsInterval = 1000 / 60;
+  const fpsInterval = TICK_DURATION / 2;
 
   useEffect(() => {
     setTimeout(() => {

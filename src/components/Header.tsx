@@ -5,9 +5,11 @@ import { useScramble } from 'src/hooks';
 import { colors } from 'src/util';
 
 const Container = styled.div`
-  font-size: 64px;
+  font-size: 58px;
   color: ${colors.primary};
   text-shadow: 8px 8px ${colors.inactive};
+  letter-spacing: 4px;
+  text-transform: uppercase;
 `;
 
 interface HeaderProps {
@@ -20,7 +22,7 @@ const Header: FC<HeaderProps> = ({ text, animationDelay = 0 }) => {
 const ref = useScramble({ text, animationDelay }) as any;
     
   return (
-    <Container {...{ ref }} >{text}</Container>
+    <Container {...{ ref }} />
   );
 };
 

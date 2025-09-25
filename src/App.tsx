@@ -61,7 +61,12 @@ function App() {
           <CSSTransition
             key={categoryPath}
             classNames='fade'
-            timeout={INIT_DURATION}
+            timeout={{
+              enter: INITIAL_DELAY + INIT_DURATION,
+              exit: INIT_DURATION,
+            }}
+            appear
+            in
           >
             <HeaderWrapper>
               <Routes {...{ location }} >
@@ -70,7 +75,10 @@ function App() {
                     key={category.path}
                     path={`/${category.path}/:itemPath?`}
                     element={
-                      <Header text={category.name} />
+                      <Header
+                        text={category.name}
+                        animationDelay={INITIAL_DELAY}
+                      />
                     }
                   />
                 )}
@@ -244,6 +252,24 @@ const HeaderWrapper = styled.div`
   position: absolute;
   top: 0;
   left: 0;
+
+  &.fade-appear, &.fade-enter {
+    opacity: 0;
+  }
+
+  &.fade-appear-active, &.fade-enter-active {
+    opacity: 1;
+    transition: opacity ${INIT_DURATION}ms ${DEFAULT_EASING} ${INITIAL_DELAY}ms;
+  }
+
+  &.fade-exit {
+    opacity: 1;
+  }
+
+  &.fade-exit-active {
+    opacity: 0;
+    transition: opacity ${INIT_DURATION}ms ${DEFAULT_EASING};
+  }
 `;
 
 const DisplayPlaceholder = styled.div`
