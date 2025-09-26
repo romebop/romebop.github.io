@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import styled, { keyframes } from 'styled-components/macro';
+import styled, { keyframes } from 'styled-components';
 
 import { ListItem } from 'src/components'
 import {

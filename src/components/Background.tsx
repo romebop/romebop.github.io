@@ -1,6 +1,6 @@
 import { FC, useEffect, useRef } from 'react';
 import p5 from 'p5';
-import styled from 'styled-components/macro';
+import styled from 'styled-components';
 
 import { useWindowDimensions  } from 'src/hooks';
 import { colors } from 'src/util';

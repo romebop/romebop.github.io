@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom/client';
 import { HashRouter as Router } from 'react-router-dom';
-import { createGlobalStyle } from 'styled-components/macro';
+import { createGlobalStyle } from 'styled-components';
 
 import App from './App';
 import { Background, Filter, Mobile } from './components';

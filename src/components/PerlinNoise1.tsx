@@ -1,6 +1,6 @@
 import { FC, useEffect, useRef } from 'react';
 import p5 from 'p5';
-import styled from 'styled-components/macro';
+import styled from 'styled-components';
 
 const CanvasWrapper = styled.div`
   margin: auto 0;

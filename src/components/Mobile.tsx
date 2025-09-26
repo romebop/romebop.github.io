@@ -1,5 +1,5 @@
 import { FC, useState } from 'react';
-import styled from 'styled-components/macro';
+import styled from 'styled-components';
 
 import skull from 'src/assets/skull.png';
 import { DEFAULT_EASING, colors, orbit  } from 'src/util';

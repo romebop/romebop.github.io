@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from 'react';
-import styled, { css } from 'styled-components/macro';
+import styled, { css } from 'styled-components';
 
-import { ReactComponent as PointerSVG } from 'src/assets/Cursor.svg';
+import PointerSVG from 'src/assets/Cursor.svg?react';
 import { useScramble } from 'src/hooks';
 import {
   DEFAULT_EASING,
@@ -77,9 +77,7 @@ const Container = styled.div`
   position: relative;
 `;
 
-const StyledPointerSVG = styled(({ isSelected, ...props }) => (
-  <PointerSVG {...props} />
-))<{ isSelected: boolean }>`
+const StyledPointerSVG = styled(PointerSVG)<{ isSelected: boolean }>`
   position: absolute;
   left: -60px;
   width: 40px;

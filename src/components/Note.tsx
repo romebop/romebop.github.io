@@ -1,5 +1,5 @@
 import { FC, ReactNode } from 'react';
-import styled, { keyframes } from 'styled-components/macro';
+import styled, { keyframes } from 'styled-components';
 
 import {
   DEFAULT_EASING,

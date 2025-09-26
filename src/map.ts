@@ -1,6 +1,6 @@
-import { ReactComponent as Circle } from './assets/Circle.svg';
-import { ReactComponent as Square } from './assets/Square.svg';
-import { ReactComponent as Triangle } from './assets/Triangle.svg';
+import Circle from './assets/Circle.svg?react';
+import Square from './assets/Square.svg?react';
+import Triangle from './assets/Triangle.svg?react';
 import { Action, Category, Position } from './types';
 
 const appCategory: Category = {
