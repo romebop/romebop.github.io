@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { ComponentType, SVGProps, FC } from 'react';
 import styled, { keyframes } from 'styled-components';
 
 import { ListItem } from 'src/components'
@@ -16,12 +16,13 @@ import {
 } from 'src/util';
 
 interface ListProps {
+  Marker: ComponentType<SVGProps<SVGSVGElement>>;
   items: string[];
   activeIdx: number;
   handleItemClick: (item: string) => () => void;
 }
 
-const List: FC<ListProps> = ({ items, activeIdx, handleItemClick }) => {
+const List: FC<ListProps> = ({ Marker, items, activeIdx, handleItemClick }) => {
 
   const baseAnimationDelay = INITIAL_DELAY + INIT_DURATION + TICK_DURATION;
   
@@ -38,10 +39,12 @@ const List: FC<ListProps> = ({ items, activeIdx, handleItemClick }) => {
             index={idx}
           >
             <ListItem
+              Marker={Marker}
               text={item}
               isSelected={idx === activeIdx}
               handleClick={handleItemClick(item)}
               animationDelay={baseAnimationDelay + (idx * CASCADE_DELAY) + (TICK_DURATION * 2)}
+              scrambleOffset={SLIDE_IN_DURATION}
             />
           </ItemWrapper>
         )}

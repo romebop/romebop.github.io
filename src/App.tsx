@@ -11,6 +11,7 @@ import {
   } from 'react-transition-group';
 import styled from 'styled-components';
 
+
 import {
   Display,
   Footer,
@@ -120,6 +121,7 @@ function App() {
                       element={
                         <List
                           key={category.path}
+                          Marker={category.shape}
                           items={category.items.map(item => item.name)}
                           activeIdx={itemIdx}
                           handleItemClick={(item: string) => () => {
@@ -167,7 +169,7 @@ function App() {
                   />
                   <Route
                     path={`/${categoryPath}`}
-                    element={<DisplayPlaceholder>Placeholder</DisplayPlaceholder>}
+                    element={<DisplayPlaceholder />}
                   />
                 </Routes>
               </DisplayWrapper>
@@ -241,8 +243,6 @@ function App() {
 }
 
 const HeaderContainer = styled.div`
-  position: relative;
-  margin-top: 40px;
 `;
 
 const HeaderTransitionGroup = styled(TransitionGroup)`
@@ -275,10 +275,23 @@ const HeaderWrapper = styled.div`
 const DisplayPlaceholder = styled.div`
   width: 100%;
   height: 100%;
-  background-color: white;
-  opacity: 0.5;
-  display: grid;
-  place-content: center;
+  position: relative;
+  background-color: rgb(255, 255, 255, 0.4);
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: ${colors.primary};
+    opacity: 0.25;
+    mask-image: url('/src/assets/Plus.svg');
+    mask-size: 120px;
+    -webkit-mask-image: url('/src/assets/Plus.svg');
+    -webkit-mask-size: 120px;
+  }
 `;
 
 const ContentContainer = styled.div`
@@ -336,9 +349,14 @@ const CategoryBox = styled.div<{ isSelected: boolean, isActive: boolean }>`
     margin-left: 20px;
   }
 
-  & > svg {
+  /* & > svg {
     transform: scale(${({ isSelected, isActive }) => (isSelected || isActive) ? 0.6 : 0.4 });
     transition: transform ${INIT_DURATION}ms ${DEFAULT_EASING};
+  } */
+
+  & > svg {
+    width: 20px;
+    height: 20px;
   }
 `;
 
@@ -397,6 +415,7 @@ const NoteTransitionGroup = styled(TransitionGroup)`
   grid-area: note;
   display: grid;
   grid-template-areas: 'stack';
+  min-width: 0;
 `;
 
 const NoteWrapper = styled.div`
@@ -458,7 +477,8 @@ const NoteTextWrapper = styled.div`
 
 const NoteText = styled.div`
   color: ${colors.primary};
-  font-size: 24px;
+  font-size: 16px;
+  line-height: 1.4;
 `;
 
 const FooterWrapper = styled.div`

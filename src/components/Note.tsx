@@ -31,7 +31,7 @@ const NOTE_TEXT_PADDING = 48;
 const Container = styled.div`
   width: 100%;
   height: 100%;
-  background-color: white;
+  background-color: ${colors.white};
   position: relative;
   display: flex;
   justify-content: flex-start;
@@ -70,7 +70,6 @@ const SideLines = styled.div`
   position: absolute;
   left: 0;
   height: 100%;
-  opacity: 0.6;
 `;
 
 const ThickLine = styled.div`
@@ -93,6 +92,7 @@ const Block = styled.div`
   right: 12px;
   bottom: 8px;
   background-color: ${colors.primary};
+  clip-path: polygon(100% 100%, 0% 100%, 100% 0%);
 `;
 
 export {

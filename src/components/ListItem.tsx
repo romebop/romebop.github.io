@@ -1,4 +1,10 @@
-import { FC, useEffect, useState } from 'react';
+import {
+  ComponentType,
+  SVGProps,
+  FC,
+  useEffect,
+  useState,
+} from 'react';
 import styled, { css } from 'styled-components';
 
 import PointerSVG from 'src/assets/Cursor.svg?react';
@@ -14,17 +20,21 @@ import {
 } from 'src/util';
 
 interface ListItemProps {
+  Marker: ComponentType<SVGProps<SVGSVGElement>>;
   text: string;
   isSelected: boolean;
   handleClick: () => void;
   animationDelay?: number;
+  scrambleOffset?: number;
 }
 
 const ListItem: FC<ListItemProps> = ({
+    Marker,
     text,
     isSelected,
     handleClick,
     animationDelay = 0,
+    scrambleOffset = 0,
   }) => {
 
   const [isLoading, setIsLoading] = useState<boolean>(animationDelay > 0);
@@ -46,7 +56,7 @@ const ListItem: FC<ListItemProps> = ({
     }
   }, [isLoading, isSelected]);
 
-  const ref = useScramble({ text, animationDelay: animationDelay + (8 * TICK_DURATION) }) as any;
+  const ref = useScramble({ text, animationDelay: animationDelay + scrambleOffset }) as any;
 
   return (
     <Container onClick={handleClick}>
@@ -55,7 +65,8 @@ const ListItem: FC<ListItemProps> = ({
       <TopLine isSelected={internalIsSelected} />
       <BottomLine isSelected={internalIsSelected} />
       <FillBar isSelected={internalIsSelected} />
-      <ContentSquare isSelected={internalIsSelected} />
+      {/* <ContentSquare isSelected={internalIsSelected} /> */}
+      <StyledMarker as={Marker} isSelected={internalIsSelected} />
       <Text {...{ ref }} isSelected={internalIsSelected} />
       <Filter isSelected={internalIsSelected} />
     </Container>
@@ -77,12 +88,14 @@ const Container = styled.div`
   position: relative;
 `;
 
-const StyledPointerSVG = styled(PointerSVG)<{ isSelected: boolean }>`
+const StyledPointerSVG = styled(({ isSelected, ...props }) => (
+  <PointerSVG {...props} />
+))<{ isSelected: boolean }>`
   position: absolute;
   left: -60px;
   width: 40px;
   height: 28px;
-  fill: ${colors.primary};
+  color: ${colors.primary};
   pointer-events: none;
 
   opacity: ${({ isSelected }) => isSelected ? 1 : 0};
@@ -125,6 +138,19 @@ const FillBar = styled.div<{ isSelected: boolean }>`
     ${FILL_BAR_EASING};
 `;
 
+const markerLength = 16;
+const StyledMarker = styled.svg<{ isSelected: boolean }>`
+  width: ${markerLength}px;
+  height: ${markerLength}px;
+  z-index: 1;
+
+  color: ${({ isSelected }) => isSelected ? colors.white : colors.primary};
+  transition:
+    fill
+    ${({ isSelected }) => isSelected ? (5 * TICK_DURATION) : (2 * TICK_DURATION)}ms
+    ${DEFAULT_EASING};
+`;
+
 const contentSquareLength = 26;
 const ContentSquare = styled.div<{ isSelected: boolean }>`
   width: ${contentSquareLength}px;
@@ -143,10 +169,9 @@ const Text = styled.div<{ isSelected: boolean }>`
   height: ${length}px;
   display: flex;
   align-items: center;
-  font-size: 24px;
+  font-size: 18px;
   user-select: none;
   letter-spacing: 0.8px;
-  /* text-transform: uppercase; */
   z-index: 1;
 
   color: ${({ isSelected }) => isSelected ? colors.white : colors.primary};

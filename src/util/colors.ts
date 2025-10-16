@@ -1,7 +1,7 @@
 import { HSL } from 'src/types';
 
 const colors = {
-  primary: '#00c0ff',
+  primary: '#0095ff',
   secondary: null,
   inactive: '#e2e2e2',
   background: '#f0f1f7',

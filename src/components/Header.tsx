@@ -5,7 +5,7 @@ import { useScramble } from 'src/hooks';
 import { colors } from 'src/util';
 
 const Container = styled.div`
-  font-size: 58px;
+  font-size: 54px;
   color: ${colors.primary};
   text-shadow: 8px 8px ${colors.inactive};
   letter-spacing: 4px;
