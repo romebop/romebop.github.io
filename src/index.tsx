@@ -30,7 +30,7 @@ const GlobalStyle = createGlobalStyle`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100%;
+    position: relative;
   }
 
   code {

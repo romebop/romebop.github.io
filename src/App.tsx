@@ -13,6 +13,7 @@ import styled from 'styled-components';
 
 
 import {
+  CategoryBox,
   Display,
   Footer,
   Header,
@@ -97,12 +98,11 @@ function App() {
             {map.map(category => (
               <CategoryBox
                 key={category.path}
+                Marker={category.shape}
                 isSelected={category.path === categoryPath && itemPath === null}
                 isActive={category.path === categoryPath && itemPath !== null}
-                onClick={() => navigate(`/${category.path}`)}
-              >
-                <category.shape />
-              </CategoryBox>
+                handleClick={() => navigate(`/${category.path}`)}
+              />
             ))}
           </CategoriesContainer>
 
@@ -159,7 +159,13 @@ function App() {
                       <Route
                         key={`${category.path}-${item.path}`}
                         path={`/${category.path}/${item.path}`}
-                        element={<Display header={item.name} />}
+                        element={
+                          <Display
+                            img={item.img}
+                            siteLink={item.siteLink}
+                            githubLink={item.githubLink}
+                          />
+                        }
                       />
                     )
                   )}
@@ -243,16 +249,15 @@ function App() {
 }
 
 const HeaderContainer = styled.div`
+  position: absolute;
+  top: 90px;
+  left: 0;
 `;
 
 const HeaderTransitionGroup = styled(TransitionGroup)`
 `;
 
 const HeaderWrapper = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-
   &.fade-appear, &.fade-enter {
     opacity: 0;
   }
@@ -272,37 +277,14 @@ const HeaderWrapper = styled.div`
   }
 `;
 
-const DisplayPlaceholder = styled.div`
-  width: 100%;
-  height: 100%;
-  position: relative;
-  background-color: rgb(255, 255, 255, 0.4);
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: ${colors.primary};
-    opacity: 0.25;
-    mask-image: url('/src/assets/Plus.svg');
-    mask-size: 120px;
-    -webkit-mask-image: url('/src/assets/Plus.svg');
-    -webkit-mask-size: 120px;
-  }
-`;
-
 const ContentContainer = styled.div`
-  height: 100%;
   display: flex;
   flex-direction: columnn;
   justify-content: center;
   align-items: center;
 `;
 
-const categoriesHeight = 80;
+const categoriesHeight = 100;
 const displayHeight = 580;
 const noteHeight = 80;
 const ContentGrid = styled.div`
@@ -315,7 +297,8 @@ const ContentGrid = styled.div`
     'note note'
   ;
   gap: 40px 20px;
-`
+  width: 1200px;
+`;
 
 const CategoriesContainer = styled.div`
   grid-area: categories;
@@ -326,37 +309,10 @@ const CategoriesContainer = styled.div`
     ${INIT_DURATION}ms
     ${DEFAULT_EASING}
     ${INITIAL_DELAY}ms
-    forwards
-`;
+    forwards;
 
-const CategoryBox = styled.div<{ isSelected: boolean, isActive: boolean }>`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100px;
-  height: 100px;
-  background-color: ${({ isSelected, isActive }) => isSelected
-    ? colors.primary
-    : isActive
-      ? '#00c0ff85'
-      : colors.inactive };
-  color: ${({ isSelected, isActive }) => (isSelected || isActive)
-    ? colors.white
-    : colors.primary};
-  margin-bottom: 40px;
-  cursor: pointer;
-  &:not(:first-child) {
+  > *:not(:first-child) {
     margin-left: 20px;
-  }
-
-  /* & > svg {
-    transform: scale(${({ isSelected, isActive }) => (isSelected || isActive) ? 0.6 : 0.4 });
-    transition: transform ${INIT_DURATION}ms ${DEFAULT_EASING};
-  } */
-
-  & > svg {
-    width: 20px;
-    height: 20px;
   }
 `;
 
@@ -372,6 +328,7 @@ const ListWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
+  padding-right: 20px;
 
   &.fade-exit {
     opacity: 1;
@@ -408,6 +365,30 @@ const DisplayWrapper = styled.div`
   &.fade-exit-active {
     opacity: 0;
     transition: opacity ${INIT_DURATION}ms ${DEFAULT_EASING};
+  }
+`;
+
+const DisplayPlaceholder = styled.div`
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background-color: rgb(255, 255, 255, 0.4);
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: ${colors.primary};
+    opacity: 0.25;
+    mask-image: url('/src/assets/Plus.svg');
+    mask-size: 80px;
+    mask-position: 42px 52px;
+    -webkit-mask-image: url('/src/assets/Plus.svg');
+    -webkit-mask-size: 80px;
+    -webkit-mask-position: 41px 52px;
   }
 `;
 
@@ -476,9 +457,9 @@ const NoteTextWrapper = styled.div`
 `;
 
 const NoteText = styled.div`
-  color: ${colors.primary};
+  color: ${colors.black};
   font-size: 16px;
-  line-height: 1.4;
+  line-height: 1.5;
 `;
 
 const FooterWrapper = styled.div`
@@ -487,7 +468,7 @@ const FooterWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 80px;
+  margin-top: 40px;
 `;
 
 export default App;

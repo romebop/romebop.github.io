@@ -60,7 +60,7 @@ const Container = styled.div`
 
 const SideLines = styled.div`
   display: flex;
-  margin-right: 41px;
+  margin-right: 26px;
   height: 100%;
   transform: scaleY(0);
   animation:
@@ -80,19 +80,19 @@ const ThickLine = styled.div`
 const ThinLine = styled.div`
   height: 100%;
   width: ${THIN_LINE_WIDTH}px;
-  margin-left: 6px;
+  margin-left: 4px;
   background-color: ${colors.inactive};
 `;
 
 const ItemsContainer = styled.div`
   & > *:not(:first-child) {
-    margin-top: 34px;
+    margin-top: 26px;
   }
 `;
 
 const slideInItem = keyframes`
   from {
-    transform: translateX(-64px);
+    transform: translateX(-53px);
     opacity: 0;
   }
   to {

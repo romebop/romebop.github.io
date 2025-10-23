@@ -9,8 +9,8 @@ const FILL_BAR_DURATION = 12 * TICK_DURATION;
 const DEFAULT_EASING = 'ease-in-out';
 const FILL_BAR_EASING = 'cubic-bezier(0.27, 1.13, 0.88, 0.96)';
 
-const THICK_LINE_WIDTH = 14;
-const THIN_LINE_WIDTH = 4;
+const THICK_LINE_WIDTH = 10;
+const THIN_LINE_WIDTH = 3;
 
 export {
   CASCADE_DELAY,

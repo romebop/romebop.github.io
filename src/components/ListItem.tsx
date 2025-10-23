@@ -73,8 +73,8 @@ const ListItem: FC<ListItemProps> = ({
   );
 };
 
-const height = 50;
-const width = 440;
+const height = 42;
+const width = 380;
 const Container = styled.div`
   display: flex;
   align-items: center;
@@ -92,12 +92,11 @@ const StyledPointerSVG = styled(({ isSelected, ...props }) => (
   <PointerSVG {...props} />
 ))<{ isSelected: boolean }>`
   position: absolute;
-  left: -60px;
-  width: 40px;
-  height: 28px;
+  left: -52px;
+  width: 34px;
+  height: 26px;
   color: ${colors.primary};
   pointer-events: none;
-
   opacity: ${({ isSelected }) => isSelected ? 1 : 0};
   transition:
     opacity
@@ -139,14 +138,17 @@ const FillBar = styled.div<{ isSelected: boolean }>`
 `;
 
 const markerLength = 16;
-const StyledMarker = styled.svg<{ isSelected: boolean }>`
+
+const StyledMarker = styled.svg.withConfig({
+  shouldForwardProp: prop => prop !== 'isSelected' as any,
+})<{ isSelected: boolean }>`
   width: ${markerLength}px;
   height: ${markerLength}px;
   z-index: 1;
 
   color: ${({ isSelected }) => isSelected ? colors.white : colors.primary};
   transition:
-    fill
+    color
     ${({ isSelected }) => isSelected ? (5 * TICK_DURATION) : (2 * TICK_DURATION)}ms
     ${DEFAULT_EASING};
 `;

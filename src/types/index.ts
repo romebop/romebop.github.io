@@ -12,9 +12,9 @@ interface Item {
   path: string;
   name: string;
   description: string;
-  link?: string;
-  compName?: string;
-  imgName?: string;
+  img?: string;
+  siteLink?: string;
+  githubLink?: string;
 }
 
 interface Position {

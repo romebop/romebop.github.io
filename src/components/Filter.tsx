@@ -1,6 +1,8 @@
 import { FC } from 'react';
 import styled from 'styled-components';
 
+const Filter: FC = () => <StyledFilter />;
+
 const StyledFilter = styled.div`
   position: fixed;
   top: 0;
@@ -13,8 +15,6 @@ const StyledFilter = styled.div`
     linear-gradient(to bottom,rgba(0,0,0,0.01) 3px, transparent 2px);
   pointer-events: none;
 `;
-
-const Filter: FC = () => <StyledFilter />;
 
 export {
   Filter,

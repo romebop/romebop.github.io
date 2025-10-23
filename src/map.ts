@@ -1,28 +1,49 @@
-import Square from './assets/Square.svg?react';
-import Circle from './assets/Circle.svg?react';
-import X from './assets/X.svg?react';
-import { Action, Category, Position } from './types';
+import Square from 'src/assets/Square.svg?react';
+import Circle from 'src/assets/Circle.svg?react';
+import X from 'src/assets/X.svg?react';
+
+import backTimeGif from 'src/assets/backtime.gif';
+import peopleMapGif from 'src/assets/people-map.gif';
+import whiteboardGif from 'src/assets/whiteboard.gif';
+
+import gameOfLifeGif from 'src/assets/game-of-life.gif';
+import perlinNoiseGif from 'src/assets/perlin-noise.gif';
+import audioVizGif from 'src/assets/audio-viz.gif';
+import yelpVisGif from 'src/assets/yelp-vis.gif';
+import collegeUnemploymentGif from 'src/assets/college-unemployment.gif';
+import campaignFinanceGif from 'src/assets/campaign-finance.gif';
+
+import { Action, Category, Position } from 'src/types';
 
 const appCategory: Category = {
   path: 'app',
   name: 'Apps',
   shape: Square,
-  description: "Here are some apps I've worked on",
+  description: "Here are some apps I've worked / am working on:",
   items: [
+    {
+      path: 'backtime',
+      name: 'Back Time',
+      description: 'A full-stack web app that helps users automatically track online purchases, returns, and warranties.',
+      img: backTimeGif,
+      siteLink: 'backtime.onrender.com',
+      githubLink: 'github.com/romebop/backtime',
+    },
     {
       path: 'people-map',
       name: 'People Map',
       description: 'A social note taking app built using React. Users can write notes on cards representing persons, draw connections between them, and examine their broader social network represented as a D3.js Force-Directed Graph. Data is stored in localStorage.',
-    },
-    {
-      path: 'backtime',
-      name: 'BackTime',
-      description: 'A full-stack web app that helps users automatically track online purchases, returns, and warranties.',
+      img: peopleMapGif,
+      siteLink: 'peoplemap.romebop.io',
+      githubLink: 'github.com/romebop/people-map',
     },
     {
       path: 'whiteboard',
       name: 'Whiteboard',
       description: 'A collaborative drawing & chatting application built on Node.js. Users can draw on HTML <canvas> to other clients and chat by setting a username in real-time via Socket.IO. Data is persisted on MongoDB.',
+      img: whiteboardGif,
+      siteLink: 'whiteboard.romebop.io',
+      githubLink: 'github.com/romebop/whiteboard',
     },
   ],
 };
@@ -31,37 +52,55 @@ const visCategory: Category = {
   path: 'vis',
   name: 'Visuals',
   shape: Circle,
-  description: 'Various and random visualizations I found interesting',
+  description: 'Various and random visualizations I found interesting:',
   items: [
     {
       path: 'game-of-life',
       name: 'Game of Life',
-      description: '4 Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+      description: "Conway's game of life on HTML Canvas with various initial states.",
+      img: gameOfLifeGif,
+      siteLink: 'life.romebop.io',
+      githubLink: 'github.com/romebop/game-of-life',
     },
     {
       path: 'perlin-noise',
       name: 'Perlin Noise',
-      description: '5 Convallis tellus id interdum velit laoreet id donec ultrices tincidunt.',
+      description: 'Perlin Noise visualization on HTML Canvas via varying shapes (densities).',
+      img: perlinNoiseGif,
+      siteLink: 'romebop.io/perlin-noise',
+      githubLink: 'github.com/romebop/perlin-noise',
     },
     {
       path: 'audio-visualizer',
       name: 'Audio Visualizer',
-      description: '6 Malesuada bibendum arcu vitae elementum curabitur vitae.',
+      description: 'Visualize audio using Web Audio API and Three.js.',
+      img: audioVizGif,
+      siteLink: 'romebop.io/audio-viz',
+      githubLink: 'github.com/romebop/audio-viz',
+    },
+    {
+      path: 'yelp-dataset',
+      name: 'Yelp Dataset Challenge',
+      description: 'SVG dots rendered on top of Las Vegas via Mapbox GL JS.',
+      img: yelpVisGif,
+      siteLink: 'romebop.io/yelp-vis',
+      githubLink: 'romebop/yelp-vis',
     },
     {
       path: 'college-unemployment',
       name: 'College Unemployment',
-      description: '7 Viverra justo nec ultrices dui sapien eget mi proin.',
+      description: 'Assortments of college majors and their unemployment rates.',
+      img: collegeUnemploymentGif,
+      siteLink: 'romebop.io/college-unemployment-vis',
+      githubLink: 'github.com/romebop/college-unemployment-vis',
     },
     {
       path: 'campaign-finance',
       name: 'US Campaign Finance',
-      description: '8 Nec sagittis aliquam malesuada bibendum arcu vitae elementum curabitur vitae.',
-    },
-    {
-      path: 'item-9',
-      name: 'Item 9 Item 9',
-      description: '9 Sagittis vitae et leo duis ut diam quam nulla porttitor.',
+      description: 'Interactive bar chart of U.S. campaign contributions per State from Federal Elections Commission data.',
+      img: campaignFinanceGif,
+      siteLink: 'romebop.io/fec-vis',
+      githubLink: 'github.com/romebop/fec-vis',
     },
   ],
 };
@@ -70,7 +109,7 @@ const soundCategory: Category = {
   path: 'sound',
   name: 'Sounds',
   shape: X,
-  description: 'Combinating and recombinating sounds',
+  description: 'Combinating and recombinating sounds:',
   items: [
     {
       path: 'item-10',

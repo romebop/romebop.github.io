@@ -81,15 +81,16 @@ const ThickLine = styled.div`
 const ThinLine = styled.div`
   height: 100%;
   width: ${THIN_LINE_WIDTH}px;
-  margin-left: 6px;
+  margin-left: 4px;
   background-color: ${colors.primary};
 `;
 
+const len = 12;
 const Block = styled.div`
-  width: 14px;
-  height: 14px;
+  width: ${len}px;
+  height: ${len}px;
   position: absolute;
-  right: 12px;
+  right: 8px;
   bottom: 8px;
   background-color: ${colors.primary};
   clip-path: polygon(100% 100%, 0% 100%, 100% 0%);
