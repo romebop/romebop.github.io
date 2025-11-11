@@ -1,9 +1,8 @@
 import { FC, ReactNode } from 'react';
 import styled, { keyframes } from 'styled-components';
 
+import { Shadow } from 'src/components';
 import {
-  DEFAULT_EASING,
-  INIT_DURATION,
   THICK_LINE_WIDTH,
   THIN_LINE_WIDTH,
   colors,
@@ -38,31 +37,6 @@ const Container = styled.div`
   align-items: center;
   padding: 0 ${NOTE_TEXT_PADDING}px;
   box-sizing: border-box;
-`;
-
-const moveShadow = keyframes`
-  from {
-    transform: translate(0, 0);
-  }
-  to {
-    transform: translate(4px, 4px);
-  }
-`;
-
-const Shadow = styled.div`
-  background-color: ${colors.shadow};
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  position: absolute;
-  top: 0;
-  left: 0;
-  animation:
-    ${moveShadow}
-    ${INIT_DURATION}ms
-    ${DEFAULT_EASING}
-    ${INIT_DURATION * 1.6}ms
-    forwards
 `;
 
 const SideLines = styled.div`

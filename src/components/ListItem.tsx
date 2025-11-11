@@ -10,6 +10,8 @@ import styled, { css } from 'styled-components';
 import PointerSVG from 'src/assets/Cursor.svg?react';
 import { useScramble } from 'src/hooks';
 import {
+  BAR_FONT_SIZE,
+  BAR_HEIGHT,
   DEFAULT_EASING,
   FILL_BAR_DURATION,
   FILL_BAR_EASING,
@@ -65,7 +67,6 @@ const ListItem: FC<ListItemProps> = ({
       <TopLine isSelected={internalIsSelected} />
       <BottomLine isSelected={internalIsSelected} />
       <FillBar isSelected={internalIsSelected} />
-      {/* <ContentSquare isSelected={internalIsSelected} /> */}
       <StyledMarker as={Marker} isSelected={internalIsSelected} />
       <Text {...{ ref }} isSelected={internalIsSelected} />
       <Filter isSelected={internalIsSelected} />
@@ -73,13 +74,12 @@ const ListItem: FC<ListItemProps> = ({
   );
 };
 
-const height = 42;
 const width = 380;
 const Container = styled.div`
   display: flex;
   align-items: center;
   width: ${width}px;
-  height: ${height}px;
+  height: ${BAR_HEIGHT}px;
   background-color: ${colors.inactive};
   cursor: pointer;
   box-sizing: border-box;
@@ -153,25 +153,12 @@ const StyledMarker = styled.svg.withConfig({
     ${DEFAULT_EASING};
 `;
 
-const contentSquareLength = 26;
-const ContentSquare = styled.div<{ isSelected: boolean }>`
-  width: ${contentSquareLength}px;
-  height: ${contentSquareLength}px;
-  z-index: 1;
-
-  background-color: ${({ isSelected }) => isSelected ? colors.white : colors.primary};
-  transition:
-    background-color
-    ${({ isSelected }) => isSelected ? (5 * TICK_DURATION) : (2 * TICK_DURATION)}ms
-    ${DEFAULT_EASING};
-`;
-
 const Text = styled.div<{ isSelected: boolean }>`
-  margin-left: 10px;
+  margin-left: 14px;
   height: ${length}px;
   display: flex;
   align-items: center;
-  font-size: 18px;
+  font-size: ${BAR_FONT_SIZE}px;
   user-select: none;
   letter-spacing: 0.8px;
   z-index: 1;

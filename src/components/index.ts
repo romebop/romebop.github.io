@@ -9,3 +9,4 @@ export * from './ListItem';
 export * from './LoadingDots';
 export * from './Mobile';
 export * from './Note';
+export * from './Shadow';

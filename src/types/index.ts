@@ -12,7 +12,7 @@ interface Item {
   path: string;
   name: string;
   description: string;
-  img?: string;
+  video?: string;
   siteLink?: string;
   githubLink?: string;
 }

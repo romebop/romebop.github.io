@@ -9,10 +9,14 @@ const FILL_BAR_DURATION = 12 * TICK_DURATION;
 const DEFAULT_EASING = 'ease-in-out';
 const FILL_BAR_EASING = 'cubic-bezier(0.27, 1.13, 0.88, 0.96)';
 
+const BAR_FONT_SIZE = 18;
+const BAR_HEIGHT = 42;
 const THICK_LINE_WIDTH = 10;
 const THIN_LINE_WIDTH = 3;
 
 export {
+  BAR_FONT_SIZE,
+  BAR_HEIGHT,
   CASCADE_DELAY,
   DEFAULT_EASING,
   FILL_BAR_DURATION,

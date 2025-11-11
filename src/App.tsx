@@ -11,7 +11,6 @@ import {
   } from 'react-transition-group';
 import styled from 'styled-components';
 
-
 import {
   CategoryBox,
   Display,
@@ -161,9 +160,10 @@ function App() {
                         path={`/${category.path}/${item.path}`}
                         element={
                           <Display
-                            img={item.img}
-                            siteLink={item.siteLink}
+                            headerText={item.name}
+                            video={item.video}
                             githubLink={item.githubLink}
+                            siteLink={item.siteLink}
                           />
                         }
                       />
@@ -372,23 +372,21 @@ const DisplayPlaceholder = styled.div`
   width: 100%;
   height: 100%;
   position: relative;
-  background-color: rgb(255, 255, 255, 0.4);
+  background-color: rgb(255, 255, 255, 0.6);
 
   &::before {
-    content: '';
+    content: "∅";
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 0px;
+    left: 0px;
     width: 100%;
     height: 100%;
-    background-color: ${colors.primary};
-    opacity: 0.25;
-    mask-image: url('/src/assets/Plus.svg');
-    mask-size: 80px;
-    mask-position: 42px 52px;
-    -webkit-mask-image: url('/src/assets/Plus.svg');
-    -webkit-mask-size: 80px;
-    -webkit-mask-position: 41px 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    opacity: 0.1;
+    pointer-events: none;
   }
 `;
 

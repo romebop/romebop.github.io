@@ -1,9 +1,11 @@
+import { FC } from 'react';
 import ReactDOM from 'react-dom/client';
 import { HashRouter as Router } from 'react-router-dom';
 import { createGlobalStyle } from 'styled-components';
 
 import App from './App';
 import { Background, Filter, Mobile } from './components';
+import { useWindowDimensions } from './hooks';
 
 const GlobalStyle = createGlobalStyle`
   html {
@@ -39,6 +41,17 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
+const Main: FC = () => {
+  const { width } = useWindowDimensions();
+  return width <= 1270
+    ? <Mobile />
+    : (
+      <Router>
+        <App />
+      </Router>
+    );
+};
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
@@ -46,12 +59,7 @@ root.render(
   <>
     <GlobalStyle />
     <Background />
-    {window.innerWidth <= 768
-      ? <Mobile />
-      : <Router>
-          <App />
-        </Router> 
-    }
+    <Main />
     <Filter />
   </>
 );
