@@ -296,7 +296,7 @@ const ContentGrid = styled.div`
     'select-list display'
     'note note'
   ;
-  gap: 40px 20px;
+  gap: 40px 40px;
   width: 1200px;
 `;
 
@@ -328,7 +328,6 @@ const ListWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  padding-right: 20px;
 
   &.fade-exit {
     opacity: 1;
