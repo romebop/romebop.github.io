@@ -4,7 +4,7 @@ import { HashRouter as Router } from 'react-router-dom';
 import { createGlobalStyle } from 'styled-components';
 
 import App from './App';
-import { Background, Filter, Mobile } from './components';
+import { Background, Filter, Footer, Mobile } from './components';
 import { useWindowDimensions } from './hooks';
 
 const GlobalStyle = createGlobalStyle`
@@ -60,6 +60,7 @@ root.render(
     <GlobalStyle />
     <Background />
     <Main />
+    <Footer />
     <Filter />
   </>
 );

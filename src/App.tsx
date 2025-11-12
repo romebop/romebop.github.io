@@ -14,7 +14,6 @@ import styled from 'styled-components';
 import {
   CategoryBox,
   Display,
-  Footer,
   Header,
   Note, NOTE_TEXT_PADDING,
   List,
@@ -240,10 +239,6 @@ function App() {
 
         </ContentGrid>
       </ContentContainer>
-
-      <FooterWrapper>
-        <Footer />
-      </FooterWrapper>
     </>
   );
 }
@@ -457,15 +452,6 @@ const NoteText = styled.div`
   color: ${colors.black};
   font-size: 16px;
   line-height: 1.5;
-`;
-
-const FooterWrapper = styled.div`
-  margin-top: auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-top: 40px;
 `;
 
 export default App;

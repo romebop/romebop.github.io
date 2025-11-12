@@ -32,6 +32,7 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  height: 180px;
 `;
 
 const inDuration = 180;
@@ -83,7 +84,7 @@ const OrbitCircle = styled.div<{ isActive: boolean }>`
     width: ${orbitCircleLen - (orbitCircleBorderLen * 2) - (orbitCircleInnerBorderLen * 2)}px;
     height: ${orbitCircleLen - (orbitCircleBorderLen * 2) - (orbitCircleInnerBorderLen * 2)}px;
   }
-  left: ${({ isActive }) => isActive ? 90 : -(orbitCircleLen / 2)}px;
+  left: ${({ isActive }) => isActive ? 100 : -(orbitCircleLen / 2)}px;
   bottom: ${({ isActive }) => isActive ? 116 : -(orbitCircleLen / 2)}px;
   opacity: ${({ isActive }) => isActive ? 1 : 0};
   transition-property: left, bottom, opacity;
@@ -113,7 +114,7 @@ const SquareA = styled.div<{ isActive: boolean }>`
   background-color: ${colors.white};
   width: ${squareLen}px;
   height: ${squareLen}px;
-  right: ${({ isActive }) => isActive ? 69 : -(squareLen / 2)}px;
+  right: ${({ isActive }) => isActive ? 59 : -(squareLen / 2)}px;
   top: ${({ isActive }) => isActive ? 97 : -(squareLen / 2)}px;
   opacity: ${({ isActive }) => isActive ? 1 : 0};
   transition-property: right, top, opacity;
