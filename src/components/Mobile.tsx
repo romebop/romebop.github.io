@@ -4,8 +4,6 @@ import styled from 'styled-components';
 import skull from 'src/assets/skull.png';
 import { DEFAULT_EASING, colors, orbit  } from 'src/util';
 
-// TODO: animate with transform
-
 const Mobile: FC = () => {
 
   const [isActive, setIsActive] = useState<boolean>(false);
@@ -13,40 +11,53 @@ const Mobile: FC = () => {
   return (
     <Container>
       <Backdrop {...{ isActive }} />
-      <SquareBorder {...{ isActive }} />
-      <OrbitCircle {...{ isActive }} />
-      <Circle {...{ isActive }} />
-      <SquareA {...{ isActive }} />
-      <SquareB {...{ isActive }} />
-      <SkullImage
-        src={skull}
-        onClick={() => setIsActive(s => !s)}
-      />
+      <ContentContainer>
+        <SquareBorder {...{ isActive }} />
+        <OrbitCircleWrapper {...{ isActive }} >
+          <OrbitCircle />
+        </OrbitCircleWrapper>
+        <Circle {...{ isActive }} />
+        <SquareA {...{ isActive }} />
+        <SquareB {...{ isActive }} />
+        <SkullImage
+          src={skull}
+          onClick={() => setIsActive(s => !s)}
+        />
+      </ContentContainer>
     </Container>
   );
 };
 
 const Container = styled.div`
-  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 180px;
 `;
 
 const inDuration = 180;
 const outDuration = 160;
 
 const Backdrop = styled.div<{ isActive: boolean }>`
-  position: absolute;
+  position: fixed;
+  top: 0;
   background-color: ${colors.background};
-  width: ${({ isActive }) => isActive ? '100vw' : 0};
-  height: ${({ isActive }) => isActive ? '100vh' : 0};
+  width: 100vw;
+  height: 100vh;
+  transform: scale(${({ isActive }) => isActive ? 1 : 0});
   opacity: ${({ isActive }) => isActive ? 1 : 0};
-  transition-property: width, height, opacity;
+  transition-property: transform, opacity;
   transition-duration: ${({ isActive }) => isActive ? inDuration : outDuration}ms;
   transition-timing-function: ${DEFAULT_EASING};
+  z-index: -1;
+  pointer-events: none;
+`;
+
+const ContentContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 
 const squareBorderLen = 170;
@@ -54,12 +65,26 @@ const SquareBorder = styled.div<{ isActive: boolean }>`
   position: absolute;
   border: 10px solid ${colors.white};
   box-sizing: border-box;
-  width: ${({ isActive }) => isActive ? squareBorderLen : 100}px;
-  height: ${({ isActive }) => isActive ? squareBorderLen : 110}px;
+  width: ${squareBorderLen}px;
+  height: ${squareBorderLen}px;
+  transform: scale(${({ isActive }) => isActive ? 1 : 0.5});
   opacity: ${({ isActive }) => isActive ? 1 : 0};
-  transition-property: width, height, opacity;
+  transition-property: transform, opacity;
   transition-duration: ${({ isActive }) => isActive ? inDuration : outDuration}ms;
   transition-timing-function: ${DEFAULT_EASING};
+  z-index: -1;
+  pointer-events: none;
+`;
+
+const OrbitCircleWrapper = styled.div<{ isActive: boolean }>`
+  position: absolute;
+  transform: translate(${({ isActive }) => isActive ? '140px, -40px' : '-20px, 20px'});
+  opacity: ${({ isActive }) => isActive ? 1 : 0};
+  transition-property: transform, opacity;
+  transition-duration: ${({ isActive }) => isActive ? inDuration : outDuration}ms;
+  transition-timing-function: ${DEFAULT_EASING};
+  z-index: -1;
+  pointer-events: none;
 `;
 
 const orbitRadius = 10;
@@ -67,7 +92,6 @@ const orbitCircleLen = 40;
 const orbitCircleBorderLen = 6;
 const orbitCircleInnerBorderLen = 4;
 const OrbitCircle = styled.div<{ isActive: boolean }>`
-  position: absolute;
   border-radius: 50%;
   border: ${orbitCircleBorderLen}px solid ${colors.white};
   box-sizing: border-box;
@@ -84,12 +108,6 @@ const OrbitCircle = styled.div<{ isActive: boolean }>`
     width: ${orbitCircleLen - (orbitCircleBorderLen * 2) - (orbitCircleInnerBorderLen * 2)}px;
     height: ${orbitCircleLen - (orbitCircleBorderLen * 2) - (orbitCircleInnerBorderLen * 2)}px;
   }
-  left: ${({ isActive }) => isActive ? 100 : -(orbitCircleLen / 2)}px;
-  bottom: ${({ isActive }) => isActive ? 116 : -(orbitCircleLen / 2)}px;
-  opacity: ${({ isActive }) => isActive ? 1 : 0};
-  transition-property: left, bottom, opacity;
-  transition-duration: ${({ isActive }) => isActive ? inDuration : outDuration}ms;
-  transition-timing-function: ${DEFAULT_EASING};
   animation: ${orbit(orbitRadius)} 10s linear infinite;
 `;
 
@@ -100,12 +118,13 @@ const Circle = styled.div<{ isActive: boolean }>`
   background-color: ${colors.white};
   width: ${circleLen}px;
   height: ${circleLen}px;
-  right: ${({ isActive }) => isActive ? 109 : -(circleLen / 2)}px;
-  bottom: ${({ isActive }) => isActive ? 85 : -(circleLen / 2)}px;
+  transform: translate(${({ isActive }) => isActive ? '-120px, -20px' : '12px, 12px'});
   opacity: ${({ isActive }) => isActive ? 1 : 0};
-  transition-property: right, bottom, opacity;
+  transition-property: transform, opacity;
   transition-duration: ${({ isActive }) => isActive ? inDuration : outDuration}ms;
   transition-timing-function: ${DEFAULT_EASING};
+  z-index: -1;
+  pointer-events: none;
 `;
 
 const squareLen = 14;
@@ -114,12 +133,13 @@ const SquareA = styled.div<{ isActive: boolean }>`
   background-color: ${colors.white};
   width: ${squareLen}px;
   height: ${squareLen}px;
-  right: ${({ isActive }) => isActive ? 59 : -(squareLen / 2)}px;
-  top: ${({ isActive }) => isActive ? 97 : -(squareLen / 2)}px;
+  transform: translate(${({ isActive }) => isActive ? '-70px, 0px' : '7px, 7px'});
   opacity: ${({ isActive }) => isActive ? 1 : 0};
-  transition-property: right, top, opacity;
+  transition-property: transform, opacity;
   transition-duration: ${({ isActive }) => isActive ? inDuration : outDuration}ms;
   transition-timing-function: ${DEFAULT_EASING};
+  z-index: -1;
+  pointer-events: none;
 `;
 
 const SquareB = styled.div<{ isActive: boolean }>`
@@ -127,16 +147,16 @@ const SquareB = styled.div<{ isActive: boolean }>`
   background-color: ${colors.white};
   width: ${squareLen}px;
   height: ${squareLen}px;
-  left: ${({ isActive }) => isActive ? 69 : -(squareLen / 2)}px;
-  top: ${({ isActive }) => isActive ? 97 : -(squareLen / 2)}px;
+  transform: translate(${({ isActive }) => isActive ? '70px, 0px' : '-7px, 7px'});
   opacity: ${({ isActive }) => isActive ? 1 : 0};
-  transition-property: left, top, opacity;
+  transition-property: transform, opacity;
   transition-duration: ${({ isActive }) => isActive ? inDuration : outDuration}ms;
   transition-timing-function: ${DEFAULT_EASING};
+  z-index: -1;
+  pointer-events: none;
 `;
 
 const SkullImage = styled.img`
-  position: absolute;
   cursor: pointer;
 `;
 
